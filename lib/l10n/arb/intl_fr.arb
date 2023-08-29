@@ -1,0 +1,6 @@
+{
+  "@@locale": "fr",
+  "checkConnectivity": "⌛ Verification de la connexion... ⌛",
+  "initializationGame": "⌛ Initialisation du jeu... ⌛",
+  "verificationGame": "⌛ Verification du jeu... ⌛"
+}
