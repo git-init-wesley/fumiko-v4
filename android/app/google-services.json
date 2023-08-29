@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "23354687373",
+    "firebase_url": "https://fumiko-41323672-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fumiko-41323672",
+    "storage_bucket": "fumiko-41323672.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23354687373:android:26e47ea0f5b9259a0f07c4",
+        "android_client_info": {
+          "package_name": "com.example.fumikov4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23354687373-qfm05j3m4u9p3rdku51i60hkas8lr858.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2x5XgbcwVShXIsddOlq7qO7cFWkhInfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23354687373-qfm05j3m4u9p3rdku51i60hkas8lr858.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "23354687373-53sfvfe5n3lirr71lmbh4v15ui1qa0c4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "codes.wesley-dev.fumiko"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
