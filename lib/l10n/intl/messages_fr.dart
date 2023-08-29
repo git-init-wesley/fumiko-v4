@@ -23,10 +23,12 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "checkConnectivity": MessageLookupByLibrary.simpleMessage(
-            "⌛ Verification de la connexion... ⌛"),
+            "⌛ Vérification de la connexion... ⌛"),
         "initializationGame": MessageLookupByLibrary.simpleMessage(
             "⌛ Initialisation du jeu... ⌛"),
+        "pageRecovery": MessageLookupByLibrary.simpleMessage(
+            "⌛ Récuperation de la page... ⌛"),
         "verificationGame":
-            MessageLookupByLibrary.simpleMessage("⌛ Verification du jeu... ⌛")
+            MessageLookupByLibrary.simpleMessage("⌛ Vérification du jeu... ⌛")
       };
 }

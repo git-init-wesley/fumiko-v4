@@ -50,10 +50,10 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  /// `⌛ Verification de la connexion... ⌛`
+  /// `⌛ Vérification de la connexion... ⌛`
   String get checkConnectivity {
     return Intl.message(
-      '⌛ Verification de la connexion... ⌛',
+      '⌛ Vérification de la connexion... ⌛',
       name: 'checkConnectivity',
       desc: '',
       args: [],
@@ -70,11 +70,21 @@ class AppLocalizations {
     );
   }
 
-  /// `⌛ Verification du jeu... ⌛`
+  /// `⌛ Vérification du jeu... ⌛`
   String get verificationGame {
     return Intl.message(
-      '⌛ Verification du jeu... ⌛',
+      '⌛ Vérification du jeu... ⌛',
       name: 'verificationGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `⌛ Récuperation de la page... ⌛`
+  String get pageRecovery {
+    return Intl.message(
+      '⌛ Récuperation de la page... ⌛',
+      name: 'pageRecovery',
       desc: '',
       args: [],
     );
