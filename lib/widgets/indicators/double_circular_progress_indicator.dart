@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DoubleCircularProgressIndicator extends StatelessWidget {
-  const DoubleCircularProgressIndicator({Key? key, this.circularColor = Colors.white, this.text}) : super(key: key);
+  const DoubleCircularProgressIndicator({Key? key, this.circularColor = Colors.white, this.text, this.fontSize}) : super(key: key);
 
   final Color circularColor;
   final String? text;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,11 @@ class DoubleCircularProgressIndicator extends StatelessWidget {
         Transform.rotate(angle: 90, child: Transform.scale(scale: 0.7, child: CircularProgressIndicator(color: circularColor))),
       ]),
       if (text != null && text is String)
-        Container(margin: const EdgeInsets.only(top: 20), width: 350, child: Text(text!, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)))
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          constraints: const BoxConstraints(maxWidth: 350),
+          child: Text(text!, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: fontSize)),
+        )
     ]);
   }
 }

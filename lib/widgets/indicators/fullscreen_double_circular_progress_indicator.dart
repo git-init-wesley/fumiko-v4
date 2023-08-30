@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:fumiko/widgets/indicators/double_circular_progress_indicator.dart';
 
 class FullScreenDoubleCircularProgressIndicator extends StatefulWidget {
-  const FullScreenDoubleCircularProgressIndicator({Key? key, this.alignment = Alignment.center, this.text, required this.presented, this.child}) : super(key: key);
+  const FullScreenDoubleCircularProgressIndicator({Key? key, this.alignment = Alignment.center, this.circularColor = Colors.white, this.text, this.fontSize, required this.presented, this.child})
+      : super(key: key);
 
   final Alignment alignment;
+  final Color circularColor;
   final String? text;
+  final double? fontSize;
   final bool presented;
   final Widget? child;
 
@@ -40,9 +43,14 @@ class _FullScreenDoubleCircularProgressIndicatorState extends State<FullScreenDo
     super.dispose();
   }
 
-  //TODO: Review
   @override
   Widget build(BuildContext context) {
+    BoxDecoration backgroundBoxDecoration = BoxDecoration(
+      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.9), offset: const Offset(0, 0), spreadRadius: MediaQuery.of(context).size.height)],
+      borderRadius: BorderRadius.circular(16),
+    );
+    BoxDecoration foregroundBoxDecoration =
+        BoxDecoration(boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.1), offset: const Offset(0, 0), spreadRadius: 1)], borderRadius: BorderRadius.circular(16));
     return Stack(alignment: widget.alignment, children: [
       if (widget.child != null) AbsorbPointer(absorbing: widget.presented, child: widget.child),
       SizedBox.fromSize(
@@ -51,14 +59,15 @@ class _FullScreenDoubleCircularProgressIndicatorState extends State<FullScreenDo
               opacity: opacityAnimationController.value,
               child: Center(
                   child: Container(
-                      padding: const EdgeInsets.all(30),
-                      decoration: BoxDecoration(
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.9), offset: const Offset(0, 0), spreadRadius: MediaQuery.of(context).size.height)],
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Container(
-                        decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.1), offset: const Offset(0, 0), spreadRadius: 1)], borderRadius: BorderRadius.circular(20)),
-                        child: Container(width: 170, padding: const EdgeInsets.all(30), child: DoubleCircularProgressIndicator(text: widget.text)),
-                      )))))
+                decoration: backgroundBoxDecoration,
+                child: Container(
+                  decoration: foregroundBoxDecoration,
+                  constraints: const BoxConstraints(minWidth: 150),
+                  child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                      child: DoubleCircularProgressIndicator(circularColor: widget.circularColor, text: widget.text, fontSize: widget.fontSize)),
+                ),
+              ))))
     ]);
   }
 }
