@@ -45,8 +45,7 @@ class _SplashScreenController extends _SplashScreenModel {
           return;
         }
 
-        //TODO: Pages
-        //navigationService.pushReplacementTo(isAuthenticated ? RouterRoutes.gameMain : RouterRoutes.authSignIn);
+        navigationService.pushReplacementTo(isAuthenticated ? RouterRoutes.gameMain : RouterRoutes.authSignIn);
       },
     );
   }
