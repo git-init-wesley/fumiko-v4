@@ -1,5 +1,14 @@
 library core_user;
 
+import 'dart:developer' as developer;
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+import 'package:fumiko/exceptions/app_exceptions.dart';
+import 'package:fumiko/utils/regexp.dart';
+
+part './auth/core_user_auth.dart';
+
 enum CoreUserStates { unload, load }
 
 enum AuthenticationStates { connected, offline }
