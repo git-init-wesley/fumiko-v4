@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a fr locale. All the
+// This is a library that provides messages for a fr_FR locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,17 +18,19 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'fr';
+  String get localeName => 'fr_FR';
+
+  static String m0(maintenanceCause, maintenanceEnd) => "👨🏻‍🔧 Une maintenance est actuellement en cours... 👨🏻‍🔧\n\n${maintenanceCause}\n\nSe termine le ${maintenanceEnd} (UTC+00).";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "checkConnectivity": MessageLookupByLibrary.simpleMessage(
-            "⌛ Vérification de la connexion... ⌛"),
-        "initializationGame": MessageLookupByLibrary.simpleMessage(
-            "⌛ Initialisation du jeu... ⌛"),
-        "pageRecovery": MessageLookupByLibrary.simpleMessage(
-            "⌛ Récuperation de la page... ⌛"),
-        "verificationGame":
-            MessageLookupByLibrary.simpleMessage("⌛ Vérification du jeu... ⌛")
+        "checkConnectivity": MessageLookupByLibrary.simpleMessage("⌛ Vérification de la connexion... ⌛"),
+        "errorOccurred": MessageLookupByLibrary.simpleMessage("❌ Une erreur est survenue. Réessayer ultérieurement. ❌"),
+        "initializationGame": MessageLookupByLibrary.simpleMessage("⌛ Initialisation du jeu... ⌛"),
+        "maintenanceCurrentlyProgress": m0,
+        "pageRecovery": MessageLookupByLibrary.simpleMessage("⌛ Récuperation de la page... ⌛"),
+        "updateAvailable": MessageLookupByLibrary.simpleMessage("🆕 Une mise a jour est disponible... 🆕"),
+        "verificationGame": MessageLookupByLibrary.simpleMessage("⌛ Vérification du jeu... ⌛")
       };
 }

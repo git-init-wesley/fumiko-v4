@@ -56,20 +56,15 @@ class AssetsImage {
           cacheWidth: cacheWidth,
           cacheHeight: cacheHeight);
 
-  const AssetsImage(
-      {required String name, required String path, required String extension})
+  const AssetsImage({required String name, required String path, required String extension})
       : _name = name,
         _path = 'assets/images/$path.$extension',
         _extension = extension;
 }
 
 class AssetsImages {
-  static const AssetsImage fumikoIcon =
-      AssetsImage(name: 'Fumiko Icon', path: 'icons/Fumiko', extension: 'png');
-  static const AssetsImage mageIcon =
-      AssetsImage(name: 'Mage Icon', path: 'icons/Mage', extension: 'png');
-  static const AssetsImage ninjaIcon =
-      AssetsImage(name: 'Ninja Icon', path: 'icons/Ninja', extension: 'png');
-  static const AssetsImage warriorIcon = AssetsImage(
-      name: 'Warrior Icon', path: 'icons/Warrior', extension: 'png');
+  static const AssetsImage fumikoIcon = AssetsImage(name: 'Fumiko Icon', path: 'icons/Fumiko', extension: 'png');
+  static const AssetsImage mageIcon = AssetsImage(name: 'Mage Icon', path: 'icons/Mage', extension: 'png');
+  static const AssetsImage ninjaIcon = AssetsImage(name: 'Ninja Icon', path: 'icons/Ninja', extension: 'png');
+  static const AssetsImage warriorIcon = AssetsImage(name: 'Warrior Icon', path: 'icons/Warrior', extension: 'png');
 }

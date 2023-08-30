@@ -1,59 +1,53 @@
 part of splash_screen_page;
 
 class _SplashScreenController extends _SplashScreenModel {
-  _SplashScreenController(
-      {required BuildContext context, required bool unknownPage}) {
+  _SplashScreenController({required BuildContext context, required bool unknownPage}) {
     _init(context: context, unknownPage: unknownPage);
   }
 
-  Future<void> _init(
-      {required BuildContext context, required bool unknownPage}) async {
+  Future<void> _init({required BuildContext context, required bool unknownPage}) async {
     if (unknownPage) {
-      await setState(
-          () => progressIndicatorText = AppLocalizations.current.pageRecovery);
-      Future.delayed(
-          const Duration(seconds: 3), () => navigationService.back());
+      await setState(() => progressIndicatorText = AppLocalizations.current.pageRecovery);
+      Future.delayed(const Duration(seconds: 3), () => navigationService.back());
       return;
     }
+
+    if (Core.instance.isInitialized || Core.instance.isStartedInitialization) {
+      return;
+    }
+
     await setState(() => progressIndicatorText = '⌛ ... ⌛');
-    //if (!FumikoCore.instance.coreInitialized && !FumikoCore.instance.startedCoreInitialized) {
-    //  await setState(() => progressIndicatorText = '⌛ ... ⌛');
-    //  Future.delayed(
-    //      const Duration(seconds: 3),
-    //          () => FumikoCore.instance.initCore(onStateChange: (FumikoCoreStates newState) {
-    //        if (newState != FumikoCoreStates.uninitialized) {
-    //          setState(() => progressIndicatorText = newState.message);
-    //        }
-    //      }, whenComplete:
-    //          (IFumikoException? fumikoException, FumikoCoreData? fumikoCoreData, bool isAuthenticated) async {
-    //        if (fumikoException != null) {
-    //          setState(() async => progressIndicatorText =
-    //              AppLocalizations.current.errorOccurred + '\n\n' + (fumikoException.message as String));
-    //          try {
-    //            throw fumikoException;
-    //          } catch (_error, _stacktrace) {
-    //            if (!kReleaseMode) {
-    //              developer.log(_error.toString(), time: DateTime.now(), stackTrace: _stacktrace);
-    //            }
-    //          }
-    //          return;
-    //        }
-    //        if (fumikoCoreData != null) {
-    //          if (await fumikoCoreData.isUpdateAvailable) {
-    //            setState(() async => progressIndicatorText = AppLocalizations.of(context).updateAvailable);
-    //          }
-    //          if (fumikoCoreData.isCurrentlyMaintenance) {
-    //            String maintenanceEnd = DateFormat('dd MMM yyyy - hh:mm a')
-    //                .format(DateTime.fromMillisecondsSinceEpoch(fumikoCoreData.maintenanceEnd, isUtc: true));
-    //            setState(() async => progressIndicatorText = AppLocalizations.of(context)
-    //                .maintenanceCurrentlyProgress(
-    //                fumikoCoreData.getMaintenanceCauseFromLocale(await FumikoCore.instance.currentLocale),
-    //                maintenanceEnd));
-    //          }
-    //          return;
-    //        }
-    //        navigationService.pushReplacementTo(isAuthenticated ? Routes.gameMain : Routes.authSignIn);
-    //      }));
-    //}
+
+    Core.instance.init(
+      onStateChange: (newState) => setState(() => progressIndicatorText = newState.message),
+      whenComplete: (AppException? appException, CoreData? coreData, bool isAuthenticated) async {
+        if (appException != null) {
+          setState(() => progressIndicatorText = '${AppLocalizations.current.errorOccurred}\n\n${appException.message ?? ''}');
+          try {
+            appException.makeThrow();
+          } catch (error, stacktrace) {
+            if (!kReleaseMode) {
+              developer.log(error.toString(), time: DateTime.now(), stackTrace: stacktrace);
+            }
+          }
+          return;
+        }
+
+        if (coreData != null) {
+          if (await coreData.isUpdateAvailable) {
+            setState(() async => progressIndicatorText = AppLocalizations.current.updateAvailable);
+          }
+          if (coreData.isCurrentlyMaintenance) {
+            String currentLocale = await Core.instance.currentLocale;
+            String maintenanceEnd = DateFormat('dd MMM yyyy - hh:mm a', currentLocale).format(DateTime.fromMillisecondsSinceEpoch(coreData.maintenanceEnd, isUtc: true));
+            setState(() async => progressIndicatorText = AppLocalizations.current.maintenanceCurrentlyProgress(coreData.getMaintenanceCauseFromLocale(currentLocale), maintenanceEnd));
+          }
+          return;
+        }
+
+        //TODO: Pages
+        //navigationService.pushReplacementTo(isAuthenticated ? RouterRoutes.gameMain : RouterRoutes.authSignIn);
+      },
+    );
   }
 }

@@ -13,11 +13,9 @@ class CoreUser {
 
   AuthenticationStates _authenticationState = AuthenticationStates.offline;
 
-  bool get isAuthenticated =>
-      _authenticationState == AuthenticationStates.connected;
+  bool get isAuthenticated => _authenticationState == AuthenticationStates.connected;
 
-  set setAuthenticationState(AuthenticationStates value) =>
-      _authenticationState = value;
+  set setAuthenticationState(AuthenticationStates value) => _authenticationState = value;
 
   CoreUserStates _state = CoreUserStates.unload;
 

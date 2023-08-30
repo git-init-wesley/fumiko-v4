@@ -1,0 +1,10 @@
+{
+  "@@locale": "fr_FR",
+  "checkConnectivity": "⌛ Vérification de la connexion... ⌛",
+  "initializationGame": "⌛ Initialisation du jeu... ⌛",
+  "verificationGame": "⌛ Vérification du jeu... ⌛",
+  "pageRecovery": "⌛ Récuperation de la page... ⌛",
+  "errorOccurred": "❌ Une erreur est survenue. Réessayer ultérieurement. ❌",
+  "updateAvailable": "\uD83C\uDD95 Une mise a jour est disponible... \uD83C\uDD95",
+  "maintenanceCurrentlyProgress": "\uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDD27 Une maintenance est actuellement en cours... \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDD27\n\n{maintenanceCause}\n\nSe termine le {maintenanceEnd} (UTC+00)."
+}

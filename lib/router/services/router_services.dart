@@ -10,14 +10,9 @@ part '../routes/router_routes.dart';
 class RouterNavigationService {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  Future<NavigatorState?> pushTo(RouterRoute route,
-          {dynamic arguments}) async =>
-      navigatorKey.currentState?.pushNamed(route.name, arguments: arguments);
+  Future<NavigatorState?> pushTo(RouterRoute route, {dynamic arguments}) async => navigatorKey.currentState?.pushNamed(route.name, arguments: arguments);
 
-  Future<NavigatorState?> pushReplacementTo(RouterRoute route,
-          {dynamic arguments}) async =>
-      navigatorKey.currentState
-          ?.pushReplacementNamed(route.route, arguments: arguments);
+  Future<NavigatorState?> pushReplacementTo(RouterRoute route, {dynamic arguments}) async => navigatorKey.currentState?.pushReplacementNamed(route.route, arguments: arguments);
 
   Future<void> back() async => navigatorKey.currentState?.pop();
 }
@@ -35,12 +30,9 @@ class RouterService {
 
   GetIt get locator => _locator;
 
-  Route onGenerateRoute(RouteSettings settings) =>
-      MaterialPageRoute(builder: (context) {
-        final RouterRoute generateRoute =
-            RouterRoutes.fromRouteName(settings.name);
-        if (!Core.instance.isInitialized &&
-            !RouterRoutes.baseRoutes.contains(generateRoute)) {
+  Route onGenerateRoute(RouteSettings settings) => MaterialPageRoute(builder: (context) {
+        final RouterRoute generateRoute = RouterRoutes.fromRouteName(settings.name);
+        if (!Core.instance.isInitialized && !RouterRoutes.baseRoutes.contains(generateRoute)) {
           return RouterRoutes.splashScreen.createPage;
         } //else if (!CoreUser.instance.isAuthenticated &&
         //    !RouterRoutes.isAuthenticationRoutes(generateRoute) &&
