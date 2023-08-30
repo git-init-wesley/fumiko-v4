@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -19,14 +18,17 @@ class AppLocalizations {
   static AppLocalizations? _current;
 
   static AppLocalizations get current {
-    assert(_current != null, 'No instance of AppLocalizations was loaded. Try to initialize the AppLocalizations delegate before accessing AppLocalizations.current.');
+    assert(_current != null,
+        'No instance of AppLocalizations was loaded. Try to initialize the AppLocalizations delegate before accessing AppLocalizations.current.');
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<AppLocalizations> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -39,12 +41,23 @@ class AppLocalizations {
 
   static AppLocalizations of(BuildContext context) {
     final instance = AppLocalizations.maybeOf(context);
-    assert(instance != null, 'No instance of AppLocalizations present in the widget tree. Did you add AppLocalizations.delegate in localizationsDelegates?');
+    assert(instance != null,
+        'No instance of AppLocalizations present in the widget tree. Did you add AppLocalizations.delegate in localizationsDelegates?');
     return instance!;
   }
 
   static AppLocalizations? maybeOf(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  }
+
+  /// `J'ai compris`
+  String get understood {
+    return Intl.message(
+      'J\'ai compris',
+      name: 'understood',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `⌛ Vérification de la connexion... ⌛`
@@ -108,12 +121,183 @@ class AppLocalizations {
   }
 
   /// `👨🏻‍🔧 Une maintenance est actuellement en cours... 👨🏻‍🔧\n\n{maintenanceCause}\n\nSe termine le {maintenanceEnd} (UTC+00).`
-  String maintenanceCurrentlyProgress(Object maintenanceCause, Object maintenanceEnd) {
+  String maintenanceCurrentlyProgress(
+      Object maintenanceCause, Object maintenanceEnd) {
     return Intl.message(
       '👨🏻‍🔧 Une maintenance est actuellement en cours... 👨🏻‍🔧\n\n$maintenanceCause\n\nSe termine le $maintenanceEnd (UTC+00).',
       name: 'maintenanceCurrentlyProgress',
       desc: '',
       args: [maintenanceCause, maintenanceEnd],
+    );
+  }
+
+  /// `Connexion`
+  String get logIn {
+    return Intl.message(
+      'Connexion',
+      name: 'logIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connectez-vous pour entrer dans le jeu.`
+  String get logInDescription {
+    return Intl.message(
+      'Connectez-vous pour entrer dans le jeu.',
+      name: 'logInDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connexion...`
+  String get logInLoading {
+    return Intl.message(
+      'Connexion...',
+      name: 'logInLoading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Se connecter`
+  String get signIn {
+    return Intl.message(
+      'Se connecter',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mot de passe perdu ?`
+  String get forgotPassword {
+    return Intl.message(
+      'Mot de passe perdu ?',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vous n'avez pas encore de compte ?`
+  String get doNotHaveAccountYet {
+    return Intl.message(
+      'Vous n\'avez pas encore de compte ?',
+      name: 'doNotHaveAccountYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `S'inscrire`
+  String get registerNow {
+    return Intl.message(
+      'S\'inscrire',
+      name: 'registerNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adresse mail`
+  String get emailAddress {
+    return Intl.message(
+      'Adresse mail',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `L'adresse mail est invalide.`
+  String get emailAddressInvalid {
+    return Intl.message(
+      'L\'adresse mail est invalide.',
+      name: 'emailAddressInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `L'adresse mail est deja utilise par un autre compte.`
+  String get emailAlreadyInUse {
+    return Intl.message(
+      'L\'adresse mail est deja utilise par un autre compte.',
+      name: 'emailAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Un mail vous a ete envoyer pour changer votre mot de passe.`
+  String get emailSentChangePassword {
+    return Intl.message(
+      'Un mail vous a ete envoyer pour changer votre mot de passe.',
+      name: 'emailSentChangePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mot de passe`
+  String get password {
+    return Intl.message(
+      'Mot de passe',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirmation du Mot de passe`
+  String get passwordConfirmation {
+    return Intl.message(
+      'Confirmation du Mot de passe',
+      name: 'passwordConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Le mot de passe est incorrect.`
+  String get passwordIncorrect {
+    return Intl.message(
+      'Le mot de passe est incorrect.',
+      name: 'passwordIncorrect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Les mot de passe ne sont pas égaux.`
+  String get passwordNotEqual {
+    return Intl.message(
+      'Les mot de passe ne sont pas égaux.',
+      name: 'passwordNotEqual',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Le mot de passe est invalide.`
+  String get passwordInvalid {
+    return Intl.message(
+      'Le mot de passe est invalide.',
+      name: 'passwordInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Au moins un chiffre.\nAu moins un caractère minuscule.\nAu moins un caractère majuscule.\nAu moins un caractère special.\nAu moins 8 caractères, mais pas plus de 32.`
+  String get passwordTooltip {
+    return Intl.message(
+      'Au moins un chiffre.\nAu moins un caractère minuscule.\nAu moins un caractère majuscule.\nAu moins un caractère special.\nAu moins 8 caractères, mais pas plus de 32.',
+      name: 'passwordTooltip',
+      desc: '',
+      args: [],
     );
   }
 }
@@ -129,10 +313,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
-
   @override
   Future<AppLocalizations> load(Locale locale) => AppLocalizations.load(locale);
-
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

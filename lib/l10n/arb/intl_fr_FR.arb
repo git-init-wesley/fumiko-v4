@@ -1,10 +1,34 @@
 {
   "@@locale": "fr_FR",
+  "understood": "J'ai compris",
   "checkConnectivity": "⌛ Vérification de la connexion... ⌛",
   "initializationGame": "⌛ Initialisation du jeu... ⌛",
   "verificationGame": "⌛ Vérification du jeu... ⌛",
   "pageRecovery": "⌛ Récuperation de la page... ⌛",
   "errorOccurred": "❌ Une erreur est survenue. Réessayer ultérieurement. ❌",
   "updateAvailable": "\uD83C\uDD95 Une mise a jour est disponible... \uD83C\uDD95",
-  "maintenanceCurrentlyProgress": "\uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDD27 Une maintenance est actuellement en cours... \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDD27\n\n{maintenanceCause}\n\nSe termine le {maintenanceEnd} (UTC+00)."
+  "maintenanceCurrentlyProgress": "\uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDD27 Une maintenance est actuellement en cours... \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDD27\n\n{maintenanceCause}\n\nSe termine le {maintenanceEnd} (UTC+00).",
+
+
+  "logIn": "Connexion",
+  "logInDescription": "Connectez-vous pour entrer dans le jeu.",
+  "logInLoading": "Connexion...",
+  "signIn": "Se connecter",
+  "forgotPassword": "Mot de passe perdu ?",
+  "doNotHaveAccountYet": "Vous n'avez pas encore de compte ?",
+  "registerNow": "S'inscrire",
+
+  "emailAddress": "Adresse mail",
+  "emailAddressInvalid": "L'adresse mail est invalide.",
+  "emailAlreadyInUse": "L'adresse mail est deja utilise par un autre compte.",
+  "emailSentChangePassword": "Un mail vous a ete envoyer pour changer votre mot de passe.",
+
+
+  "password": "Mot de passe",
+  "passwordConfirmation": "Confirmation du Mot de passe",
+  "passwordIncorrect": "Le mot de passe est incorrect.",
+  "passwordNotEqual": "Les mot de passe ne sont pas égaux.",
+  "passwordInvalid": "Le mot de passe est invalide.",
+  "passwordTooltip": "Au moins un chiffre.\nAu moins un caractère minuscule.\nAu moins un caractère majuscule.\nAu moins un caractère special.\nAu moins 8 caractères, mais pas plus de 32."
+
 }
