@@ -1,3 +1,7 @@
+library app_exceptions;
+
+part './auth/auth_exceptions.dart';
+
 class AppException extends Error {
   final String _code;
   final String? _message;
@@ -34,13 +38,13 @@ class AppExceptions {
 
   static List<AppException> get baseErrors => [error(), appInvalid(), connectivityNone(), connectivityVPN(), malformedEmail(), malformedUsername(), malformedPassword()];
 
-  static List<AppException> get errors => baseErrors;
+  static List<AppException> get errors => baseErrors + AuthExceptions.authErrors;
 
   static List<String> get errorsCode => errors.map((e) => e.code).toList();
 
   static Map<String, AppException> get mapErrorsCode => Map.fromIterables(errorsCode, errors);
 
-  static AppException fromCode(String? code, Object? object) =>
+  static AppException fromCode({String? code, Object? object}) =>
       AppException.delta(exceptionsService: mapErrorsCode.entries.firstWhere((e) => e.value.code == code, orElse: () => MapEntry<String, AppException>(error().code, error())).value, object: object);
 
   static AppException error({String? message, Object? object}) => AppException(object: object);
@@ -57,5 +61,7 @@ class AppExceptions {
 
   static AppException malformedPassword({Object? object}) => AppException(code: 'malformed/password', message: 'The password address is incorrectly formed.', object: object);
 
-  static bool isBaseErrors(AppException exceptionsService) => baseErrors.contains(exceptionsService);
+  static bool isBaseErrors(AppException exception) => baseErrors.contains(exception);
+
+  static bool isAuthErrors(AppException exception) => AuthExceptions.authErrors.contains(exception);
 }
