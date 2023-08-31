@@ -496,6 +496,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Chargement du jeu...`
+  String get gameLoading {
+    return Intl.message(
+      'Chargement du jeu...',
+      name: 'gameLoading',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

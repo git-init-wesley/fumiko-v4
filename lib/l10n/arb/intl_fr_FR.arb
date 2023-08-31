@@ -44,5 +44,6 @@
   "username": "Nom d'utilisateur",
   "usernameAlreadyTaken": "Le nom d'utilisateur est déjà utilisé par un autre compte.",
   "usernameInvalid": "Le nom d'utilisateur est invalide.",
-  "usernameTooltip": "Doit-être composé de chiffre.\nDoit-être composé de minuscule ou majuscule.\nNe dois pas contenir de caractère spécial sauf « ._ ».\nAu moins 3 caractères, mais pas plus de 16."
+  "usernameTooltip": "Doit-être composé de chiffre.\nDoit-être composé de minuscule ou majuscule.\nNe dois pas contenir de caractère spécial sauf « ._ ».\nAu moins 3 caractères, mais pas plus de 16.",
+  "gameLoading": "Chargement du jeu..."
 }

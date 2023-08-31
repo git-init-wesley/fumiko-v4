@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("Erreur"),
         "errorOccurred": MessageLookupByLibrary.simpleMessage("❌ Une erreur est survenue. Réessayer ultérieurement. ❌"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Mot de passe perdu ?"),
+        "gameLoading": MessageLookupByLibrary.simpleMessage("Chargement du jeu..."),
         "initializationGame": MessageLookupByLibrary.simpleMessage("⌛ Initialisation du jeu... ⌛"),
         "logIn": MessageLookupByLibrary.simpleMessage("Connexion"),
         "logInDescription": MessageLookupByLibrary.simpleMessage("Connectez-vous pour entrer dans le jeu."),
