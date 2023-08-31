@@ -36,7 +36,7 @@ class AppException extends Error {
 class AppExceptions {
   AppExceptions._();
 
-  static List<AppException> get baseErrors => [error(), appInvalid(), connectivityNone(), connectivityVPN(), malformedEmail(), malformedUsername(), malformedPassword()];
+  static List<AppException> get baseErrors => [error(), appInvalid(), connectivityNone(), connectivityVPN(), malformedEmail(), malformedUsername(), malformedPassword(), passwordNotEqual()];
 
   static List<AppException> get errors => baseErrors + AuthExceptions.authErrors;
 
@@ -60,6 +60,8 @@ class AppExceptions {
   static AppException malformedUsername({Object? object}) => AppException(code: 'malformed/username', message: 'The username is incorrectly formed.', object: object);
 
   static AppException malformedPassword({Object? object}) => AppException(code: 'malformed/password', message: 'The password address is incorrectly formed.', object: object);
+
+  static AppException passwordNotEqual({Object? object}) => AppException(code: 'malformed/password-not-equal', message: 'Passwords are not equal.', object: object);
 
   static bool isBaseErrors(AppException exception) => baseErrors.contains(exception);
 
