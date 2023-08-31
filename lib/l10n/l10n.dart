@@ -227,6 +227,36 @@ class AppLocalizations {
     );
   }
 
+  /// `Recuperation`
+  String get recovery {
+    return Intl.message(
+      'Recuperation',
+      name: 'recovery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vous avez perdu votre mot de passe ?`
+  String get recoveryDescription {
+    return Intl.message(
+      'Vous avez perdu votre mot de passe ?',
+      name: 'recoveryDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recuperation...`
+  String get recoveryLoading {
+    return Intl.message(
+      'Recuperation...',
+      name: 'recoveryLoading',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Inscription`
   String get registration {
     return Intl.message(
@@ -292,6 +322,16 @@ class AppLocalizations {
     return Intl.message(
       'Vous avez déjà un compte ?',
       name: 'alreadyHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vous vous souvenez de votre mot de passe ?`
+  String get rememberPassword {
+    return Intl.message(
+      'Vous vous souvenez de votre mot de passe ?',
+      name: 'rememberPassword',
       desc: '',
       args: [],
     );
