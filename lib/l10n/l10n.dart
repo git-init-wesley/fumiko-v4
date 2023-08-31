@@ -50,6 +50,36 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
+  /// `Erreur`
+  String get error {
+    return Intl.message(
+      'Erreur',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attention`
+  String get warning {
+    return Intl.message(
+      'Attention',
+      name: 'warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Désactivation`
+  String get deactivation {
+    return Intl.message(
+      'Désactivation',
+      name: 'deactivation',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `J'ai compris`
   String get understood {
     return Intl.message(
@@ -131,6 +161,16 @@ class AppLocalizations {
     );
   }
 
+  /// `L'accès à ce compte a été temporairement désactivé en raison de nombreuses tentatives de connexion infructueuses. Vous pouvez le restaurer immédiatement en réinitialisant votre mot de passe ou réessayer plus tard. ⌛`
+  String get logInTooManyRequests {
+    return Intl.message(
+      'L\'accès à ce compte a été temporairement désactivé en raison de nombreuses tentatives de connexion infructueuses. Vous pouvez le restaurer immédiatement en réinitialisant votre mot de passe ou réessayer plus tard. ⌛',
+      name: 'logInTooManyRequests',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Connexion`
   String get logIn {
     return Intl.message(
@@ -196,6 +236,26 @@ class AppLocalizations {
     return Intl.message(
       'S\'inscrire',
       name: 'registerNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Le compte est introuvable.`
+  String get accountCannotFound {
+    return Intl.message(
+      'Le compte est introuvable.',
+      name: 'accountCannotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Votre compte a été désactivé. ⏳`
+  String get accountDeactivated {
+    return Intl.message(
+      'Votre compte a été désactivé. ⏳',
+      name: 'accountDeactivated',
       desc: '',
       args: [],
     );

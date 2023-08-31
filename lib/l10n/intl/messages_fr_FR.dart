@@ -25,8 +25,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accountCannotFound":
+            MessageLookupByLibrary.simpleMessage("Le compte est introuvable."),
+        "accountDeactivated": MessageLookupByLibrary.simpleMessage(
+            "Votre compte a été désactivé. ⏳"),
         "checkConnectivity": MessageLookupByLibrary.simpleMessage(
             "⌛ Vérification de la connexion... ⌛"),
+        "deactivation": MessageLookupByLibrary.simpleMessage("Désactivation"),
         "doNotHaveAccountYet": MessageLookupByLibrary.simpleMessage(
             "Vous n\'avez pas encore de compte ?"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Adresse mail"),
@@ -36,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "L\'adresse mail est deja utilise par un autre compte."),
         "emailSentChangePassword": MessageLookupByLibrary.simpleMessage(
             "Un mail vous a ete envoyer pour changer votre mot de passe."),
+        "error": MessageLookupByLibrary.simpleMessage("Erreur"),
         "errorOccurred": MessageLookupByLibrary.simpleMessage(
             "❌ Une erreur est survenue. Réessayer ultérieurement. ❌"),
         "forgotPassword":
@@ -46,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "logInDescription": MessageLookupByLibrary.simpleMessage(
             "Connectez-vous pour entrer dans le jeu."),
         "logInLoading": MessageLookupByLibrary.simpleMessage("Connexion..."),
+        "logInTooManyRequests": MessageLookupByLibrary.simpleMessage(
+            "L\'accès à ce compte a été temporairement désactivé en raison de nombreuses tentatives de connexion infructueuses. Vous pouvez le restaurer immédiatement en réinitialisant votre mot de passe ou réessayer plus tard. ⌛"),
         "maintenanceCurrentlyProgress": m0,
         "pageRecovery": MessageLookupByLibrary.simpleMessage(
             "⌛ Récuperation de la page... ⌛"),
@@ -66,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "updateAvailable": MessageLookupByLibrary.simpleMessage(
             "🆕 Une mise a jour est disponible... 🆕"),
         "verificationGame":
-            MessageLookupByLibrary.simpleMessage("⌛ Vérification du jeu... ⌛")
+            MessageLookupByLibrary.simpleMessage("⌛ Vérification du jeu... ⌛"),
+        "warning": MessageLookupByLibrary.simpleMessage("Attention")
       };
 }
