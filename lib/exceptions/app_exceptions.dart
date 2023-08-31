@@ -1,5 +1,7 @@
 library app_exceptions;
 
+import 'package:fumiko/exceptions/database/database_exceptions.dart';
+
 part './auth/auth_exceptions.dart';
 
 class AppException extends Error {
@@ -38,7 +40,7 @@ class AppExceptions {
 
   static List<AppException> get baseErrors => [error(), appInvalid(), connectivityNone(), connectivityVPN(), malformedEmail(), malformedUsername(), malformedPassword(), passwordNotEqual()];
 
-  static List<AppException> get errors => baseErrors + AuthExceptions.authErrors;
+  static List<AppException> get errors => baseErrors + AuthExceptions.authErrors + DatabaseExceptions.databaseErrors;
 
   static List<String> get errorsCode => errors.map((e) => e.code).toList();
 
@@ -66,4 +68,6 @@ class AppExceptions {
   static bool isBaseErrors(AppException exception) => baseErrors.contains(exception);
 
   static bool isAuthErrors(AppException exception) => AuthExceptions.authErrors.contains(exception);
+
+  static bool isDatabaseErrors(AppException exception) => DatabaseExceptions.databaseErrors.contains(exception);
 }
