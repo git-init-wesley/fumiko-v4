@@ -15,7 +15,7 @@ class AuthSubmitButton extends StatelessWidget {
             padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(0))),
         child: Ink(
             decoration:
-                BoxDecoration(gradient: const LinearGradient(colors: [Colors.red, Colors.redAccent], begin: Alignment.centerLeft, end: Alignment.centerRight), borderRadius: BorderRadius.circular(16)),
+                BoxDecoration(gradient: LinearGradient(colors: [Colors.red, Colors.red.shade900], begin: Alignment.centerLeft, end: Alignment.centerRight), borderRadius: BorderRadius.circular(16)),
             child: Container(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), boxShadow: [
                 BoxShadow(color: Colors.red.withOpacity(0.1), spreadRadius: 0.1, blurRadius: 4, offset: const Offset(3, 1.5)),
