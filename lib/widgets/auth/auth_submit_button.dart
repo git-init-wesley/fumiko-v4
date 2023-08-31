@@ -21,7 +21,7 @@ class AuthSubmitButton extends StatelessWidget {
                 BoxShadow(color: Colors.red.withOpacity(0.1), spreadRadius: 0.1, blurRadius: 4, offset: const Offset(3, 1.5)),
                 BoxShadow(color: Colors.red.withOpacity(0.1), spreadRadius: 0.1, blurRadius: 4, offset: const Offset(-3, -1.5))
               ]),
-              constraints: const BoxConstraints(maxWidth: 170, minHeight: 50),
+              constraints: const BoxConstraints(maxWidth: 192, minHeight: 48),
               alignment: Alignment.center,
               child: Text(title.toUpperCase(),
                   textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge!.fontSize!)),
