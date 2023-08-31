@@ -37,12 +37,17 @@ class RouterRoutes {
 
   static RouterRoute get authSignIn => _authSignIn;
 
+  static const RouterRoute _authSignUp = RouterRoute(name: 'Authentication Sign Up', route: '/auth/sign-up', createPage: AuthSignUpPage());
+
+  static RouterRoute get authSignUp => _authSignUp;
+
   static RouterRoute get gameMain => const RouterRoute(name: 'Game Main', route: '/game/main', createPage: Scaffold());
 
   static List<RouterRoute> get baseRoutes => [unknown, splashScreen];
 
   static List<RouterRoute> get authenticationRoutes => [
-        authSignIn, /*authSignUp, authRecoveryPassword*/
+        authSignIn,
+        authSignUp /*, authRecoveryPassword*/
       ];
 
   static List<RouterRoute> get routes => baseRoutes + authenticationRoutes; // + authenticationRoutes + gamesRoutes;
