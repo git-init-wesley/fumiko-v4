@@ -20,61 +20,43 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'fr_FR';
 
-  static String m0(maintenanceCause, maintenanceEnd) =>
-      "👨🏻‍🔧 Une maintenance est actuellement en cours... 👨🏻‍🔧\n\n${maintenanceCause}\n\nSe termine le ${maintenanceEnd} (UTC+00).";
+  static String m0(maintenanceCause, maintenanceEnd) => "👨🏻‍🔧 Une maintenance est actuellement en cours... 👨🏻‍🔧\n\n${maintenanceCause}\n\nSe termine le ${maintenanceEnd} (UTC+00).";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "accountCannotFound":
-            MessageLookupByLibrary.simpleMessage("Le compte est introuvable."),
-        "accountDeactivated": MessageLookupByLibrary.simpleMessage(
-            "Votre compte a été désactivé. ⏳"),
-        "checkConnectivity": MessageLookupByLibrary.simpleMessage(
-            "⌛ Vérification de la connexion... ⌛"),
+        "accountCannotFound": MessageLookupByLibrary.simpleMessage("Le compte est introuvable."),
+        "accountDeactivated": MessageLookupByLibrary.simpleMessage("Votre compte a été désactivé. ⏳"),
+        "checkConnectivity": MessageLookupByLibrary.simpleMessage("⌛ Vérification de la connexion... ⌛"),
         "deactivation": MessageLookupByLibrary.simpleMessage("Désactivation"),
-        "doNotHaveAccountYet": MessageLookupByLibrary.simpleMessage(
-            "Vous n\'avez pas encore de compte ?"),
+        "doNotHaveAccountYet": MessageLookupByLibrary.simpleMessage("Vous n\'avez pas encore de compte ?"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Adresse mail"),
-        "emailAddressInvalid": MessageLookupByLibrary.simpleMessage(
-            "L\'adresse mail est invalide."),
-        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
-            "L\'adresse mail est deja utilise par un autre compte."),
-        "emailSentChangePassword": MessageLookupByLibrary.simpleMessage(
-            "Un mail vous a ete envoyer pour changer votre mot de passe."),
+        "emailAddressInvalid": MessageLookupByLibrary.simpleMessage("L\'adresse mail est invalide."),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage("L\'adresse mail est deja utilise par un autre compte."),
+        "emailSentChangePassword": MessageLookupByLibrary.simpleMessage("Un mail vous a ete envoyer pour changer votre mot de passe."),
         "error": MessageLookupByLibrary.simpleMessage("Erreur"),
-        "errorOccurred": MessageLookupByLibrary.simpleMessage(
-            "❌ Une erreur est survenue. Réessayer ultérieurement. ❌"),
-        "forgotPassword":
-            MessageLookupByLibrary.simpleMessage("Mot de passe perdu ?"),
-        "initializationGame": MessageLookupByLibrary.simpleMessage(
-            "⌛ Initialisation du jeu... ⌛"),
+        "errorOccurred": MessageLookupByLibrary.simpleMessage("❌ Une erreur est survenue. Réessayer ultérieurement. ❌"),
+        "forgotPassword": MessageLookupByLibrary.simpleMessage("Mot de passe perdu ?"),
+        "initializationGame": MessageLookupByLibrary.simpleMessage("⌛ Initialisation du jeu... ⌛"),
         "logIn": MessageLookupByLibrary.simpleMessage("Connexion"),
-        "logInDescription": MessageLookupByLibrary.simpleMessage(
-            "Connectez-vous pour entrer dans le jeu."),
+        "logInDescription": MessageLookupByLibrary.simpleMessage("Connectez-vous pour entrer dans le jeu."),
         "logInLoading": MessageLookupByLibrary.simpleMessage("Connexion..."),
         "logInTooManyRequests": MessageLookupByLibrary.simpleMessage(
             "L\'accès à ce compte a été temporairement désactivé en raison de nombreuses tentatives de connexion infructueuses. Vous pouvez le restaurer immédiatement en réinitialisant votre mot de passe ou réessayer plus tard. ⌛"),
         "maintenanceCurrentlyProgress": m0,
-        "pageRecovery": MessageLookupByLibrary.simpleMessage(
-            "⌛ Récuperation de la page... ⌛"),
+        "pageRecovery": MessageLookupByLibrary.simpleMessage("⌛ Récuperation de la page... ⌛"),
         "password": MessageLookupByLibrary.simpleMessage("Mot de passe"),
-        "passwordConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Confirmation du Mot de passe"),
-        "passwordIncorrect": MessageLookupByLibrary.simpleMessage(
-            "Le mot de passe est incorrect."),
-        "passwordInvalid": MessageLookupByLibrary.simpleMessage(
-            "Le mot de passe est invalide."),
-        "passwordNotEqual": MessageLookupByLibrary.simpleMessage(
-            "Les mot de passe ne sont pas égaux."),
+        "passwordConfirmation": MessageLookupByLibrary.simpleMessage("Confirmation du Mot de passe"),
+        "passwordIncorrect": MessageLookupByLibrary.simpleMessage("Le mot de passe est incorrect."),
+        "passwordInvalid": MessageLookupByLibrary.simpleMessage("Le mot de passe est invalide."),
+        "passwordNotEqual": MessageLookupByLibrary.simpleMessage("Les mot de passe ne sont pas égaux."),
         "passwordTooltip": MessageLookupByLibrary.simpleMessage(
             "Au moins un chiffre.\nAu moins un caractère minuscule.\nAu moins un caractère majuscule.\nAu moins un caractère special.\nAu moins 8 caractères, mais pas plus de 32."),
         "registerNow": MessageLookupByLibrary.simpleMessage("S\'inscrire"),
         "signIn": MessageLookupByLibrary.simpleMessage("Se connecter"),
         "understood": MessageLookupByLibrary.simpleMessage("J\'ai compris"),
-        "updateAvailable": MessageLookupByLibrary.simpleMessage(
-            "🆕 Une mise a jour est disponible... 🆕"),
-        "verificationGame":
-            MessageLookupByLibrary.simpleMessage("⌛ Vérification du jeu... ⌛"),
+        "updateAvailable": MessageLookupByLibrary.simpleMessage("🆕 Une mise a jour est disponible... 🆕"),
+        "verificationGame": MessageLookupByLibrary.simpleMessage("⌛ Vérification du jeu... ⌛"),
         "warning": MessageLookupByLibrary.simpleMessage("Attention")
       };
 }

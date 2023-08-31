@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -18,17 +19,14 @@ class AppLocalizations {
   static AppLocalizations? _current;
 
   static AppLocalizations get current {
-    assert(_current != null,
-        'No instance of AppLocalizations was loaded. Try to initialize the AppLocalizations delegate before accessing AppLocalizations.current.');
+    assert(_current != null, 'No instance of AppLocalizations was loaded. Try to initialize the AppLocalizations delegate before accessing AppLocalizations.current.');
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<AppLocalizations> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -41,8 +39,7 @@ class AppLocalizations {
 
   static AppLocalizations of(BuildContext context) {
     final instance = AppLocalizations.maybeOf(context);
-    assert(instance != null,
-        'No instance of AppLocalizations present in the widget tree. Did you add AppLocalizations.delegate in localizationsDelegates?');
+    assert(instance != null, 'No instance of AppLocalizations present in the widget tree. Did you add AppLocalizations.delegate in localizationsDelegates?');
     return instance!;
   }
 
@@ -151,8 +148,7 @@ class AppLocalizations {
   }
 
   /// `👨🏻‍🔧 Une maintenance est actuellement en cours... 👨🏻‍🔧\n\n{maintenanceCause}\n\nSe termine le {maintenanceEnd} (UTC+00).`
-  String maintenanceCurrentlyProgress(
-      Object maintenanceCause, Object maintenanceEnd) {
+  String maintenanceCurrentlyProgress(Object maintenanceCause, Object maintenanceEnd) {
     return Intl.message(
       '👨🏻‍🔧 Une maintenance est actuellement en cours... 👨🏻‍🔧\n\n$maintenanceCause\n\nSe termine le $maintenanceEnd (UTC+00).',
       name: 'maintenanceCurrentlyProgress',
@@ -373,8 +369,10 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
+
   @override
   Future<AppLocalizations> load(Locale locale) => AppLocalizations.load(locale);
+
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 
