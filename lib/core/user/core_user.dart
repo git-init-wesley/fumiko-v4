@@ -3,6 +3,7 @@ library core_user;
 import 'dart:developer' as developer;
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fumiko/exceptions/app_exceptions.dart';
 import 'package:fumiko/utils/regexp.dart';
