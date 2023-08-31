@@ -8,6 +8,13 @@ class _AuthRecoveryView extends State<AuthRecoveryPage> with SingleTickerProvide
   }
 
   Widget _buildWidget(BuildContext context, _AuthRecoveryController controller, Widget? child) {
+    List<Widget> childrenNavigateBottom = [
+      Container(margin: const EdgeInsets.only(right: 4), child: Text(AppLocalizations.of(context).rememberPassword)),
+      TextButton(
+          style: ButtonStyle(shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)))),
+          onPressed: controller.navigateToSignIn,
+          child: Text(AppLocalizations.of(context).signIn, style: const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)))
+    ];
     return Scaffold(
         body: Stack(alignment: Alignment.center, children: [
       PopupWidget(
@@ -71,25 +78,12 @@ class _AuthRecoveryView extends State<AuthRecoveryPage> with SingleTickerProvide
                                           AuthSubmitButton(title: AppLocalizations.of(context).recovery, onPressed: controller.recovery)
                                         ])),
                                     Container(
-                                        margin: const EdgeInsets.only(top: 8),
-                                        alignment: Alignment.topCenter,
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
-                                                Container(margin: const EdgeInsets.only(right: 4), child: Text(AppLocalizations.of(context).rememberPassword)),
-                                                TextButton(
-                                                    style: ButtonStyle(shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)))),
-                                                    onPressed: controller.navigateToSignIn,
-                                                    child: Text(AppLocalizations.of(context).signIn, style: const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)))
-                                              ],
-                                            )
-                                          ],
-                                        ))
+                                      margin: const EdgeInsets.only(top: 8),
+                                      alignment: Alignment.topCenter,
+                                      child: (MediaQuery.of(context).size.width >= 512)
+                                          ? Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: childrenNavigateBottom)
+                                          : Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: childrenNavigateBottom),
+                                    )
                                   ],
                                 )))
                       ])))))
