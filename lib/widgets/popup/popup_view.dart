@@ -70,7 +70,7 @@ class _PopupView extends State<PopupWidget> with TickerProviderStateMixin {
                                     margin: const EdgeInsets.only(bottom: 4), padding: const EdgeInsets.all(32), child: Transform.scale(scale: 3, child: Icon(widget.icon, color: widget.iconColor))),
                                 Text(widget.title.toUpperCase(), style: TextStyle(color: widget.titleColor, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize, fontWeight: FontWeight.bold)),
                                 Container(
-                                    constraints: const BoxConstraints(maxWidth: 350),
+                                    constraints: const BoxConstraints(maxWidth: 200),
                                     margin: EdgeInsets.only(top: 12, bottom: (widget.buttons != null ? 8 : 0)),
                                     child: Text(widget.description, style: Theme.of(context).textTheme.titleSmall, textAlign: TextAlign.center)),
                                 Container(child: _buttons(mediaWidth))

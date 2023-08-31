@@ -3,7 +3,9 @@ part of core_user;
 typedef CoreUserAuthCallback = Function(List<AppException> exceptions);
 
 class CoreUserAuth {
-  Future<void> signIn({required String emailAddress, required String password, required CoreUserAuthCallback whenComplete}) async {
+  CoreUserAuth._();
+
+  static Future<void> signIn({required String emailAddress, required String password, required CoreUserAuthCallback whenComplete}) async {
     List<AppException> exceptions = [];
     if (!RegExps.mail.hasMatch(emailAddress)) {
       exceptions.add(AppExceptions.malformedEmail(object: emailAddress));
