@@ -87,6 +87,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Conditions d'utilisations`
+  String get termsOfServices {
+    return Intl.message(
+      'Conditions d\'utilisations',
+      name: 'termsOfServices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Politique de confidentialité`
+  String get privacyPolicy {
+    return Intl.message(
+      'Politique de confidentialité',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `⌛ Vérification de la connexion... ⌛`
   String get checkConnectivity {
     return Intl.message(
@@ -137,10 +157,10 @@ class AppLocalizations {
     );
   }
 
-  /// `🆕 Une mise a jour est disponible... 🆕`
+  /// `🆕 Une mise à jour est disponible... 🆕`
   String get updateAvailable {
     return Intl.message(
-      '🆕 Une mise a jour est disponible... 🆕',
+      '🆕 Une mise à jour est disponible... 🆕',
       name: 'updateAvailable',
       desc: '',
       args: [],
@@ -207,6 +227,46 @@ class AppLocalizations {
     );
   }
 
+  /// `Inscription`
+  String get registration {
+    return Intl.message(
+      'Inscription',
+      name: 'registration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inscrivez-vous pour entrer dans le jeu.`
+  String get registrationDescription {
+    return Intl.message(
+      'Inscrivez-vous pour entrer dans le jeu.',
+      name: 'registrationDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inscription...`
+  String get registrationLoading {
+    return Intl.message(
+      'Inscription...',
+      name: 'registrationLoading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `S'inscrire`
+  String get registerNow {
+    return Intl.message(
+      'S\'inscrire',
+      name: 'registerNow',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Mot de passe perdu ?`
   String get forgotPassword {
     return Intl.message(
@@ -227,11 +287,11 @@ class AppLocalizations {
     );
   }
 
-  /// `S'inscrire`
-  String get registerNow {
+  /// `Vous avez déjà un compte ?`
+  String get alreadyHaveAccount {
     return Intl.message(
-      'S\'inscrire',
-      name: 'registerNow',
+      'Vous avez déjà un compte ?',
+      name: 'alreadyHaveAccount',
       desc: '',
       args: [],
     );
@@ -277,20 +337,20 @@ class AppLocalizations {
     );
   }
 
-  /// `L'adresse mail est deja utilise par un autre compte.`
+  /// `L'adresse mail est déjà utilisée par un autre compte.`
   String get emailAlreadyInUse {
     return Intl.message(
-      'L\'adresse mail est deja utilise par un autre compte.',
+      'L\'adresse mail est déjà utilisée par un autre compte.',
       name: 'emailAlreadyInUse',
       desc: '',
       args: [],
     );
   }
 
-  /// `Un mail vous a ete envoyer pour changer votre mot de passe.`
+  /// `Un mail vous a été envoyer pour changer votre mot de passe.`
   String get emailSentChangePassword {
     return Intl.message(
-      'Un mail vous a ete envoyer pour changer votre mot de passe.',
+      'Un mail vous a été envoyer pour changer votre mot de passe.',
       name: 'emailSentChangePassword',
       desc: '',
       args: [],
@@ -347,11 +407,51 @@ class AppLocalizations {
     );
   }
 
-  /// `Au moins un chiffre.\nAu moins un caractère minuscule.\nAu moins un caractère majuscule.\nAu moins un caractère special.\nAu moins 8 caractères, mais pas plus de 32.`
+  /// `Au moins un chiffre.\nAu moins un caractère minuscule.\nAu moins un caractère majuscule.\nAu moins un caractère spécial.\nAu moins 8 caractères, mais pas plus de 32.`
   String get passwordTooltip {
     return Intl.message(
-      'Au moins un chiffre.\nAu moins un caractère minuscule.\nAu moins un caractère majuscule.\nAu moins un caractère special.\nAu moins 8 caractères, mais pas plus de 32.',
+      'Au moins un chiffre.\nAu moins un caractère minuscule.\nAu moins un caractère majuscule.\nAu moins un caractère spécial.\nAu moins 8 caractères, mais pas plus de 32.',
       name: 'passwordTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nom d'utilisateur`
+  String get username {
+    return Intl.message(
+      'Nom d\'utilisateur',
+      name: 'username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Le nom d'utilisateur est déjà utilisé par un autre compte.`
+  String get usernameAlreadyTaken {
+    return Intl.message(
+      'Le nom d\'utilisateur est déjà utilisé par un autre compte.',
+      name: 'usernameAlreadyTaken',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Le nom d'utilisateur est invalide.`
+  String get usernameInvalid {
+    return Intl.message(
+      'Le nom d\'utilisateur est invalide.',
+      name: 'usernameInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Doit-être composé de chiffre.\nDoit-être composé de minuscule ou majuscule.\nNe dois pas contenir de caractère spécial sauf « ._ ».\nAu moins 3 caractères, mais pas plus de 16.`
+  String get usernameTooltip {
+    return Intl.message(
+      'Doit-être composé de chiffre.\nDoit-être composé de minuscule ou majuscule.\nNe dois pas contenir de caractère spécial sauf « ._ ».\nAu moins 3 caractères, mais pas plus de 16.',
+      name: 'usernameTooltip',
       desc: '',
       args: [],
     );
