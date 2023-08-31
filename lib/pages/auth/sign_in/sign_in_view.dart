@@ -97,9 +97,8 @@ class _AuthSignInView extends State<AuthSignInPage> with SingleTickerProviderSta
                                           children: [
                                             TextButton(
                                                 style: ButtonStyle(shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)))),
-                                                onPressed: controller.navigateToRecoveryPassword,
-                                                child: Text(AppLocalizations.of(context).forgotPassword,
-                                                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent, decoration: TextDecoration.underline))),
+                                                onPressed: controller.navigateToRecovery,
+                                                child: Text(AppLocalizations.of(context).forgotPassword, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent))),
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               crossAxisAlignment: CrossAxisAlignment.center,

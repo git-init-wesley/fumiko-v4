@@ -8,6 +8,19 @@ class _AuthSignUpView extends State<AuthSignUpPage> {
   }
 
   Widget _buildWidget(BuildContext context, _AuthSignUpController controller, Widget? child) {
+    List<Widget> childrenRGPD = [
+      TextButton(
+          style: ButtonStyle(shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)))),
+          onPressed: null,
+          child: Text(AppLocalizations.of(context).termsOfServices, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent))),
+      TextButton(
+          style: ButtonStyle(shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)))),
+          onPressed: null,
+          child: Text(AppLocalizations.of(context).privacyPolicy, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent)))
+    ];
+    if (MediaQuery.of(context).size.width >= 512) {
+      childrenRGPD.insert(1, const Text('&'));
+    }
     return Scaffold(
         body: Stack(alignment: Alignment.center, children: [
       PopupWidget(
@@ -119,23 +132,9 @@ class _AuthSignUpView extends State<AuthSignUpPage> {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
-                                                TextButton(
-                                                    style: ButtonStyle(shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)))),
-                                                    onPressed: null,
-                                                    child: Text(AppLocalizations.of(context).termsOfServices,
-                                                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent, decoration: TextDecoration.underline))),
-                                                const Text('&'),
-                                                TextButton(
-                                                    style: ButtonStyle(shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)))),
-                                                    onPressed: null,
-                                                    child: Text(AppLocalizations.of(context).privacyPolicy,
-                                                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent, decoration: TextDecoration.underline)))
-                                              ],
-                                            ),
+                                            (MediaQuery.of(context).size.width >= 512)
+                                                ? Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: childrenRGPD)
+                                                : Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: childrenRGPD),
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               crossAxisAlignment: CrossAxisAlignment.center,
