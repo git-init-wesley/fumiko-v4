@@ -1,6 +1,5 @@
 library popup;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -32,7 +31,7 @@ class PopupWidget extends StatefulWidget {
   final Color iconColor;
   final String description;
   final bool presented;
-  final List<List<PopupButtonWidget>>? buttons;
+  final List<PopupButtonWidget>? buttons;
   final GestureTapCallback? onTap;
   final Widget? child;
 

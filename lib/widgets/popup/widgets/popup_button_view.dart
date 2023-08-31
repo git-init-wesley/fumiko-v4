@@ -3,7 +3,6 @@ part of popup;
 class _PopupButtonWidgetState extends State<PopupButtonWidget> {
   @override
   Widget build(BuildContext context) {
-    final double mediaWidth = MediaQuery.of(context).size.width;
     return Transform.scale(
         scale: 0.7,
         child: ElevatedButton(
@@ -16,14 +15,15 @@ class _PopupButtonWidgetState extends State<PopupButtonWidget> {
                     gradient: LinearGradient(colors: [widget.color, widget.color.shade900], begin: Alignment.centerLeft, end: Alignment.centerRight), borderRadius: BorderRadius.circular(16)),
                 child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(80),
+                      borderRadius: BorderRadius.circular(16),
                       boxShadow: [
-                        BoxShadow(color: widget.color.withOpacity(0.1), spreadRadius: 0.1, blurRadius: 7, offset: const Offset(6, 3)),
-                        BoxShadow(color: widget.color.withOpacity(0.1), spreadRadius: 0.1, blurRadius: 7, offset: const Offset(-6, -3))
+                        BoxShadow(color: widget.color.withOpacity(0.1), spreadRadius: 0.1, blurRadius: 4, offset: const Offset(3, 1.5)),
+                        BoxShadow(color: widget.color.withOpacity(0.1), spreadRadius: 0.1, blurRadius: 4, offset: const Offset(-3, -1.5))
                       ],
                     ),
-                    constraints: BoxConstraints(maxWidth: kIsWeb ? (mediaWidth * 0.4 > 200 ? 200 : mediaWidth * 0.4) : (mediaWidth * 0.8 > 200 ? 200 : mediaWidth * 0.8), minHeight: 50.0),
+                    constraints: const BoxConstraints(maxWidth: 256, minHeight: 48),
                     alignment: Alignment.center,
-                    child: Text(widget.text, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize))))));
+                    child: Text(widget.text.toUpperCase(),
+                        textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize))))));
   }
 }
