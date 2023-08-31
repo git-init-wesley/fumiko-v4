@@ -6,6 +6,7 @@ import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/pages/auth/recovery/recovery_page.dart';
 import 'package:fumiko/pages/auth/sign_in/sign_in_page.dart';
 import 'package:fumiko/pages/auth/sign_up/sign_up_page.dart';
+import 'package:fumiko/pages/game/main/game_main_page.dart';
 import 'package:fumiko/pages/splash_screen/splash_screen_page.dart';
 import 'package:get_it/get_it.dart';
 
@@ -40,10 +41,9 @@ class RouterService {
           return RouterRoutes.splashScreen.createPage;
         } else if (!CoreUser.instance.isAuthenticated && !RouterRoutes.isAuthenticationRoutes(generateRoute) && !RouterRoutes.isBaseRoutes(generateRoute)) {
           return RouterRoutes.authSignIn.createPage;
-        } //else if (CoreUser.instance.isAuthenticated &&
-        //    !RouterRoutes.isGameRoutes(generateRoute)) {
-        //  return RouterRoutes.gameMain.createPage;
-        //}
+        } else if (CoreUser.instance.isAuthenticated && !RouterRoutes.isGameRoutes(generateRoute)) {
+          return RouterRoutes.gameMain.createPage;
+        }
         return generateRoute.createPage;
       });
 }

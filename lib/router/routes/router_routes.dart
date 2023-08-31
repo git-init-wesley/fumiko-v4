@@ -45,13 +45,17 @@ class RouterRoutes {
 
   static RouterRoute get authRecovery => _authRecovery;
 
-  static RouterRoute get gameMain => const RouterRoute(name: 'Game Main', route: '/game/main', createPage: Scaffold());
+  static const RouterRoute _gameMain = RouterRoute(name: 'Game Main', route: '/game/main', createPage: GameMainPage());
+
+  static RouterRoute get gameMain => _gameMain;
 
   static List<RouterRoute> get baseRoutes => [unknown, splashScreen];
 
   static List<RouterRoute> get authenticationRoutes => [authSignIn, authSignUp, authRecovery];
 
-  static List<RouterRoute> get routes => baseRoutes + authenticationRoutes; // + authenticationRoutes + gamesRoutes;
+  static List<RouterRoute> get gameRoutes => [gameMain];
+
+  static List<RouterRoute> get routes => baseRoutes + authenticationRoutes + gameRoutes; // + authenticationRoutes + gamesRoutes;
 
   static List<String> get routesName => routes.map((e) => e.route).toList();
 
@@ -62,4 +66,6 @@ class RouterRoutes {
   static bool isBaseRoutes(RouterRoute routes) => baseRoutes.contains(routes);
 
   static bool isAuthenticationRoutes(RouterRoute routes) => authenticationRoutes.contains(routes);
+
+  static bool isGameRoutes(RouterRoute routes) => gameRoutes.contains(routes);
 }
