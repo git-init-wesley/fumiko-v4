@@ -77,4 +77,29 @@ class CoreUserAuth {
       whenComplete(exceptions);
     }
   }
+
+  static Future<void> recovery({required String emailAddress, required CoreUserAuthCallback whenComplete}) async {
+    List<AppException> exceptions = [];
+    if (!RegExps.mail.hasMatch(emailAddress)) {
+      exceptions.add(AppExceptions.malformedEmail(object: emailAddress));
+    }
+    if (exceptions.isNotEmpty) {
+      whenComplete(exceptions);
+      return;
+    }
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress);
+    } on FirebaseAuthException catch (error, stacktrace) {
+      if (AppExceptions.errorsCode.contains(error.code)) {
+        exceptions.add(AppExceptions.fromCode(code: error.code, object: error));
+      } else {
+        exceptions.add(AppExceptions.error(object: error, message: error.message));
+      }
+      if (!kReleaseMode) {
+        developer.log(error.toString(), time: DateTime.now(), stackTrace: stacktrace);
+      }
+    } finally {
+      whenComplete(exceptions);
+    }
+  }
 }
