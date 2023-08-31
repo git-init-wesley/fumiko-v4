@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class ChangeListener implements Listenable {
+mixin ChangeListener implements Listenable {
   final List<VoidCallback> _listeners = [];
 
   Future<void> onChange() async {
