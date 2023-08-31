@@ -61,9 +61,7 @@ class CoreUserAuth {
         return;
       }
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailAddress, password: password);
-
-      //TODO: SetUsername after SignUp
-      //    await DatabaseUser.of(uid: userCredential.user!.uid).setUsername(username);
+      await DatabaseUser.of(uid: userCredential.user!.uid).setUsername(username);
     } on FirebaseAuthException catch (error, stacktrace) {
       if (AppExceptions.errorsCode.contains(error.code)) {
         exceptions.add(AppExceptions.fromCode(code: error.code, object: error));
