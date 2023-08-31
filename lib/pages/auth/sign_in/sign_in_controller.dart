@@ -2,11 +2,11 @@ part of auth_sign_in;
 
 class _AuthSignInController extends _AuthSignInModel with PopupController, AuthNavigationController {
   FormFieldValidator<String> get emailAddressValidator =>
-      (String? value) => value != null && value.trim().isNotEmpty && RegExps.mail.hasMatch(value) ? null : (currentErrorEmailAddress = AppLocalizations.current.emailAddressInvalid);
+      (String? value) => value != null && value.trim().isNotEmpty && RegExps.mail.hasMatch(value) ? null : (errorEmailAddress = AppLocalizations.current.emailAddressInvalid);
 
   FormFieldValidator<String> get passwordValidator => (String? value) => value != null && value.trim().isNotEmpty && RegExps.password.hasMatch(value)
       ? null
-      : (currentErrorPassword = AppLocalizations.current.passwordInvalid + (kIsWeb ? '' : '\n\n${AppLocalizations.current.passwordTooltip}'));
+      : (errorPassword = AppLocalizations.current.passwordInvalid + (kIsWeb ? '' : '\n\n${AppLocalizations.current.passwordTooltip}'));
 
   @override
   RouterNavigationService get authNavigationService => super.navigationService;
@@ -30,21 +30,20 @@ class _AuthSignInController extends _AuthSignInModel with PopupController, AuthN
     }
 
     setState(() {
-      currentLoadingText = AppLocalizations.current.logInLoading;
-      currentLoading = true;
-      currentErrorEmailAddress = null;
-      currentErrorPassword = null;
+      loadingText = AppLocalizations.current.logInLoading;
+      isLoading = true;
+      errorEmailAddress = null;
+      errorPassword = null;
     });
 
-    //TODO: Sign In
     await CoreUserAuth.signIn(
         emailAddress: emailAddressController.text,
         password: passwordController.text,
         whenComplete: (List<AppException> appExceptions) async {
           if (appExceptions.isEmpty) {
             setState(() {
-              currentLoadingText = null;
-              currentLoading = false;
+              loadingText = null;
+              isLoading = false;
             });
             navigationService.pushReplacementTo(RouterRoutes.gameMain);
             return;
@@ -79,8 +78,8 @@ class _AuthSignInController extends _AuthSignInModel with PopupController, AuthN
           }
 
           setState(() {
-            currentLoadingText = null;
-            currentLoading = false;
+            loadingText = null;
+            isLoading = false;
           });
         });
   }

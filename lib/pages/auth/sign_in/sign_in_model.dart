@@ -11,9 +11,9 @@ class _AuthSignInModel extends PageBaseModel with PopupModel {
   final TextEditingController emailAddressController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  String? currentErrorEmailAddress;
-  String? currentErrorPassword;
+  String? errorEmailAddress;
+  String? errorPassword;
 
-  bool currentLoading = false;
-  String? currentLoadingText;
+  bool isLoading = false;
+  String? loadingText;
 }

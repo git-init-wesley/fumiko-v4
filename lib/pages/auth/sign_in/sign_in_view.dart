@@ -25,8 +25,8 @@ class _AuthSignInView extends State<AuthSignInPage> with SingleTickerProviderSta
           onTap: controller.closePopup,
           child: FullScreenDoubleCircularProgressIndicator(
               fontSize: Theme.of(context).textTheme.titleLarge!.fontSize,
-              text: controller.currentLoadingText,
-              presented: controller.currentLoading,
+              text: controller.loadingText,
+              presented: controller.isLoading,
               child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Container(
@@ -63,7 +63,7 @@ class _AuthSignInView extends State<AuthSignInPage> with SingleTickerProviderSta
                                           AuthField(
                                               icon: FontAwesomeIcons.envelope,
                                               hintText: AppLocalizations.of(context).emailAddress,
-                                              errorText: controller.currentErrorEmailAddress,
+                                              errorText: controller.errorEmailAddress,
                                               focusNode: controller.emailAddressFocusNode,
                                               textInputAction: TextInputAction.next,
                                               textInputType: TextInputType.emailAddress,
@@ -74,11 +74,11 @@ class _AuthSignInView extends State<AuthSignInPage> with SingleTickerProviderSta
                                           Tooltip(
                                               message: AppLocalizations.of(context).passwordTooltip,
                                               textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                                              padding: const EdgeInsets.all(10),
+                                              padding: const EdgeInsets.all(8),
                                               child: AuthField(
                                                   icon: FontAwesomeIcons.lock,
                                                   hintText: AppLocalizations.of(context).password,
-                                                  errorText: controller.currentErrorPassword,
+                                                  errorText: controller.errorPassword,
                                                   focusNode: controller.passwordFocusNode,
                                                   textInputAction: TextInputAction.done,
                                                   textInputType: TextInputType.visiblePassword,
