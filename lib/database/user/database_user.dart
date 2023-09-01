@@ -1,6 +1,10 @@
+library database_user;
+
 import 'dart:async';
 
 import 'package:fumiko/database/database.dart';
+
+part './leveling/database_user_leveling.dart';
 
 class DatabaseUserPaths {
   DatabaseUserPaths._();
@@ -8,10 +12,10 @@ class DatabaseUserPaths {
   static username(String uid) => 'users/$uid/username';
 }
 
-class DatabaseUser with Database {
+class DatabaseUser extends _DatabaseUserLeveling with Database {
   String? _uid;
 
-  //@override
+  @override
   String get uid => _uid ?? '...';
 
   DatabaseUser._();
