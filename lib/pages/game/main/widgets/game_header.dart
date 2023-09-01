@@ -4,7 +4,10 @@ import 'package:fumiko/utils/assets/assets_images.dart';
 import 'package:fumiko/widgets/game/bar_progress_indicator.dart';
 
 class GameHeader extends StatelessWidget {
-  const GameHeader({super.key});
+  const GameHeader({super.key, required this.exp, required this.maxExp});
+
+  final num exp;
+  final num maxExp;
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +50,7 @@ class GameHeader extends StatelessWidget {
                         width: mediaWidth - 86 - 8,
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.deepOrange,
-                        child: Text('Exp: ${CoreUser.instance.current.exp}/${CoreUser.instance.current.maxExp}',
-                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize ?? 0)))),
+                        child: Text('Exp: ${exp}/${maxExp}', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize ?? 0)))),
               ],
             ))
       ],
