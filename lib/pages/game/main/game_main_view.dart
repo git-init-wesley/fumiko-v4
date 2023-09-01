@@ -8,8 +8,6 @@ class _GameMainView extends State<GameMainPage> {
   }
 
   Widget _buildWidget(BuildContext context, _GameMainController controller, Widget? child) {
-    final Widget? tooltipMobileExpProgressIndicator =
-        kIsWeb ? Text('${CoreUser.instance.current.exp}/${CoreUser.instance.current.maxExp}', style: const TextStyle(color: Colors.white, fontSize: 12)) : null;
     final double mediaWidth = MediaQuery.of(context).size.width;
     final double mediaHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -34,13 +32,27 @@ class _GameMainView extends State<GameMainPage> {
                     child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Column(
-                          mainAxisSize: MainAxisSize.min,
+                          mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            GameHeader(),
-                            GameSubheader(),
+                            Container(key: controller._gameHeaderKey, child: GameHeader(exp: CoreUser.instance.current.exp, maxExp: CoreUser.instance.current.maxExp)),
+                            Container(key: controller._gameSubheaderKey, child: GameSubheader()),
+                            Container(
+                              margin: const EdgeInsets.only(top: 8),
+                              width: mediaWidth,
+                              height: mediaHeight -
+                                  8 -
+                                  ((controller._gameHeaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0) -
+                                  ((controller._gameSubheaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0),
+                              child: PageView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                controller: controller.pageController,
+                                children: [Ink(color: Colors.transparent)],
+                              ),
+                            ),
                             Transform.scale(scale: 0, child: Text(CoreUser.instance.current.exp.toString())),
+                            const Text('v1.0.0#0000'), //TODO: Copyright, Versioning...
                           ],
                         )),
                   ))

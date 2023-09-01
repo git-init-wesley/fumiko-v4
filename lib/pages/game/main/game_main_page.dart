@@ -1,6 +1,5 @@
 library game_main;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/l10n/l10n.dart';
