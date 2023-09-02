@@ -1,7 +1,9 @@
 part of user;
 
-abstract class _EntityUserLeveling {
+mixin _EntityUserLeveling {
   void updatePower();
+
+  void onChange(UserChangeListener obj);
 
   EntityUserValue<num?> _levels = EntityUserValue<num?>(value: 1);
 
@@ -23,7 +25,7 @@ abstract class _EntityUserLeveling {
       didSet: (num? oldLevels, num? newLevels) async {
         if (oldLevels == newLevels) return;
         if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
-          DatabaseUser.of(uid: uid).setLevels(newLevels);
+          onChange(await DatabaseUser.of(uid: uid).setLevels(newLevels));
         }
       },
       value: 1,
@@ -32,7 +34,7 @@ abstract class _EntityUserLeveling {
       didSet: (num? oldRebirths, num? newRebirths) async {
         if (oldRebirths == newRebirths) return;
         if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
-          DatabaseUser.of(uid: uid).setRebirths(newRebirths);
+          onChange(await DatabaseUser.of(uid: uid).setRebirths(newRebirths));
         }
       },
       value: 0,
@@ -41,7 +43,7 @@ abstract class _EntityUserLeveling {
       didSet: (num? oldExp, num? newExp) async {
         if (oldExp == newExp) return;
         if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
-          DatabaseUser.of(uid: uid).setExp(newExp);
+          onChange(await DatabaseUser.of(uid: uid).setExp(newExp));
         }
       },
       value: 0,
@@ -52,17 +54,17 @@ abstract class _EntityUserLeveling {
     if (uid == null) return;
     _levelsObserver = await DatabaseUser.of(uid: uid).observeLevels((value) {
       if (value != _levels.value) _levels._set(value ?? 1);
-      onChange();
+      onChange(null);
       updatePower();
     });
     _rebirthsObserver = await DatabaseUser.of(uid: uid).observeRebirths((value) {
       if (value != _rebirths.value) _rebirths._set(value ?? 1); //TODO: Make default to 0
-      onChange();
+      onChange(null);
       updatePower();
     });
     _expObserver = await DatabaseUser.of(uid: uid).observeExp((value) {
       if (value != _exp.value) _exp._set(value ?? 0);
-      onChange();
+      onChange(null);
       updatePower();
     });
   }
