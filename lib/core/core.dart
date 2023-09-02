@@ -15,6 +15,7 @@ import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/exceptions/app_exceptions.dart';
 import 'package:fumiko/firebase/firebase_options.dart';
 import 'package:fumiko/l10n/l10n.dart';
+import 'package:fumiko/utils/change_listener.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,7 +24,7 @@ part './core_state.dart';
 typedef StateCallback = Function(CoreStates newState);
 typedef InitCallback = Function(AppException? exception, CoreData? data, bool isAuthenticated);
 
-class Core {
+class Core with ChangeListener {
   Core._();
 
   static final Core _instance = Core._();
@@ -51,7 +52,7 @@ class Core {
   bool get isInitialized => state == CoreStates.initialized;
 
   Future<String> get currentLocale async {
-    return 'fr_FR';
+    return 'fr_FR'; //TODO: Return to default
     if (Core.instance.sharedPreferences == null) return Intl.systemLocale;
     if (Core.instance.sharedPreferences?.getString('fumiko-locale') == null) {
       await Core.instance.sharedPreferences!.setString('fumiko-locale', Intl.systemLocale);
@@ -112,7 +113,7 @@ class Core {
 
       FirebaseDatabase.instance.ref().child('core').onValue.listen((event) {
         Core.instance._data = CoreData.fromJson(jsonDecode(jsonEncode((event.snapshot.value))));
-        //TODO: If update, or maintenance go to page;
+        onChange(null);
       });
     } catch (error, stacktrace) {
       if (!kReleaseMode) {
@@ -129,15 +130,17 @@ class Core {
       return;
     }
 
-    //TODO: If offline, go to page
-    FirebaseAuth.instance.authStateChanges().listen((User? user) async => CoreUser.instance.setAuthenticationState = user != null ? AuthenticationStates.connected : AuthenticationStates.offline);
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      CoreUser.instance.setAuthenticationState = user != null ? AuthenticationStates.connected : AuthenticationStates.offline;
+      onChange(null);
+    });
 
     _onStateChange(state: CoreStates.initialized, onStateChange: onStateChange);
     whenComplete(null, null, FirebaseAuth.instance.currentUser != null);
   }
 
-  void _onStateChange({required CoreStates state, required StateCallback onStateChange}) {
+  void _onStateChange({required CoreStates state, StateCallback? onStateChange}) {
     _state = state;
-    onStateChange.call(state);
+    onStateChange?.call(state);
   }
 }

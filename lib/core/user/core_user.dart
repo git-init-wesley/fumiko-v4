@@ -47,13 +47,16 @@ class CoreUser {
     if (withLogout) await FirebaseAuth.instance.signOut();
   }
 
-  Future<void> load() async {
+  Future<void> load({required VoidCallback whenComplete}) async {
     await unload(withLogout: false);
     if (FirebaseAuth.instance.currentUser != null && !isLoaded && isAuthenticated) {
       _current = EntityUser.load(() {
         _state = CoreUserStates.load;
         //TODO: Presence
+        whenComplete();
       });
+    } else {
+      whenComplete();
     }
   }
 }
