@@ -5,7 +5,9 @@ import 'package:fumiko/widgets/game/small_indicator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class GameSubheader extends StatelessWidget {
-  const GameSubheader({super.key});
+  const GameSubheader({super.key, required this.primary, required this.secondary, required this.power});
+
+  final num primary, secondary, power;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class GameSubheader extends StatelessWidget {
           ),
           SmallIndicator(
             backgroundColor: Colors.black,
-            text: NumberFormatter.compact(0),
+            text: NumberFormatter.compact(primary),
             //TODO: Balance
             iconData: FontAwesomeIcons.coins,
             iconColor: Colors.white70,
@@ -43,7 +45,7 @@ class GameSubheader extends StatelessWidget {
           ),
           SmallIndicator(
             backgroundColor: Colors.black,
-            text: NumberFormatter.compact(0),
+            text: NumberFormatter.compact(secondary),
             //TODO: Balance
             iconData: FontAwesomeIcons.solidGem,
             iconColor: Colors.blueAccent,
@@ -61,7 +63,7 @@ class GameSubheader extends StatelessWidget {
           children: [
             SmallIndicator(
               backgroundColor: Colors.black,
-              text: NumberFormatter.compact(0),
+              text: NumberFormatter.compact(power),
               //TODO: Power
               iconData: MdiIcons.swordCross,
               iconColor: Colors.redAccent,

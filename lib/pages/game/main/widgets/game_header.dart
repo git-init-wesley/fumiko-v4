@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/utils/assets/assets_images.dart';
 import 'package:fumiko/widgets/game/bar_progress_indicator.dart';
 
 class GameHeader extends StatelessWidget {
-  const GameHeader({super.key, required this.exp, required this.maxExp});
+  const GameHeader({super.key, required this.username, required this.levels, required this.rebirths, required this.exp, required this.maxExp});
 
-  final num exp;
-  final num maxExp;
+  final String username;
+  final num levels, rebirths, exp, maxExp;
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +35,21 @@ class GameHeader extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(CoreUser.instance.current.username, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 0)),
-                    Text('Re.${CoreUser.instance.current.rebirths} - Lv.${CoreUser.instance.current.levels}', style: TextStyle(fontSize: Theme.of(context).textTheme.titleMedium?.fontSize ?? 0))
+                    Text(username, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 0)),
+                    Text('Re.$rebirths - Lv.$levels', style: TextStyle(fontSize: Theme.of(context).textTheme.titleMedium?.fontSize ?? 0))
                   ],
                 ),
                 Tooltip(
-                    message: '${CoreUser.instance.current.exp.toString()}/${CoreUser.instance.current.maxExp.toString()}',
+                    message: '${exp.toString()}/${maxExp.toString()}',
                     textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                     padding: const EdgeInsets.all(8),
                     child: BarProgressIndicator(
-                        value: (CoreUser.instance.current.exp / CoreUser.instance.current.maxExp),
+                        value: (exp / maxExp),
                         height: 24,
                         width: mediaWidth - 86 - 8,
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.deepOrange,
-                        child: Text('Exp: ${exp}/${maxExp}', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize ?? 0)))),
+                        child: Text('Exp: $exp/$maxExp', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize ?? 0)))),
               ],
             ))
       ],
