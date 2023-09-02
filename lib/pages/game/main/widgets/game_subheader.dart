@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fumiko/utils/number_formatter.dart';
-import 'package:fumiko/widgets/game/small_indicator.dart';
+import 'package:fumiko/widgets/game/indicators/small_indicator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class GameSubheader extends StatelessWidget {

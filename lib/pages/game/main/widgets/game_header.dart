@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fumiko/utils/assets/assets_images.dart';
-import 'package:fumiko/widgets/game/bar_progress_indicator.dart';
+import 'package:fumiko/widgets/game/indicators/bar_progress_indicator.dart';
 
 class GameHeader extends StatelessWidget {
   const GameHeader({super.key, required this.username, required this.levels, required this.rebirths, required this.exp, required this.maxExp});
