@@ -7,6 +7,15 @@ class _GameMainView extends State<GameMainPage> {
         create: (context) => widget._createController(), child: Consumer<_GameMainController>(builder: (context, controller, child) => _buildWidget(context, controller, child)));
   }
 
+  double getWidgetPageHeight({required _GameMainController controller, required double mediaHeight}) {
+    const double minHeight = 480;
+    double algo = mediaHeight -
+        8 -
+        ((controller._gameHeaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0) -
+        ((controller._gameSubheaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0);
+    return max(algo, minHeight);
+  }
+
   Widget _buildWidget(BuildContext context, _GameMainController controller, Widget? child) {
     final double mediaWidth = MediaQuery.of(context).size.width;
     final double mediaHeight = MediaQuery.of(context).size.height;
@@ -36,15 +45,26 @@ class _GameMainView extends State<GameMainPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(key: controller._gameHeaderKey, child: GameHeader(exp: CoreUser.instance.current.exp, maxExp: CoreUser.instance.current.maxExp)),
-                            Container(key: controller._gameSubheaderKey, child: GameSubheader()),
+                            Container(
+                                key: controller._gameHeaderKey,
+                                child: GameHeader(
+                                  username: CoreUser.instance.current.username,
+                                  levels: CoreUser.instance.current.levels,
+                                  rebirths: CoreUser.instance.current.rebirths,
+                                  exp: CoreUser.instance.current.exp,
+                                  maxExp: CoreUser.instance.current.maxExp,
+                                )),
+                            Container(
+                                key: controller._gameSubheaderKey,
+                                child: GameSubheader(
+                                  primary: CoreUser.instance.current.primary,
+                                  secondary: CoreUser.instance.current.secondary,
+                                  power: CoreUser.instance.current.power,
+                                )),
                             Container(
                               margin: const EdgeInsets.only(top: 8),
                               width: mediaWidth,
-                              height: mediaHeight -
-                                  8 -
-                                  ((controller._gameHeaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0) -
-                                  ((controller._gameSubheaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0),
+                              height: getWidgetPageHeight(controller: controller, mediaHeight: mediaHeight),
                               child: PageView(
                                 physics: const NeverScrollableScrollPhysics(),
                                 controller: controller.pageController,

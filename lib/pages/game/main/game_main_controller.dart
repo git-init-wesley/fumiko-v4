@@ -6,8 +6,28 @@ class _GameMainController extends _GameMainModel with PopupController {
       loadingText = AppLocalizations.current.gameLoading;
       isLoading = true;
     });
-    CoreUser.instance.load().whenComplete(() {
-      CoreUser.instance.current.addListener(() => notifyListeners());
+    CoreUser.instance.load(whenComplete: () {
+      Core.instance.addListener((_) async {
+        if (!CoreUser.instance.isAuthenticated) {
+          navigationService.pushReplacementTo(RouterRoutes.authSignIn);
+        }
+        if (Core.instance.data != null && (await Core.instance.data!.isUpdateAvailable || Core.instance.data!.isCurrentlyMaintenance)) {
+          navigationService.pushReplacementTo(RouterRoutes.splashScreen);
+        }
+      });
+
+      CoreUser.instance.current.addListener((UserChangeListener obj) {
+        if (obj != null && obj.error != null) {
+          openPopup(
+            title: AppLocalizations.current.error,
+            titleColor: Colors.redAccent,
+            description: obj.error!.message ?? AppLocalizations.current.errorOccurred,
+            icon: FontAwesomeIcons.circleXmark,
+            iconColor: Colors.redAccent,
+          );
+        }
+        notifyListeners();
+      });
       //TODO: Check if classe has been chosen.
       setState(() {
         loadingText = null;
