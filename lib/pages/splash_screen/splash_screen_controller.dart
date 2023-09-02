@@ -13,6 +13,17 @@ class _SplashScreenController extends _SplashScreenModel {
     }
 
     if (Core.instance.isInitialized || Core.instance.isStartedInitialization) {
+      if (Core.instance.data != null) {
+        if (await Core.instance.data!.isUpdateAvailable) {
+          setState(() async => progressIndicatorText = AppLocalizations.current.updateAvailable);
+        }
+        if (Core.instance.data!.isCurrentlyMaintenance) {
+          String currentLocale = await Core.instance.currentLocale;
+          String maintenanceEnd = DateFormat('dd MMM yyyy - hh:mm a', currentLocale).format(DateTime.fromMillisecondsSinceEpoch(Core.instance.data!.maintenanceEnd, isUtc: true));
+          setState(() async => progressIndicatorText = AppLocalizations.current.maintenanceCurrentlyProgress(Core.instance.data!.getMaintenanceCauseFromLocale(currentLocale), maintenanceEnd));
+        }
+        return;
+      }
       return;
     }
 
