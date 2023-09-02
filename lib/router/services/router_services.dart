@@ -37,11 +37,16 @@ class RouterService {
 
   Route onGenerateRoute(RouteSettings settings) => MaterialPageRoute(builder: (context) {
         final RouterRoute generateRoute = RouterRoutes.fromRouteName(settings.name);
+
+        //if (Core.instance.data != null && (await Core.instance.data!.isUpdateAvailable || Core.instance.data!.isCurrentlyMaintenance)) {
+        //  return RouterRoutes.splashScreen.createPage;
+        //}
+
         if (!Core.instance.isInitialized && !RouterRoutes.baseRoutes.contains(generateRoute)) {
           return RouterRoutes.splashScreen.createPage;
         } else if (!CoreUser.instance.isAuthenticated && !RouterRoutes.isAuthenticationRoutes(generateRoute) && !RouterRoutes.isBaseRoutes(generateRoute)) {
           return RouterRoutes.authSignIn.createPage;
-        } else if (CoreUser.instance.isAuthenticated && !RouterRoutes.isGameRoutes(generateRoute)) {
+        } else if (CoreUser.instance.isAuthenticated && !RouterRoutes.isGameRoutes(generateRoute) && !RouterRoutes.isBaseRoutes(generateRoute)) {
           return RouterRoutes.gameMain.createPage;
         }
         return generateRoute.createPage;
