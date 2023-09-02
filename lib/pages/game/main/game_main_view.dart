@@ -62,15 +62,22 @@ class _GameMainView extends State<GameMainPage> {
                                   power: CoreUser.instance.current.power,
                                 )),
                             Container(
-                              margin: const EdgeInsets.only(top: 8),
-                              width: mediaWidth,
-                              height: getWidgetPageHeight(controller: controller, mediaHeight: mediaHeight),
-                              child: PageView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                controller: controller.pageController,
-                                children: [Ink(color: Colors.transparent)],
-                              ),
-                            ),
+                                margin: const EdgeInsets.only(top: 8),
+                                width: mediaWidth,
+                                height: getWidgetPageHeight(controller: controller, mediaHeight: mediaHeight),
+                                child: PageView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  controller: controller.pageController,
+                                  children: [
+                                    GameHome(
+                                      pageController: controller.pageController,
+                                      fightsPage: 1,
+                                      settingsPage: 2,
+                                    ),
+                                    GameFights(pageController: controller.pageController),
+                                    GameSettings(pageController: controller.pageController),
+                                  ],
+                                )),
                             Transform.scale(scale: 0, child: Text(CoreUser.instance.current.exp.toString())),
                             const Text('v1.0.0#0000'), //TODO: Copyright, Versioning...
                           ],

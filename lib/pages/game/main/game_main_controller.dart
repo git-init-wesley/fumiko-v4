@@ -2,6 +2,7 @@ part of game_main;
 
 class _GameMainController extends _GameMainModel with PopupController {
   _GameMainController() {
+    pageController.addListener(() => notifyListeners());
     setState(() {
       loadingText = AppLocalizations.current.gameLoading;
       isLoading = true;
