@@ -1,13 +1,11 @@
-import 'package:flutter/foundation.dart';
+mixin ChangeListener<T> {
+  final List<Function(T?)> _listeners = [];
 
-mixin ChangeListener implements Listenable {
-  final List<VoidCallback> _listeners = [];
-
-  Future<void> onChange() async {
+  Future<void> onChange(T obj) async {
     if (_listeners.isNotEmpty) {
-      for (VoidCallback listener in _listeners) {
+      for (Function(T?) listener in _listeners) {
         try {
-          listener.call();
+          listener.call(obj);
         } catch (_) {
           removeListener(listener);
         }
@@ -15,11 +13,9 @@ mixin ChangeListener implements Listenable {
     }
   }
 
-  @override
-  void addListener(VoidCallback listener) => _listeners.add(listener);
+  void addListener(Function(T?) listener) => _listeners.add(listener);
 
-  @override
-  void removeListener(VoidCallback listener) => _listeners.remove(listener);
+  void removeListener(Function(T?) listener) => _listeners.remove(listener);
 
   void disposeListeners() => _listeners.clear();
 }
