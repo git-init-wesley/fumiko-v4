@@ -20,6 +20,12 @@ mixin _EntityUserBalance {
   num get trophies => _trophies.value ?? 0;
   StreamSubscription? _trophiesObserver;
 
+  Future<void> _getBalanceValues({required String uid}) async {
+    _primary = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getPrimary()).value ?? 0);
+    _secondary = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getSecondary()).value ?? 0);
+    _trophies = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getTrophies()).value ?? 0);
+  }
+
   void _initBalanceValues({required String? uid}) {
     _primary = EntityUserValue<num?>(
       didSet: (num? oldPrimary, num? newPrimary) async {
@@ -69,9 +75,10 @@ mixin _EntityUserBalance {
     });
   }
 
-  Future<void> _destroyLevelingObservers() async {
+  Future<void> _destroyBalanceObservers() async {
     await Database.removeObserver(streamSubscription: _primaryObserver);
     await Database.removeObserver(streamSubscription: _secondaryObserver);
+    await Database.removeObserver(streamSubscription: _trophiesObserver);
     _primaryObserver = null;
     _secondaryObserver = null;
     _trophiesObserver = null;
