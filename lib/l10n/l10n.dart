@@ -637,6 +637,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Mage`
+  String get mage {
+    return Intl.message(
+      'Mage',
+      name: 'mage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Les Mages sont l'artillerie lourde d'un groupe, ils lancent de puissants sorts à distance sur une ou plusieurs cibles. Les ennemis s'enfuient dès qu'ils entendent leurs redoutables incantations.`
   String get mageDescription {
     return Intl.message(
@@ -647,11 +657,31 @@ class AppLocalizations {
     );
   }
 
+  /// `Guérrier`
+  String get warrior {
+    return Intl.message(
+      'Guérrier',
+      name: 'warrior',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Puissants, d'un courage sans limite, et possédant de fantastiques compétences de combat, les Guerriers sont toujours prêts à attaquer l'ennemi. Pilier de tout groupe et source de sa puissance, les Guerriers affrontent les ennemis en combat rapprochent pendant que leurs partenaires assurent leurs arrières.`
   String get warriorDescription {
     return Intl.message(
       'Puissants, d\'un courage sans limite, et possédant de fantastiques compétences de combat, les Guerriers sont toujours prêts à attaquer l\'ennemi. Pilier de tout groupe et source de sa puissance, les Guerriers affrontent les ennemis en combat rapprochent pendant que leurs partenaires assurent leurs arrières.',
       name: 'warriorDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ninja`
+  String get ninja {
+    return Intl.message(
+      'Ninja',
+      name: 'ninja',
       desc: '',
       args: [],
     );

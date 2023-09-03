@@ -51,10 +51,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "L\'accès à ce compte a été temporairement désactivé en raison de nombreuses tentatives de connexion infructueuses. Vous pouvez le restaurer immédiatement en réinitialisant votre mot de passe ou réessayer plus tard. ⌛"),
         "logout": MessageLookupByLibrary.simpleMessage("Se déconnecter"),
         "logoutLoading": MessageLookupByLibrary.simpleMessage("Déconnexion..."),
+        "mage": MessageLookupByLibrary.simpleMessage("Mage"),
         "mageDescription": MessageLookupByLibrary.simpleMessage(
             "Les Mages sont l\'artillerie lourde d\'un groupe, ils lancent de puissants sorts à distance sur une ou plusieurs cibles. Les ennemis s\'enfuient dès qu\'ils entendent leurs redoutables incantations."),
         "maintenanceCurrentlyProgress": m0,
         "map": MessageLookupByLibrary.simpleMessage("Carte"),
+        "ninja": MessageLookupByLibrary.simpleMessage("Ninja"),
         "ninjaDescription": MessageLookupByLibrary.simpleMessage(
             "Grâce à leur rapidité et leur agilité incroyables, les Ninja sont des experts des dégâts infligés dans un laps de temps très court. Ce sont des assassins entraînés qui ont appris à déceler la moindre faiblesse de leur ennemi pour en tirer avantage. À chaque coup porté par leurs griffes ou par leurs lames, les Ninja acquièrent une âme, essence de vie qu’ils emploient pour lancer des attaques féroces suffisamment puissantes pour mettre à genoux même les adversaires les plus coriaces."),
         "pageRecovery": MessageLookupByLibrary.simpleMessage("⌛ Récuperation de la page... ⌛"),
@@ -90,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Doit-être composé de chiffre.\nDoit-être composé de minuscule ou majuscule.\nNe dois pas contenir de caractère spécial sauf « ._ ».\nAu moins 3 caractères, mais pas plus de 16."),
         "verificationGame": MessageLookupByLibrary.simpleMessage("⌛ Vérification du jeu... ⌛"),
         "warning": MessageLookupByLibrary.simpleMessage("Attention"),
+        "warrior": MessageLookupByLibrary.simpleMessage("Guérrier"),
         "warriorDescription": MessageLookupByLibrary.simpleMessage(
             "Puissants, d\'un courage sans limite, et possédant de fantastiques compétences de combat, les Guerriers sont toujours prêts à attaquer l\'ennemi. Pilier de tout groupe et source de sa puissance, les Guerriers affrontent les ennemis en combat rapprochent pendant que leurs partenaires assurent leurs arrières."),
         "welcome": MessageLookupByLibrary.simpleMessage("Accueil")
