@@ -68,7 +68,7 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
 
   EntityUser.load(VoidCallback whenComplete) {
     _uid = FirebaseAuth.instance.currentUser?.uid;
-    _init().whenComplete(whenComplete);
+    _get().whenComplete(() => _init().whenComplete(whenComplete));
   }
 
   Future<void> _init() async {
@@ -131,8 +131,9 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
       onChange(null);
     });
     _classesObserver = await DatabaseUser.of(uid: uid!).observeClasses((value) {
-      if (value != _username.value) _classes._set(UserClasses.fromCode(value));
+      if (value != _classes.value?.code) _classes._set(UserClasses.fromCode(value));
       onChange(null);
+      updatePower();
     });
     _powerObserver = await DatabaseUser.of(uid: uid!).observePower((value) {
       if (value != _power.value) _power._set(value ?? 0);
