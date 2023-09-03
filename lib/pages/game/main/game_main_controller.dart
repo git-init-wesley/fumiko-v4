@@ -16,7 +16,7 @@ class _GameMainController extends _GameMainModel with PopupController {
           navigationService.pushReplacementTo(RouterRoutes.splashScreen);
         }
       });
-
+      CoreUserPresences.instance.addListener((_) => notifyListeners());
       CoreUser.instance.current.addListener((UserChangeListener obj) {
         if (obj != null && obj.error != null) {
           openPopup(

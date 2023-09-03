@@ -57,9 +57,17 @@ class _GameMainView extends State<GameMainPage> {
                             Container(
                                 key: controller._gameSubheaderKey,
                                 child: GameSubheader(
+                                  pageController: controller.pageController,
                                   primary: CoreUser.instance.current.primary,
                                   secondary: CoreUser.instance.current.secondary,
                                   power: CoreUser.instance.current.power,
+                                  trophies: CoreUser.instance.current.trophies,
+                                  shopPrimaryPage: 0,
+                                  shopSecondaryPage: 0,
+                                  statsPage: 0,
+                                  rankingsPage: 0,
+                                  presencesPage: 0,
+                                  onlineUsers: CoreUserPresences.instance.onlineUsers.length,
                                 )),
                             Container(
                                 margin: const EdgeInsets.only(top: 8),
