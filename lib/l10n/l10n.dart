@@ -636,6 +636,36 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Les Mages sont l'artillerie lourde d'un groupe, ils lancent de puissants sorts à distance sur une ou plusieurs cibles. Les ennemis s'enfuient dès qu'ils entendent leurs redoutables incantations.`
+  String get mageDescription {
+    return Intl.message(
+      'Les Mages sont l\'artillerie lourde d\'un groupe, ils lancent de puissants sorts à distance sur une ou plusieurs cibles. Les ennemis s\'enfuient dès qu\'ils entendent leurs redoutables incantations.',
+      name: 'mageDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Puissants, d'un courage sans limite, et possédant de fantastiques compétences de combat, les Guerriers sont toujours prêts à attaquer l'ennemi. Pilier de tout groupe et source de sa puissance, les Guerriers affrontent les ennemis en combat rapprochent pendant que leurs partenaires assurent leurs arrières.`
+  String get warriorDescription {
+    return Intl.message(
+      'Puissants, d\'un courage sans limite, et possédant de fantastiques compétences de combat, les Guerriers sont toujours prêts à attaquer l\'ennemi. Pilier de tout groupe et source de sa puissance, les Guerriers affrontent les ennemis en combat rapprochent pendant que leurs partenaires assurent leurs arrières.',
+      name: 'warriorDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grâce à leur rapidité et leur agilité incroyables, les Ninja sont des experts des dégâts infligés dans un laps de temps très court. Ce sont des assassins entraînés qui ont appris à déceler la moindre faiblesse de leur ennemi pour en tirer avantage. À chaque coup porté par leurs griffes ou par leurs lames, les Ninja acquièrent une âme, essence de vie qu’ils emploient pour lancer des attaques féroces suffisamment puissantes pour mettre à genoux même les adversaires les plus coriaces.`
+  String get ninjaDescription {
+    return Intl.message(
+      'Grâce à leur rapidité et leur agilité incroyables, les Ninja sont des experts des dégâts infligés dans un laps de temps très court. Ce sont des assassins entraînés qui ont appris à déceler la moindre faiblesse de leur ennemi pour en tirer avantage. À chaque coup porté par leurs griffes ou par leurs lames, les Ninja acquièrent une âme, essence de vie qu’ils emploient pour lancer des attaques féroces suffisamment puissantes pour mettre à genoux même les adversaires les plus coriaces.',
+      name: 'ninjaDescription',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
