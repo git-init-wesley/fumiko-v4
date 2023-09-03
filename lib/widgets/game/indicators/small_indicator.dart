@@ -17,7 +17,7 @@ class SmallIndicator extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
       child: ElevatedButton(
-          onPressed: onPressed ?? () {},
+          onPressed: onPressed,
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
               //overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
