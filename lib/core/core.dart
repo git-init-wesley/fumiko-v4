@@ -17,6 +17,7 @@ import 'package:fumiko/firebase/firebase_options.dart';
 import 'package:fumiko/l10n/l10n.dart';
 import 'package:fumiko/utils/change_listener.dart';
 import 'package:intl/intl.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part './core_state.dart';
@@ -38,6 +39,10 @@ class Core with ChangeListener {
   SharedPreferences? _sharedPreferences;
 
   SharedPreferences? get sharedPreferences => _sharedPreferences;
+
+  PackageInfo? _packageInfo;
+
+  PackageInfo? get packageInfo => _packageInfo;
 
   CoreStates _state = CoreStates.uninitialized;
 
@@ -63,6 +68,7 @@ class Core with ChangeListener {
   Future<void> init({required StateCallback onStateChange, required InitCallback whenComplete}) async {
     _onStateChange(state: CoreStates.startInitialisation, onStateChange: onStateChange);
     _sharedPreferences = await SharedPreferences.getInstance();
+    _packageInfo = await PackageInfo.fromPlatform();
 
     _onStateChange(state: CoreStates.initLanguage, onStateChange: onStateChange);
     await AppLocalizations.load(Locale(await currentLocale));

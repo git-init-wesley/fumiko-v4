@@ -1,6 +1,6 @@
 library core_data;
 
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:fumiko/core/core.dart';
 
 class CoreData {
   final String _version;
@@ -24,7 +24,7 @@ class CoreData {
 
   bool get isCurrentlyMaintenance => _maintenanceEnd >= DateTime.now().millisecondsSinceEpoch;
 
-  Future<bool> get isUpdateAvailable async => (await PackageInfo.fromPlatform()).version != version;
+  Future<bool> get isUpdateAvailable async => Core.instance.packageInfo?.version != version;
 
   String getMaintenanceCauseFromLocale(String locale) => maintenanceCauses.entries.firstWhere((element) => locale.contains(element.key), orElse: () => const MapEntry('N/A', 'N/A')).value;
 }
