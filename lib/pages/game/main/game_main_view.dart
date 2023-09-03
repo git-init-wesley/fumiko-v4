@@ -66,7 +66,7 @@ class _GameMainView extends State<GameMainPage> {
                                   shopSecondaryPage: 0,
                                   statsPage: 0,
                                   rankingsPage: 0,
-                                  presencesPage: 0,
+                                  presencesPage: 3,
                                   onlineUsers: CoreUserPresences.instance.onlineUsers.length,
                                 )),
                             Container(
@@ -88,6 +88,11 @@ class _GameMainView extends State<GameMainPage> {
                                       pvePage: 0,
                                     ),
                                     GameSettings(pageController: controller.pageController, logout: controller.logout),
+                                    GameUsers(
+                                      userPresences: CoreUserPresences.instance.onlineUsers,
+                                      pageController: controller.pageController,
+                                      onChange: () => setState(() {}),
+                                    )
                                   ],
                                 )),
                             Transform.scale(scale: 0, child: Text(CoreUser.instance.current.exp.toString())),
