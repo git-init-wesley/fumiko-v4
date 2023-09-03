@@ -506,6 +506,136 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Accueil`
+  String get welcome {
+    return Intl.message(
+      'Accueil',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Combats`
+  String get fights {
+    return Intl.message(
+      'Combats',
+      name: 'fights',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inventaire`
+  String get inventory {
+    return Intl.message(
+      'Inventaire',
+      name: 'inventory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quêtes`
+  String get quests {
+    return Intl.message(
+      'Quêtes',
+      name: 'quests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Carte`
+  String get map {
+    return Intl.message(
+      'Carte',
+      name: 'map',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alliance`
+  String get alliance {
+    return Intl.message(
+      'Alliance',
+      name: 'alliance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Boutique`
+  String get shop {
+    return Intl.message(
+      'Boutique',
+      name: 'shop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coffres`
+  String get chests {
+    return Intl.message(
+      'Coffres',
+      name: 'chests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paramètres`
+  String get settings {
+    return Intl.message(
+      'Paramètres',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Se déconnecter`
+  String get logout {
+    return Intl.message(
+      'Se déconnecter',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Déconnexion...`
+  String get logoutLoading {
+    return Intl.message(
+      'Déconnexion...',
+      name: 'logoutLoading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `JcJ`
+  String get pvp {
+    return Intl.message(
+      'JcJ',
+      name: 'pvp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `JcE`
+  String get pve {
+    return Intl.message(
+      'JcE',
+      name: 'pve',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
