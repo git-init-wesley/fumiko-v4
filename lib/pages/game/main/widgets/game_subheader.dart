@@ -5,9 +5,23 @@ import 'package:fumiko/widgets/game/indicators/small_indicator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class GameSubheader extends StatelessWidget {
-  const GameSubheader({super.key, required this.primary, required this.secondary, required this.power});
+  const GameSubheader(
+      {super.key,
+      required this.primary,
+      required this.secondary,
+      required this.power,
+      required this.pageController,
+      required this.trophies,
+      required this.shopPrimaryPage,
+      required this.shopSecondaryPage,
+      required this.statsPage,
+      required this.rankingsPage,
+      required this.presencesPage,
+      required this.onlineUsers});
 
-  final num primary, secondary, power;
+  final PageController pageController;
+  final num primary, secondary, power, trophies, onlineUsers;
+  final int shopPrimaryPage, shopSecondaryPage, statsPage, rankingsPage, presencesPage;
 
   @override
   Widget build(BuildContext context) {
@@ -29,27 +43,25 @@ class GameSubheader extends StatelessWidget {
             //TODO: Stamina
             iconData: FontAwesomeIcons.bolt,
             iconColor: Colors.purpleAccent,
-            onPressed: () {},
+            onPressed: null,
             withIconData: FontAwesomeIcons.plus,
             width: indicatorWidth,
           ),
           SmallIndicator(
             backgroundColor: Colors.black,
             text: NumberFormatter.compact(primary),
-            //TODO: Balance
             iconData: FontAwesomeIcons.coins,
             iconColor: Colors.white70,
-            onPressed: () {},
+            onPressed: () => pageController.animateToPage(shopPrimaryPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
             withIconData: FontAwesomeIcons.plus,
             width: indicatorWidth,
           ),
           SmallIndicator(
             backgroundColor: Colors.black,
             text: NumberFormatter.compact(secondary),
-            //TODO: Balance
             iconData: FontAwesomeIcons.solidGem,
             iconColor: Colors.blueAccent,
-            onPressed: () {},
+            onPressed: () => pageController.animateToPage(shopSecondaryPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
             withIconData: FontAwesomeIcons.plus,
             width: indicatorWidth,
           ),
@@ -64,30 +76,27 @@ class GameSubheader extends StatelessWidget {
             SmallIndicator(
               backgroundColor: Colors.black,
               text: NumberFormatter.compact(power),
-              //TODO: Power
               iconData: MdiIcons.swordCross,
               iconColor: Colors.redAccent,
-              onPressed: () {},
+              onPressed: () => pageController.animateToPage(statsPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
               withIconData: FontAwesomeIcons.info,
               width: indicatorWidth,
             ),
             SmallIndicator(
               backgroundColor: Colors.black,
-              text: '0',
-              //TODO: Classement
+              text: NumberFormatter.compact(trophies),
               iconData: FontAwesomeIcons.trophy,
               iconColor: Colors.orangeAccent,
-              onPressed: () {},
+              onPressed: () => pageController.animateToPage(rankingsPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
               withIconData: FontAwesomeIcons.info,
               width: indicatorWidth,
             ),
             SmallIndicator(
               backgroundColor: Colors.black,
-              text: NumberFormatter.compact(0),
-              //TODO: Presence
+              text: NumberFormatter.compact(onlineUsers),
               iconData: FontAwesomeIcons.users,
               iconColor: Colors.white,
-              onPressed: () {},
+              onPressed: () => pageController.animateToPage(presencesPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
               withIconData: FontAwesomeIcons.info,
               width: indicatorWidth,
             ),
