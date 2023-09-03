@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:fumiko/l10n/l10n.dart';
 import 'package:fumiko/utils/assets/assets_images.dart';
 
@@ -5,6 +6,10 @@ class UserClass {
   final String _code;
 
   String get code => _code;
+
+  final String Function(BuildContext) _name;
+
+  String Function(BuildContext) get name => _name;
 
   final AssetsImage _image;
 
@@ -46,21 +51,23 @@ class UserClass {
 
   num get mass => _mass;
 
-  UserClass(
-      {required String code,
-      required AssetsImage image,
-      required AssetsImage graphics,
-      required String description,
-      required num strength,
-      required num dexterity,
-      required num agility,
-      required num vitality,
-      required num endurance,
-      required num eyesight,
-      required num mass})
-      : _code = code,
-        _image = image,
-        _graphics = graphics,
+  UserClass({
+    required String code,
+    required String Function(BuildContext) name,
+    required AssetsImage icon,
+    required AssetsImage graphic,
+    required String description,
+    required num strength,
+    required num dexterity,
+    required num agility,
+    required num vitality,
+    required num endurance,
+    required num eyesight,
+    required num mass,
+  })  : _code = code,
+        _name = name,
+        _image = icon,
+        _graphics = graphic,
         _description = description,
         _strength = strength,
         _dexterity = dexterity,
@@ -81,54 +88,55 @@ class UserClasses {
   UserClasses._();
 
   static final List<UserClass> _classes = [
-    //TODO: Remake stats
     UserClass(
       code: 'mage',
-      image: AssetsImages.mageIcon,
-      graphics: AssetsImages.mageIcon,
+      name: (context) => AppLocalizations.of(context).mage,
+      icon: AssetsImages.mageIcon,
+      graphic: AssetsImages.mageGraphic,
       description: AppLocalizations.current.mageDescription,
-      strength: 0.8,
-      dexterity: 0.8,
-      agility: 1,
-      vitality: 1,
-      endurance: 1.2,
-      eyesight: 1.5,
+      strength: 1,
+      dexterity: 1.1,
+      agility: 0.7,
+      vitality: 1.1,
+      endurance: 1.1,
+      eyesight: 1,
       mass: 1,
     ),
-    //TODO: Remake stats
     UserClass(
       code: 'warrior',
-      image: AssetsImages.warriorIcon,
-      graphics: AssetsImages.warriorIcon,
+      name: (context) => AppLocalizations.of(context).warrior,
+      icon: AssetsImages.warriorIcon,
+      graphic: AssetsImages.warriorGraphic,
       description: AppLocalizations.current.warriorDescription,
       strength: 1.5,
       dexterity: 0.8,
-      agility: 0.8,
+      agility: 0.7,
       vitality: 1.5,
-      endurance: 0.8,
-      eyesight: 0.8,
-      mass: 1.3,
+      endurance: 0.5,
+      eyesight: 0.5,
+      mass: 1.5,
     ),
-    //TODO: Remake stats
     UserClass(
       code: 'ninja',
-      image: AssetsImages.ninjaIcon,
-      graphics: AssetsImages.ninjaIcon,
+      name: (context) => AppLocalizations.of(context).ninja,
+      icon: AssetsImages.ninjaIcon,
+      graphic: AssetsImages.ninjaGraphic,
       description: AppLocalizations.current.ninjaDescription,
       strength: 0.5,
-      dexterity: 1.3,
-      agility: 1.3,
-      vitality: 0.75,
-      endurance: 1.5,
+      dexterity: 1.1,
+      agility: 1.6,
+      vitality: 0.4,
+      endurance: 1.4,
       eyesight: 1.5,
-      mass: 0.8,
+      mass: 0.5,
     ),
   ];
 
   static final UserClass _unknown = UserClass(
     code: 'unknown',
-    image: AssetsImages.fumikoIcon,
-    graphics: AssetsImages.fumikoIcon,
+    name: (_) => 'unknown',
+    icon: AssetsImages.fumikoIcon,
+    graphic: AssetsImages.fumikoGraphic,
     description: 'N/A',
     strength: 0,
     dexterity: 0,
