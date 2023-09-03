@@ -48,6 +48,7 @@ class _GameMainView extends State<GameMainPage> {
                             Container(
                                 key: controller._gameHeaderKey,
                                 child: GameHeader(
+                                  classes: CoreUser.instance.current.classes,
                                   username: CoreUser.instance.current.username,
                                   levels: CoreUser.instance.current.levels,
                                   rebirths: CoreUser.instance.current.rebirths,
@@ -96,7 +97,7 @@ class _GameMainView extends State<GameMainPage> {
                                   ],
                                 )),
                             Transform.scale(scale: 0, child: Text(CoreUser.instance.current.exp.toString())),
-                            const Text('v1.0.0#0000'), //TODO: Copyright, Versioning...
+                            Text('v${Core.instance.packageInfo?.version ?? '0.0.0'}#${Core.instance.packageInfo?.buildNumber ?? '0000'}'), //TODO: Copyright, Versioning...
                           ],
                         )),
                   ))

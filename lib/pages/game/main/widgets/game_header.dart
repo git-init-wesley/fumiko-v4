@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fumiko/utils/assets/assets_images.dart';
+import 'package:fumiko/entities/user/classes/user_classes.dart';
 import 'package:fumiko/widgets/game/indicators/bar_progress_indicator.dart';
 
 class GameHeader extends StatelessWidget {
-  const GameHeader({super.key, required this.username, required this.levels, required this.rebirths, required this.exp, required this.maxExp});
+  const GameHeader({super.key, required this.username, required this.levels, required this.rebirths, required this.exp, required this.maxExp, required this.classes});
 
+  final UserClass classes;
   final String username;
   final num levels, rebirths, exp, maxExp;
 
@@ -18,7 +19,7 @@ class GameHeader extends StatelessWidget {
           width: 86,
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
           decoration: BoxDecoration(color: Colors.black.withOpacity(0.2)),
-          child: AssetsImages.fumikoIcon.toImage(),
+          child: classes.icon.toImage(),
         ),
         Container(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
