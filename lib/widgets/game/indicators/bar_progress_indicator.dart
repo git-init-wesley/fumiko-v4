@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-//TODO: A revoir
 class BarProgressIndicator extends StatefulWidget {
   const BarProgressIndicator({Key? key, required this.value, required this.height, required this.width, required this.backgroundColor, required this.foregroundColor, this.child}) : super(key: key);
 
