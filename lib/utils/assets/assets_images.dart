@@ -67,4 +67,9 @@ class AssetsImages {
   static const AssetsImage mageIcon = AssetsImage(name: 'Mage Icon', path: 'icons/Mage', extension: 'png');
   static const AssetsImage ninjaIcon = AssetsImage(name: 'Ninja Icon', path: 'icons/Ninja', extension: 'png');
   static const AssetsImage warriorIcon = AssetsImage(name: 'Warrior Icon', path: 'icons/Warrior', extension: 'png');
+
+  static const AssetsImage fumikoGraphic = AssetsImage(name: 'Fumiko Graphic', path: 'graphics/Fumiko', extension: 'png');
+  static const AssetsImage mageGraphic = AssetsImage(name: 'Mage Graphic', path: 'graphics/Mage', extension: 'png');
+  static const AssetsImage ninjaGraphic = AssetsImage(name: 'Ninja Graphic', path: 'graphics/Ninja', extension: 'png');
+  static const AssetsImage warriorGraphic = AssetsImage(name: 'Warrior Graphic', path: 'graphics/Warrior', extension: 'png');
 }
