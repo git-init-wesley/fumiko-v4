@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/database/database.dart';
 import 'package:fumiko/database/user/database_user.dart';
+import 'package:fumiko/entities/user/classes/user_classes.dart';
 import 'package:fumiko/utils/change_listener.dart';
 
 part './balance/user_balance.dart';
@@ -44,12 +45,19 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
   String get username => _username.value ?? 'X';
   StreamSubscription? _usernameObserver;
 
+  Future<String?> setUsername(String newUsername) async => await _username._set(newUsername);
+
+  EntityUserValue<UserClass?> _classes = EntityUserValue<UserClass>(value: UserClasses.unknown);
+
+  UserClass get classes => _classes.value ?? UserClasses.unknown;
+  StreamSubscription? _classesObserver;
+
+  Future<UserClass?> setClasses(UserClass newClasses) async => await _classes._set(newClasses);
+
   EntityUserValue<num?> _power = EntityUserValue<num>(value: 0);
 
   num get power => _power.value ?? 0;
   StreamSubscription? _powerObserver;
-
-  Future<String?> setUsername(String newUsername) async => await _username._set(newUsername);
 
   EntityUser();
 
@@ -82,6 +90,7 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
 
   Future<void> _getBaseValues() async {
     _username = EntityUserValue<String?>(value: (await DatabaseUser.of(uid: uid!).getUsername()).value ?? 'N/A');
+    _classes = EntityUserValue<UserClass?>(value: UserClasses.fromCode((await DatabaseUser.of(uid: uid!).getClasses()).value));
     _power = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid!).getPower()).value ?? 0);
   }
 
@@ -94,6 +103,16 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
         }
       },
       value: 'N/A',
+    );
+    _classes = EntityUserValue<UserClass>(
+      didSet: (UserClass oldClass, UserClass newClass) async {
+        if (oldClass == newClass) return;
+        if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
+          onChange(await DatabaseUser.of(uid: uid!).setClasses(newClass.code));
+          updatePower();
+        }
+      },
+      value: UserClasses.unknown,
     );
     _power = EntityUserValue<num>(
       didSet: (num oldPower, num newPower) async {
@@ -111,6 +130,10 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
       if (value != _username.value) _username._set(value ?? 'N/A');
       onChange(null);
     });
+    _classesObserver = await DatabaseUser.of(uid: uid!).observeClasses((value) {
+      if (value != _username.value) _classes._set(UserClasses.fromCode(value));
+      onChange(null);
+    });
     _powerObserver = await DatabaseUser.of(uid: uid!).observePower((value) {
       if (value != _power.value) _power._set(value ?? 0);
       onChange(null);
@@ -119,8 +142,10 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
 
   Future<void> _destroyBaseObservers() async {
     await Database.removeObserver(streamSubscription: _usernameObserver);
+    await Database.removeObserver(streamSubscription: _classesObserver);
     await Database.removeObserver(streamSubscription: _powerObserver);
     _usernameObserver = null;
+    _classesObserver = null;
     _powerObserver = null;
   }
 
