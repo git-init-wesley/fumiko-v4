@@ -7,7 +7,7 @@ class _GameMainController extends _GameMainModel with PopupController {
       loadingText = AppLocalizations.current.gameLoading;
       isLoading = true;
     });
-    CoreUser.instance.load(whenComplete: () {
+    CoreUser.instance.load(whenComplete: () async {
       Core.instance.addListener((_) async {
         if (!CoreUser.instance.isAuthenticated) {
           navigationService.pushReplacementTo(RouterRoutes.authSignIn);
@@ -27,9 +27,18 @@ class _GameMainController extends _GameMainModel with PopupController {
             iconColor: Colors.redAccent,
           );
         }
+
+        if (CoreUser.instance.current.classes.code == UserClasses.unknown.code) {
+          pageController.animateToPage(4, duration: const Duration(microseconds: 1), curve: Curves.linear);
+        }
+
         notifyListeners();
       });
-      //TODO: Check if classe has been chosen.
+
+      if (CoreUser.instance.current.classes.code == UserClasses.unknown.code) {
+        await pageController.animateToPage(4, duration: const Duration(microseconds: 1), curve: Curves.linear);
+      }
+
       setState(() {
         loadingText = null;
         isLoading = false;
@@ -55,5 +64,23 @@ class _GameMainController extends _GameMainModel with PopupController {
       isLoading = true;
     });
     FirebaseAuth.instance.signOut();
+  }
+
+  void setClasses(UserClass classes) async {
+    setState(() {
+      loadingText = AppLocalizations.current.gameLoading;
+      isLoading = true;
+    });
+
+    await CoreUser.instance.current.setClasses(classes);
+
+    if (CoreUser.instance.current.classes.code != UserClasses.unknown.code) {
+      pageController.animateToPage(0, duration: const Duration(microseconds: 1), curve: Curves.linear);
+    }
+
+    setState(() {
+      loadingText = null;
+      isLoading = false;
+    });
   }
 }

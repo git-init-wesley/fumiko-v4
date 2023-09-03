@@ -93,7 +93,8 @@ class _GameMainView extends State<GameMainPage> {
                                       userPresences: CoreUserPresences.instance.onlineUsers,
                                       pageController: controller.pageController,
                                       onChange: () => setState(() {}),
-                                    )
+                                    ),
+                                    GameChooseClasses(setClasses: controller.setClasses)
                                   ],
                                 )),
                             Transform.scale(scale: 0, child: Text(CoreUser.instance.current.exp.toString())),
