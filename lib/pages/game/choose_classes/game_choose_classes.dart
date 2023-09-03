@@ -12,43 +12,47 @@ class GameChooseClasses extends StatefulWidget {
 
 class _GameChooseClassesState extends State<GameChooseClasses> {
   final PageController pageController = PageController(keepPage: false);
-
+  List<Widget> widgets = [];
   int currentPage = 0;
 
   @override
+  void initState() {
+    widgets = UserClasses.classes.map((e) {
+      return SingleChildScrollView(
+          child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: Column(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(colors: [Colors.red, Colors.red.shade900], begin: Alignment.centerLeft, end: Alignment.centerRight), borderRadius: BorderRadius.circular(2)),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.min, children: [
+                        for (int i = 0; i < UserClasses.classes.length; i++)
+                          Container(
+                              decoration: BoxDecoration(color: currentPage == i ? Colors.white.withOpacity(0.05) : null, borderRadius: BorderRadius.circular(2)),
+                              child: TextButton(
+                                  style: ButtonStyle(
+                                      padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.symmetric(vertical: 4, horizontal: 8)),
+                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(2))),
+                                      overlayColor: MaterialStateProperty.all<Color>(Colors.redAccent)),
+                                  onPressed: () => setState(() {
+                                        pageController.animateToPage(currentPage = i, duration: const Duration(microseconds: 1), curve: Curves.linear);
+                                      }),
+                                  child: Text(UserClasses.fromCode(UserClasses.classesCode.elementAt(i)).name(context),
+                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 0))))
+                      ])),
+                  _buildClasses(context: context, classes: e),
+                ],
+              )));
+    }).toList();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return PageView(
-        controller: pageController,
-        children: UserClasses.classes.map((e) {
-          return SingleChildScrollView(
-              child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  child: Column(
-                    children: [
-                      Container(
-                          margin: const EdgeInsets.only(bottom: 16),
-                          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [Colors.red, Colors.red.shade900], begin: Alignment.centerLeft, end: Alignment.centerRight), borderRadius: BorderRadius.circular(2)),
-                          child: Row(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.min, children: [
-                            for (int i = 0; i < UserClasses.classes.length; i++)
-                              Container(
-                                  decoration: BoxDecoration(color: currentPage == i ? Colors.white.withOpacity(0.05) : null, borderRadius: BorderRadius.circular(2)),
-                                  child: TextButton(
-                                      style: ButtonStyle(
-                                          padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.symmetric(vertical: 4, horizontal: 8)),
-                                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(2))),
-                                          overlayColor: MaterialStateProperty.all<Color>(Colors.redAccent)),
-                                      onPressed: () => setState(() {
-                                            pageController.animateToPage(currentPage = i, duration: const Duration(microseconds: 1), curve: Curves.linear);
-                                          }),
-                                      child: Text(UserClasses.fromCode(UserClasses.classesCode.elementAt(i)).name(context),
-                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 0))))
-                          ])),
-                      _buildClasses(context: context, classes: e),
-                    ],
-                  )));
-        }).toList());
+    return PageView(controller: pageController, children: widgets);
   }
 
   Widget _buildClasses({required BuildContext context, required UserClass classes}) {

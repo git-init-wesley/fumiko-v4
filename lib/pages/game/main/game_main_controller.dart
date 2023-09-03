@@ -27,9 +27,10 @@ class _GameMainController extends _GameMainModel with PopupController {
             iconColor: Colors.redAccent,
           );
         }
-
         if (CoreUser.instance.current.classes.code == UserClasses.unknown.code) {
           pageController.animateToPage(4, duration: const Duration(microseconds: 1), curve: Curves.linear);
+        } else {
+          pageController.animateToPage(0, duration: const Duration(microseconds: 1), curve: Curves.linear);
         }
 
         notifyListeners();

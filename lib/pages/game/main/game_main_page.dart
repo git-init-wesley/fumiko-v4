@@ -24,7 +24,9 @@ import 'package:fumiko/widgets/popup/popup_widget.dart';
 import 'package:provider/provider.dart';
 
 part './game_main_controller.dart';
+
 part './game_main_model.dart';
+
 part './game_main_view.dart';
 
 class GameMainPage extends StatefulWidget {

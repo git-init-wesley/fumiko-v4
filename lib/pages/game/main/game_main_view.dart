@@ -8,7 +8,7 @@ class _GameMainView extends State<GameMainPage> {
   }
 
   double getWidgetPageHeight({required _GameMainController controller, required double mediaHeight}) {
-    const double minHeight = 480;
+    const double minHeight = 0; //480;
     double algo = mediaHeight -
         8 -
         ((controller._gameHeaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0) -
