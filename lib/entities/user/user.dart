@@ -12,6 +12,7 @@ import 'package:fumiko/utils/change_listener.dart';
 
 part './balance/user_balance.dart';
 part './leveling/user_leveling.dart';
+part './presences/user_presences.dart';
 
 typedef UserChangeListener = DatabaseResult<dynamic>?;
 typedef EntityUserDidSetValue<T> = Function(T oldValue, T newValue);
