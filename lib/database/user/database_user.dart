@@ -13,6 +13,8 @@ class DatabaseUserPaths {
   static username(String uid) => 'users/$uid/username';
 
   static power(String uid) => 'users/$uid/power';
+
+  static classes(String uid) => 'users/$uid/classes';
 }
 
 class DatabaseUser with Database, _DatabaseUserLeveling, _DatabaseUserBalance {
@@ -45,4 +47,10 @@ class DatabaseUser with Database, _DatabaseUserLeveling, _DatabaseUserBalance {
   Future<DatabaseResult<num?>> setPower(num? newPower) async => await setValue<num?>(path: DatabaseUserPaths.power(uid), value: newPower);
 
   Future<StreamSubscription?> observePower(DatabaseListen<num?> listen) async => await addObserver(path: DatabaseUserPaths.power(uid), listen: listen);
+
+  Future<DatabaseResult<String?>> getClasses() async => await getValue<String?>(path: DatabaseUserPaths.classes(uid));
+
+  Future<DatabaseResult<String?>> setClasses(String? newClasses) async => await setValue<String?>(path: DatabaseUserPaths.classes(uid), value: newClasses);
+
+  Future<StreamSubscription?> observeClasses(DatabaseListen<String?> listen) async => await addObserver(path: DatabaseUserPaths.classes(uid), listen: listen);
 }
