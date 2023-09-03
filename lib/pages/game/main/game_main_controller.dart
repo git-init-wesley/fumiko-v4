@@ -35,10 +35,6 @@ class _GameMainController extends _GameMainModel with PopupController {
         notifyListeners();
       });
 
-      if (CoreUser.instance.current.classes.code == UserClasses.unknown.code) {
-        await pageController.animateToPage(4, duration: const Duration(microseconds: 1), curve: Curves.linear);
-      }
-
       setState(() {
         loadingText = null;
         isLoading = false;
