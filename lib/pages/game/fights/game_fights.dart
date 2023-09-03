@@ -8,8 +8,7 @@ class GameFights extends StatelessWidget {
   const GameFights({super.key, required this.pageController, required this.pvpPage, required this.pvePage});
 
   final PageController pageController;
-  final int pvpPage;
-  final int pvePage;
+  final int pvpPage, pvePage;
 
   @override
   Widget build(BuildContext context) {

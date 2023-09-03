@@ -7,8 +7,7 @@ class GameHome extends StatelessWidget {
   const GameHome({super.key, required this.pageController, required this.fightsPage, required this.settingsPage});
 
   final PageController pageController;
-  final int fightsPage;
-  final int settingsPage;
+  final int fightsPage, settingsPage;
 
   @override
   Widget build(BuildContext context) {
