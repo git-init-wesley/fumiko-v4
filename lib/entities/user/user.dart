@@ -35,7 +35,9 @@ class EntityUserValue<T> {
 }
 
 class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<UserChangeListener> {
-  String? get uid => FirebaseAuth.instance.currentUser?.uid;
+  String? _uid;
+
+  String? get uid => _uid;
 
   EntityUserValue<String?> _username = EntityUserValue<String>(value: '...');
 
@@ -51,7 +53,13 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
 
   EntityUser();
 
+  EntityUser.of({String? uid, required VoidCallback whenComplete}) {
+    _uid = uid;
+    _get().whenComplete(whenComplete);
+  }
+
   EntityUser.load(VoidCallback whenComplete) {
+    _uid = FirebaseAuth.instance.currentUser?.uid;
     _init().whenComplete(whenComplete);
   }
 
@@ -63,6 +71,18 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
     await _initBaseObservers();
     await _initLevelingObservers(uid: uid, onChange: onChange);
     await _initBalanceObservers(uid: uid, onChange: onChange);
+  }
+
+  Future<void> _get() async {
+    if (!CoreUser.instance.isAuthenticated || !CoreUser.instance.isLoaded || uid == null) return;
+    await _getBaseValues();
+    await _getLevelingValues(uid: uid!);
+    await _getBalanceValues(uid: uid!);
+  }
+
+  Future<void> _getBaseValues() async {
+    _username = EntityUserValue<String?>(value: (await DatabaseUser.of(uid: uid!).getUsername()).value ?? 'N/A');
+    _power = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid!).getPower()).value ?? 0);
   }
 
   void _initBaseValues() {
@@ -99,6 +119,7 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
 
   Future<void> _destroyBaseObservers() async {
     await Database.removeObserver(streamSubscription: _usernameObserver);
+    await Database.removeObserver(streamSubscription: _powerObserver);
     _usernameObserver = null;
     _powerObserver = null;
   }
@@ -107,6 +128,7 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
     disposeListeners();
     await _destroyBaseObservers();
     await _destroyLevelingObservers();
+    await _destroyBalanceObservers();
   }
 
   @override
