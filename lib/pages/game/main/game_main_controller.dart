@@ -48,4 +48,12 @@ class _GameMainController extends _GameMainModel with PopupController {
     super.closePopup();
     notifyListeners();
   }
+
+  void logout() {
+    setState(() {
+      loadingText = AppLocalizations.current.logoutLoading;
+      isLoading = true;
+    });
+    FirebaseAuth.instance.signOut();
+  }
 }
