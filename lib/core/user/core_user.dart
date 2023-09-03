@@ -45,7 +45,6 @@ class CoreUser {
 
   Future<void> unload({bool withLogout = true}) async {
     _state = CoreUserStates.unload;
-    //TODO: Presence
     await _current?.destroy();
     _current = null;
     await CoreUserPresences.instance.destroyObserverCurrentUser();
