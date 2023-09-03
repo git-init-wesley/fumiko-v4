@@ -20,10 +20,16 @@ mixin _EntityUserLeveling {
   num get exp => _exp.value ?? 0;
   StreamSubscription? _expObserver;
 
+  Future<void> _getLevelingValues({required String uid}) async {
+    _levels = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getLevels()).value ?? 1);
+    _rebirths = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getRebirths()).value ?? 0);
+    _exp = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getExp()).value ?? 0);
+  }
+
   void _initLevelingValues({required String? uid}) {
     _levels = EntityUserValue<num?>(
       didSet: (num? oldLevels, num? newLevels) async {
-        if (oldLevels == newLevels) return;
+        if (oldLevels == newLevels || newLevels == null) return;
         if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
           onChange(await DatabaseUser.of(uid: uid).setLevels(newLevels));
         }
@@ -32,7 +38,7 @@ mixin _EntityUserLeveling {
     );
     _rebirths = EntityUserValue<num?>(
       didSet: (num? oldRebirths, num? newRebirths) async {
-        if (oldRebirths == newRebirths) return;
+        if (oldRebirths == newRebirths || newRebirths == null) return;
         if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
           onChange(await DatabaseUser.of(uid: uid).setRebirths(newRebirths));
         }
@@ -41,7 +47,7 @@ mixin _EntityUserLeveling {
     );
     _exp = EntityUserValue<num?>(
       didSet: (num? oldExp, num? newExp) async {
-        if (oldExp == newExp) return;
+        if (oldExp == newExp || newExp == null) return;
         if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
           onChange(await DatabaseUser.of(uid: uid).setExp(newExp));
         }
@@ -58,7 +64,7 @@ mixin _EntityUserLeveling {
       updatePower();
     });
     _rebirthsObserver = await DatabaseUser.of(uid: uid).observeRebirths((value) {
-      if (value != _rebirths.value) _rebirths._set(value ?? 1); //TODO: Make default to 0
+      if (value != _rebirths.value) _rebirths._set(value ?? 0);
       onChange(null);
       updatePower();
     });
