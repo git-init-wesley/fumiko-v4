@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fumiko/entities/user/user.dart';
 import 'package:fumiko/l10n/l10n.dart';
@@ -27,7 +25,6 @@ class _GameUsersState extends State<GameUsers> {
             uid: e.uid,
             whenComplete: () {
               ++retrieve;
-              log('onChange');
               setState(() {});
             }))
         .toList();
