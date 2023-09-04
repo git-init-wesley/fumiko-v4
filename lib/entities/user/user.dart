@@ -11,7 +11,7 @@ import 'package:fumiko/database/user/database_user.dart';
 import 'package:fumiko/entities/user/classes/user_classes.dart';
 import 'package:fumiko/utils/change_listener.dart';
 
-part './balance/user_balance.dart';
+part './balances/user_balances.dart';
 part './leveling/user_leveling.dart';
 part './presences/user_presences.dart';
 part './stats/user_stats_base.dart';
@@ -39,7 +39,7 @@ class EntityUserValue<T> {
         _value = value;
 }
 
-class EntityUser with _EntityUserLeveling, _EntityUserBalance, _EntityUserStatsBase, _EntityUserStatsPrimary, ChangeListener<UserChangeListener> {
+class EntityUser with _EntityUserLeveling, _EntityUserBalances, _EntityUserStatsBase, _EntityUserStatsPrimary, ChangeListener<UserChangeListener> {
   String? _uid;
 
   String? get uid => _uid;
@@ -177,7 +177,7 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, _EntityUserStatsB
 
   @override
   void updatePower() {
-    final algo = realHealth + realStrength + realDexterity;
+    final algo = (realStrength + realDexterity + realAgility + realVitality + realEndurance + realEyesight + realMass) - 200;
     _power._set(algo);
     onChange(null);
   }
