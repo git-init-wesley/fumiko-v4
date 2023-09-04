@@ -2,9 +2,9 @@ library user;
 
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/database/database.dart';
 import 'package:fumiko/database/user/database_user.dart';
@@ -14,6 +14,8 @@ import 'package:fumiko/utils/change_listener.dart';
 part './balance/user_balance.dart';
 part './leveling/user_leveling.dart';
 part './presences/user_presences.dart';
+part './stats/user_stats_base.dart';
+part './stats/user_stats_primary.dart';
 
 typedef UserChangeListener = DatabaseResult<dynamic>?;
 typedef EntityUserDidSetValue<T> = Function(T oldValue, T newValue);
@@ -26,8 +28,10 @@ class EntityUserValue<T> {
   T get value => _value;
 
   Future<T> _set(T newValue) async {
-    if (_didSet != null) await _didSet!(_value, newValue);
-    return _value = newValue;
+    final oldValue = _value;
+    _value = newValue;
+    if (_didSet != null) await _didSet!(oldValue, newValue);
+    return _value;
   }
 
   EntityUserValue({EntityUserDidSetValue<T>? didSet, required T value})
@@ -35,7 +39,7 @@ class EntityUserValue<T> {
         _value = value;
 }
 
-class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<UserChangeListener> {
+class EntityUser with _EntityUserLeveling, _EntityUserBalance, _EntityUserStatsBase, _EntityUserStatsPrimary, ChangeListener<UserChangeListener> {
   String? _uid;
 
   String? get uid => _uid;
@@ -49,6 +53,7 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
 
   EntityUserValue<UserClass?> _classes = EntityUserValue<UserClass>(value: UserClasses.unknown);
 
+  @override
   UserClass get classes => _classes.value ?? UserClasses.unknown;
   StreamSubscription? _classesObserver;
 
@@ -75,10 +80,14 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
     _initBaseValues();
     _initLevelingValues(uid: uid);
     _initBalanceValues(uid: uid);
+    _initStatsBaseValues(uid: uid);
+    _initStatsPrimaryValues(uid: uid);
 
     await _initBaseObservers();
     await _initLevelingObservers(uid: uid, onChange: onChange);
     await _initBalanceObservers(uid: uid, onChange: onChange);
+    await _initStatsBaseObservers(uid: uid, onChange: onChange);
+    await _initStatsPrimaryObservers(uid: uid, onChange: onChange);
   }
 
   Future<void> _get() async {
@@ -86,6 +95,8 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
     await _getBaseValues();
     await _getLevelingValues(uid: uid!);
     await _getBalanceValues(uid: uid!);
+    await _getStatsBaseValues(uid: uid!);
+    await _getStatsPrimaryValues(uid: uid!);
   }
 
   Future<void> _getBaseValues() async {
@@ -155,6 +166,8 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
     await _destroyBaseObservers();
     await _destroyLevelingObservers();
     await _destroyBalanceObservers();
+    await _destroyStatsBaseObservers();
+    await _destroyStatsPrimaryObservers();
   }
 
   @override
@@ -164,6 +177,8 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalance, ChangeListener<Us
 
   @override
   void updatePower() {
-    // TODO: implement updatePower
+    final algo = realHealth + realStrength + realDexterity;
+    _power._set(algo);
+    onChange(null);
   }
 }
