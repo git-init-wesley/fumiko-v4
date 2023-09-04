@@ -6,6 +6,8 @@ import 'package:fumiko/database/database.dart';
 
 part './balance/database_user_balance.dart';
 part './leveling/database_user_leveling.dart';
+part './stats/database_stats_base.dart';
+part './stats/database_stats_primary.dart';
 
 class DatabaseUserPaths {
   DatabaseUserPaths._();
@@ -17,7 +19,7 @@ class DatabaseUserPaths {
   static classes(String uid) => 'users/$uid/classes';
 }
 
-class DatabaseUser with Database, _DatabaseUserLeveling, _DatabaseUserBalance {
+class DatabaseUser with Database, _DatabaseUserLeveling, _DatabaseUserBalance, _DatabaseUserStatsBase, _DatabaseUserStatsPrimary {
   String? _uid;
 
   @override
