@@ -14,12 +14,17 @@ class GameHeader extends StatelessWidget {
     final double mediaWidth = MediaQuery.of(context).size.width;
     return Row(
       children: [
-        Container(
-          height: 86,
-          width: 86,
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          decoration: BoxDecoration(color: Colors.black.withOpacity(0.2)),
-          child: classes.icon.toImage(),
+        Tooltip(
+          message: classes.name(context),
+          textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          padding: const EdgeInsets.all(8),
+          child: Container(
+            height: 86,
+            width: 86,
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            decoration: BoxDecoration(color: Colors.black.withOpacity(0.2)),
+            child: classes.icon.toImage(),
+          ),
         ),
         Container(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
