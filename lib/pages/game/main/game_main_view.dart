@@ -59,10 +59,12 @@ class _GameMainView extends State<GameMainPage> {
                                 key: controller._gameSubheaderKey,
                                 child: GameSubheader(
                                   pageController: controller.pageController,
+                                  stamina: CoreUser.instance.current.stamina,
                                   primary: CoreUser.instance.current.primary,
                                   secondary: CoreUser.instance.current.secondary,
                                   power: CoreUser.instance.current.power,
                                   trophies: CoreUser.instance.current.trophies,
+                                  staminaPage: 0,
                                   shopPrimaryPage: 0,
                                   shopSecondaryPage: 0,
                                   statsPage: 0,

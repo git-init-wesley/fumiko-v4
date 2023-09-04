@@ -60,7 +60,7 @@ class _GameMainController extends _GameMainModel with PopupController {
       loadingText = AppLocalizations.current.logoutLoading;
       isLoading = true;
     });
-    FirebaseAuth.instance.signOut();
+    CoreUser.instance.unload();
   }
 
   void setClasses(UserClass classes) async {
