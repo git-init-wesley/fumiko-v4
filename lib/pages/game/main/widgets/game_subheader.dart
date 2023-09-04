@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fumiko/entities/user/user.dart';
 import 'package:fumiko/utils/number_formatter.dart';
 import 'package:fumiko/widgets/game/indicators/small_indicator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -17,11 +18,13 @@ class GameSubheader extends StatelessWidget {
       required this.statsPage,
       required this.rankingsPage,
       required this.presencesPage,
-      required this.onlineUsers});
+      required this.onlineUsers,
+      required this.stamina,
+      required this.staminaPage});
 
   final PageController pageController;
-  final num primary, secondary, power, trophies, onlineUsers;
-  final int shopPrimaryPage, shopSecondaryPage, statsPage, rankingsPage, presencesPage;
+  final num stamina, primary, secondary, power, trophies, onlineUsers;
+  final int staminaPage, shopPrimaryPage, shopSecondaryPage, statsPage, rankingsPage, presencesPage;
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +42,10 @@ class GameSubheader extends StatelessWidget {
         children: [
           SmallIndicator(
             backgroundColor: Colors.black,
-            text: '0',
-            //TODO: Stamina
+            text: '${NumberFormatter.compact(stamina)}/${NumberFormatter.compact(DefaultEntityUserStatsBase.maxStamina)}',
             iconData: FontAwesomeIcons.bolt,
             iconColor: Colors.purpleAccent,
-            onPressed: null,
+            onPressed: () => pageController.animateToPage(staminaPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
             withIconData: FontAwesomeIcons.plus,
             width: indicatorWidth,
           ),
