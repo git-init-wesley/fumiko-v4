@@ -17,7 +17,7 @@ class MenusButton extends StatelessWidget {
         style: ButtonStyle(
             minimumSize: MaterialStateProperty.all<Size>(Size(0, height)),
             maximumSize: MaterialStateProperty.all<Size>(Size(maxWidth, double.infinity)),
-            backgroundColor: MaterialStateProperty.all<Color>(color.withOpacity(0.5)),
+            backgroundColor: MaterialStateProperty.all<Color>(color.withOpacity(0.75)),
             overlayColor: MaterialStateProperty.all<Color>(color.withOpacity(0.6)),
             shadowColor: MaterialStateProperty.all<Color>(Colors.black),
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
