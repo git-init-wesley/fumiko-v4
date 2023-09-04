@@ -1,6 +1,6 @@
 part of user;
 
-mixin _EntityUserBalance {
+mixin _EntityUserBalances {
   void updatePower();
 
   void onChange(UserChangeListener obj);
