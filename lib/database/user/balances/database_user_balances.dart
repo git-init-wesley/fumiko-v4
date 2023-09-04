@@ -3,14 +3,14 @@ part of database_user;
 class DatabaseUserBalancePaths {
   DatabaseUserBalancePaths._();
 
-  static primary(String uid) => 'users/$uid/balance/primary';
+  static primary(String uid) => 'users/$uid/balances/primary';
 
-  static secondary(String uid) => 'users/$uid/balance/secondary';
+  static secondary(String uid) => 'users/$uid/balances/secondary';
 
-  static trophies(String uid) => 'users/$uid/balance/trophies';
+  static trophies(String uid) => 'users/$uid/balances/trophies';
 }
 
-mixin _DatabaseUserBalance {
+mixin _DatabaseUserBalances {
   String get uid;
 
   Future<DatabaseResult<V?>> getValue<V>({required String path});
