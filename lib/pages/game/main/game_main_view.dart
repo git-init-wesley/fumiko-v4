@@ -1,5 +1,38 @@
 part of game_main;
 
+class GameMainSubPages {
+  GameMainSubPages._();
+
+  static const String homeRoute = 'home';
+
+  static Widget home({required SetSubPageFunction setSubPageRoute}) => GameHome(setSubPageRoute: setSubPageRoute);
+
+  static const String fightsRoute = 'fights';
+
+  static Widget fights({required SetSubPageFunction setSubPageRoute}) => GameFights(setSubPageRoute: setSubPageRoute);
+
+  static const String settingsRoute = 'settings';
+
+  static Widget settings({required SetSubPageFunction setSubPageRoute, required VoidCallback logout}) => GameSettings(setSubPageRoute: setSubPageRoute, logout: logout);
+
+  static const String viewUsersRoute = 'view-users';
+
+  static Widget viewUsers({required SetSubPageFunction setSubPageRoute, required VoidCallback onChange}) =>
+      GameUsers(userPresences: CoreUserPresences.instance.onlineUsers, setSubPageRoute: setSubPageRoute, onChange: onChange);
+
+  static const String chooseClassesRoute = 'choose-classes';
+
+  static Widget chooseClasses({required void Function(UserClass) setClasses}) => GameChooseClasses(setClasses: setClasses);
+
+  static const String pvpRoute = 'pvp';
+  static const String pveRoute = 'pve';
+  static const String staminaRoute = 'stamina';
+  static const String shopPrimaryRoute = 'shop-primary';
+  static const String shopSecondaryRoute = 'shop-secondary';
+  static const String statsRoute = 'stats';
+  static const String rankingsRoute = 'rankings';
+}
+
 class _GameMainView extends State<GameMainPage> {
   @override
   Widget build(BuildContext context) {
@@ -7,13 +40,28 @@ class _GameMainView extends State<GameMainPage> {
         create: (context) => widget._createController(), child: Consumer<_GameMainController>(builder: (context, controller, child) => _buildWidget(context, controller, child)));
   }
 
-  double getWidgetPageHeight({required _GameMainController controller, required double mediaHeight}) {
+  double _getWidgetPageHeight({required _GameMainController controller, required double mediaHeight}) {
     const double minHeight = 0; //480;
     double algo = mediaHeight -
         8 -
         ((controller._gameHeaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0) -
         ((controller._gameSubheaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0);
     return max(algo, minHeight);
+  }
+
+  Widget _buildWidgetPage({required _GameMainController controller}) {
+    switch (controller.subPageRoute) {
+      case GameMainSubPages.fightsRoute:
+        return GameMainSubPages.fights(setSubPageRoute: controller.setSubPageRoute);
+      case GameMainSubPages.settingsRoute:
+        return GameMainSubPages.settings(setSubPageRoute: controller.setSubPageRoute, logout: controller.logout);
+      case GameMainSubPages.viewUsersRoute:
+        return GameMainSubPages.viewUsers(setSubPageRoute: controller.setSubPageRoute, onChange: () => setState(() {}));
+      case GameMainSubPages.chooseClassesRoute:
+        return GameMainSubPages.chooseClasses(setClasses: controller.setClasses);
+      default:
+        return GameMainSubPages.home(setSubPageRoute: controller.setSubPageRoute);
+    }
   }
 
   Widget _buildWidget(BuildContext context, _GameMainController controller, Widget? child) {
@@ -58,47 +106,19 @@ class _GameMainView extends State<GameMainPage> {
                             Container(
                                 key: controller._gameSubheaderKey,
                                 child: GameSubheader(
-                                  pageController: controller.pageController,
+                                  setSubPageRoute: controller.setSubPageRoute,
                                   stamina: CoreUser.instance.current.stamina,
                                   primary: CoreUser.instance.current.primary,
                                   secondary: CoreUser.instance.current.secondary,
                                   power: CoreUser.instance.current.power,
                                   trophies: CoreUser.instance.current.trophies,
-                                  staminaPage: 0,
-                                  shopPrimaryPage: 0,
-                                  shopSecondaryPage: 0,
-                                  statsPage: 0,
-                                  rankingsPage: 0,
-                                  presencesPage: 3,
                                   onlineUsers: CoreUserPresences.instance.onlineUsers.length,
                                 )),
                             Container(
                                 margin: const EdgeInsets.only(top: 8),
                                 width: mediaWidth,
-                                height: getWidgetPageHeight(controller: controller, mediaHeight: mediaHeight),
-                                child: PageView(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  controller: controller.pageController,
-                                  children: [
-                                    GameHome(
-                                      pageController: controller.pageController,
-                                      fightsPage: 1,
-                                      settingsPage: 2,
-                                    ),
-                                    GameFights(
-                                      pageController: controller.pageController,
-                                      pvpPage: 0,
-                                      pvePage: 0,
-                                    ),
-                                    GameSettings(pageController: controller.pageController, logout: controller.logout),
-                                    GameUsers(
-                                      userPresences: CoreUserPresences.instance.onlineUsers,
-                                      pageController: controller.pageController,
-                                      onChange: () => setState(() {}),
-                                    ),
-                                    GameChooseClasses(setClasses: controller.setClasses)
-                                  ],
-                                )),
+                                constraints: BoxConstraints(minHeight: _getWidgetPageHeight(controller: controller, mediaHeight: mediaHeight)),
+                                child: _buildWidgetPage(controller: controller)),
                             Transform.scale(scale: 0, child: Text(CoreUser.instance.current.exp.toString())),
                             Text('v${Core.instance.packageInfo?.version ?? '0.0.0'}#${Core.instance.packageInfo?.buildNumber ?? '0000'}'), //TODO: Copyright, Versioning...
                           ],

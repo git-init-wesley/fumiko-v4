@@ -1,8 +1,9 @@
 part of game_main;
 
+typedef SetSubPageFunction = void Function(String route);
+
 class _GameMainController extends _GameMainModel with PopupController {
   _GameMainController() {
-    pageController.addListener(() => notifyListeners());
     setState(() {
       loadingText = AppLocalizations.current.gameLoading;
       isLoading = true;
@@ -28,9 +29,9 @@ class _GameMainController extends _GameMainModel with PopupController {
           );
         }
         if (CoreUser.instance.current.classes.code == UserClasses.unknown.code) {
-          pageController.animateToPage(4, duration: const Duration(microseconds: 1), curve: Curves.linear);
+          setSubPageRoute(GameMainSubPages.chooseClassesRoute);
         } else {
-          pageController.animateToPage(0, duration: const Duration(microseconds: 1), curve: Curves.linear);
+          setSubPageRoute(GameMainSubPages.homeRoute);
         }
 
         notifyListeners();
@@ -63,6 +64,12 @@ class _GameMainController extends _GameMainModel with PopupController {
     CoreUser.instance.unload();
   }
 
+  void setSubPageRoute(String route) {
+    setState(() {
+      subPageRoute = route;
+    });
+  }
+
   void setClasses(UserClass classes) async {
     setState(() {
       loadingText = AppLocalizations.current.gameLoading;
@@ -72,7 +79,7 @@ class _GameMainController extends _GameMainModel with PopupController {
     await CoreUser.instance.current.setClasses(classes);
 
     if (CoreUser.instance.current.classes.code != UserClasses.unknown.code) {
-      pageController.animateToPage(0, duration: const Duration(microseconds: 1), curve: Curves.linear);
+      setSubPageRoute(GameMainSubPages.homeRoute);
     }
 
     setState(() {
