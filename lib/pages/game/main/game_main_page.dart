@@ -16,7 +16,7 @@ import 'package:fumiko/pages/game/home/game_home.dart';
 import 'package:fumiko/pages/game/main/widgets/game_header.dart';
 import 'package:fumiko/pages/game/main/widgets/game_subheader.dart';
 import 'package:fumiko/pages/game/settings/game_settings.dart';
-import 'package:fumiko/pages/game/users/game_users.dart';
+import 'package:fumiko/pages/game/users/game_view_users.dart';
 import 'package:fumiko/router/services/router_services.dart';
 import 'package:fumiko/widgets/indicators/fullscreen_double_circular_progress_indicator.dart';
 import 'package:fumiko/widgets/popup/popup_widget.dart';

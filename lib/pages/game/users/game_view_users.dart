@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:fumiko/entities/user/user.dart';
 import 'package:fumiko/l10n/l10n.dart';
+import 'package:fumiko/pages/game/main/game_main_page.dart';
 import 'package:fumiko/pages/game/statique/home_menus_button.dart';
 
 class GameUsers extends StatefulWidget {
-  const GameUsers({super.key, required this.userPresences, required this.pageController, required this.onChange});
+  const GameUsers({super.key, required this.userPresences, required this.setSubPageRoute, required this.onChange});
 
   final VoidCallback onChange;
   final List<UserPresences> userPresences;
-  final PageController pageController;
+  final SetSubPageFunction setSubPageRoute;
 
   @override
   State<GameUsers> createState() => _GameUsersState();
@@ -37,7 +38,7 @@ class _GameUsersState extends State<GameUsers> {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          HomeMenusButton(pageController: widget.pageController),
+          HomeMenusButton(setSubPageRoute: widget.setSubPageRoute),
           if (retrieve != users.length) Text('${AppLocalizations.current.recoveryLoading} ${retrieve.toString()} / ${users.length}'),
           Container(
             margin: const EdgeInsets.only(top: 16),
