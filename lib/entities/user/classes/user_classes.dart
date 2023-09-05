@@ -90,7 +90,7 @@ class UserClasses {
   static final List<UserClass> _classes = [
     UserClass(
       code: 'mage',
-      name: (context) => AppLocalizations.of(context).mage,
+      name: (context) => false ? AppLocalizations.of(context).mage : AppLocalizations.current.mage,
       icon: AssetsImages.mageIcon,
       graphic: AssetsImages.mageGraphic,
       description: AppLocalizations.current.mageDescription,
@@ -104,7 +104,7 @@ class UserClasses {
     ),
     UserClass(
       code: 'warrior',
-      name: (context) => AppLocalizations.of(context).warrior,
+      name: (context) => false ? AppLocalizations.of(context).warrior : AppLocalizations.current.warrior,
       icon: AssetsImages.warriorIcon,
       graphic: AssetsImages.warriorGraphic,
       description: AppLocalizations.current.warriorDescription,
@@ -118,7 +118,7 @@ class UserClasses {
     ),
     UserClass(
       code: 'ninja',
-      name: (context) => AppLocalizations.of(context).ninja,
+      name: (context) => false ? AppLocalizations.of(context).ninja : AppLocalizations.current.ninja,
       icon: AssetsImages.ninjaIcon,
       graphic: AssetsImages.ninjaGraphic,
       description: AppLocalizations.current.ninjaDescription,

@@ -22,7 +22,8 @@ class GameMainSubPages {
 
   static const String chooseClassesRoute = 'choose-classes';
 
-  static Widget chooseClasses({required void Function(UserClass) setClasses}) => GameChooseClasses(setClasses: setClasses);
+  static Widget chooseClasses({required BuildContext context, required void Function(UserClass) setClasses}) =>
+      GameChooseClasses(setClasses: setClasses, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 0);
 
   static const String pvpRoute = 'pvp';
   static const String pveRoute = 'pve';
@@ -49,7 +50,7 @@ class _GameMainView extends State<GameMainPage> {
     return max(algo, minHeight);
   }
 
-  Widget _buildWidgetPage({required _GameMainController controller}) {
+  Widget _buildWidgetPage({required BuildContext context, required _GameMainController controller}) {
     switch (controller.subPageRoute) {
       case GameMainSubPages.fightsRoute:
         return GameMainSubPages.fights(setSubPageRoute: controller.setSubPageRoute);
@@ -58,7 +59,7 @@ class _GameMainView extends State<GameMainPage> {
       case GameMainSubPages.viewUsersRoute:
         return GameMainSubPages.viewUsers(setSubPageRoute: controller.setSubPageRoute, onChange: () => setState(() {}));
       case GameMainSubPages.chooseClassesRoute:
-        return GameMainSubPages.chooseClasses(setClasses: controller.setClasses);
+        return GameMainSubPages.chooseClasses(context: context, setClasses: controller.setClasses);
       default:
         return GameMainSubPages.home(setSubPageRoute: controller.setSubPageRoute);
     }
@@ -118,7 +119,7 @@ class _GameMainView extends State<GameMainPage> {
                                 margin: const EdgeInsets.only(top: 8),
                                 width: mediaWidth,
                                 constraints: BoxConstraints(minHeight: _getWidgetPageHeight(controller: controller, mediaHeight: mediaHeight)),
-                                child: _buildWidgetPage(controller: controller)),
+                                child: _buildWidgetPage(context: context, controller: controller)),
                             Transform.scale(scale: 0, child: Text(CoreUser.instance.current.exp.toString())),
                             Text('v${Core.instance.packageInfo?.version ?? '0.0.0'}#${Core.instance.packageInfo?.buildNumber ?? '0000'}'), //TODO: Copyright, Versioning...
                           ],
