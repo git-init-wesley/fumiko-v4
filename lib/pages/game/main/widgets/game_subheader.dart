@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fumiko/entities/user/user.dart';
+import 'package:fumiko/pages/game/main/game_main_page.dart';
 import 'package:fumiko/utils/number_formatter.dart';
 import 'package:fumiko/widgets/game/indicators/small_indicator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class GameSubheader extends StatelessWidget {
-  const GameSubheader(
-      {super.key,
-      required this.primary,
-      required this.secondary,
-      required this.power,
-      required this.pageController,
-      required this.trophies,
-      required this.shopPrimaryPage,
-      required this.shopSecondaryPage,
-      required this.statsPage,
-      required this.rankingsPage,
-      required this.presencesPage,
-      required this.onlineUsers,
-      required this.stamina,
-      required this.staminaPage});
+  const GameSubheader({
+    super.key,
+    required this.primary,
+    required this.secondary,
+    required this.power,
+    required this.setSubPageRoute,
+    required this.trophies,
+    required this.onlineUsers,
+    required this.stamina,
+  });
 
-  final PageController pageController;
+  final SetSubPageFunction setSubPageRoute;
   final num stamina, primary, secondary, power, trophies, onlineUsers;
-  final int staminaPage, shopPrimaryPage, shopSecondaryPage, statsPage, rankingsPage, presencesPage;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +40,7 @@ class GameSubheader extends StatelessWidget {
             text: '${NumberFormatter.compact(stamina)}/${NumberFormatter.compact(DefaultEntityUserStatsBase.maxStamina)}',
             iconData: FontAwesomeIcons.bolt,
             iconColor: Colors.purpleAccent,
-            onPressed: () => pageController.animateToPage(staminaPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
+            onPressed: () => setSubPageRoute(GameMainSubPages.staminaRoute),
             withIconData: FontAwesomeIcons.plus,
             width: indicatorWidth,
           ),
@@ -54,7 +49,7 @@ class GameSubheader extends StatelessWidget {
             text: NumberFormatter.compact(primary),
             iconData: FontAwesomeIcons.coins,
             iconColor: Colors.white70,
-            onPressed: () => pageController.animateToPage(shopPrimaryPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
+            onPressed: () => setSubPageRoute(GameMainSubPages.shopPrimaryRoute),
             withIconData: FontAwesomeIcons.plus,
             width: indicatorWidth,
           ),
@@ -63,7 +58,7 @@ class GameSubheader extends StatelessWidget {
             text: NumberFormatter.compact(secondary),
             iconData: FontAwesomeIcons.solidGem,
             iconColor: Colors.blueAccent,
-            onPressed: () => pageController.animateToPage(shopSecondaryPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
+            onPressed: () => setSubPageRoute(GameMainSubPages.shopSecondaryRoute),
             withIconData: FontAwesomeIcons.plus,
             width: indicatorWidth,
           ),
@@ -80,7 +75,7 @@ class GameSubheader extends StatelessWidget {
               text: NumberFormatter.compact(power),
               iconData: MdiIcons.swordCross,
               iconColor: Colors.redAccent,
-              onPressed: () => pageController.animateToPage(statsPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
+              onPressed: () => setSubPageRoute(GameMainSubPages.statsRoute),
               withIconData: FontAwesomeIcons.info,
               width: indicatorWidth,
             ),
@@ -89,7 +84,7 @@ class GameSubheader extends StatelessWidget {
               text: NumberFormatter.compact(trophies),
               iconData: FontAwesomeIcons.trophy,
               iconColor: Colors.orangeAccent,
-              onPressed: () => pageController.animateToPage(rankingsPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
+              onPressed: () => setSubPageRoute(GameMainSubPages.rankingsRoute),
               withIconData: FontAwesomeIcons.info,
               width: indicatorWidth,
             ),
@@ -98,7 +93,7 @@ class GameSubheader extends StatelessWidget {
               text: NumberFormatter.compact(onlineUsers),
               iconData: FontAwesomeIcons.users,
               iconColor: Colors.white,
-              onPressed: () => pageController.animateToPage(presencesPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
+              onPressed: () => setSubPageRoute(GameMainSubPages.viewUsersRoute),
               withIconData: FontAwesomeIcons.info,
               width: indicatorWidth,
             ),
