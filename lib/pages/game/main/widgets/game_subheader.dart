@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fumiko/entities/user/user.dart';
@@ -72,7 +74,7 @@ class GameSubheader extends StatelessWidget {
           children: [
             SmallIndicator(
               backgroundColor: Colors.black,
-              text: NumberFormatter.compact(power),
+              text: NumberFormatter.compact(max(power, 0)),
               iconData: MdiIcons.swordCross,
               iconColor: Colors.redAccent,
               onPressed: () => setSubPageRoute(GameMainSubPages.statsRoute),
