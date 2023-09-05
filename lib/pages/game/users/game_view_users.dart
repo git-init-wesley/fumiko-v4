@@ -34,20 +34,18 @@ class _GameUsersState extends State<GameUsers> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          HomeMenusButton(setSubPageRoute: widget.setSubPageRoute),
-          if (retrieve != users.length) Text('${AppLocalizations.current.recoveryLoading} ${retrieve.toString()} / ${users.length}'),
-          Container(
-            margin: const EdgeInsets.only(top: 16),
-            child: Builder(builder: (b) {
-              return Column(children: users.map((e) => Container(margin: const EdgeInsets.only(bottom: 8), child: Text('${e.username}: Re. ${e.rebirths} - Lv. ${e.levels}'))).toList());
-            }),
-          )
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        HomeMenusButton(setSubPageRoute: widget.setSubPageRoute),
+        if (retrieve != users.length) Text('${AppLocalizations.current.recoveryLoading} ${retrieve.toString()} / ${users.length}'),
+        Container(
+          margin: const EdgeInsets.only(top: 16),
+          child: Builder(builder: (b) {
+            return Column(children: users.map((e) => Container(margin: const EdgeInsets.only(bottom: 8), child: Text('${e.username}: Re. ${e.rebirths} - Lv. ${e.levels}'))).toList());
+          }),
+        )
+      ],
     );
   }
 }

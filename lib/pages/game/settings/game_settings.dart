@@ -13,22 +13,20 @@ class GameSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          HomeMenusButton(setSubPageRoute: setSubPageRoute),
-          Container(
-            margin: const EdgeInsets.only(top: 16),
-            child: Column(
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(bottom: 8), child: MenusButton(onPressed: logout, color: Colors.red.shade500, iconData: MdiIcons.logout, text: AppLocalizations.of(context).logout)),
-              ],
-            ),
-          )
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        HomeMenusButton(setSubPageRoute: setSubPageRoute),
+        Container(
+          margin: const EdgeInsets.only(top: 16),
+          child: Column(
+            children: [
+              Container(
+                  margin: const EdgeInsets.only(bottom: 8), child: MenusButton(onPressed: logout, color: Colors.red.shade500, iconData: MdiIcons.logout, text: AppLocalizations.of(context).logout)),
+            ],
+          ),
+        )
+      ],
     );
   }
 }

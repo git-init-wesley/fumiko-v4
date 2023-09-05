@@ -12,36 +12,34 @@ class GameFights extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          HomeMenusButton(setSubPageRoute: setSubPageRoute),
-          Container(
-            margin: const EdgeInsets.only(top: 16),
-            child: Column(
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(bottom: 8),
-                    child: MenusButton(
-                      color: Colors.redAccent.withOpacity(0.5),
-                      iconData: MdiIcons.controllerOff,
-                      text: AppLocalizations.of(context).pvp,
-                      onPressed: () => setSubPageRoute(GameMainSubPages.pvpRoute),
-                    )),
-                Container(
-                    margin: const EdgeInsets.only(bottom: 8),
-                    child: MenusButton(
-                      color: Colors.blueAccent,
-                      iconData: MdiIcons.controller,
-                      text: AppLocalizations.of(context).pve,
-                      onPressed: () => setSubPageRoute(GameMainSubPages.pveRoute),
-                    )),
-              ],
-            ),
-          )
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        HomeMenusButton(setSubPageRoute: setSubPageRoute),
+        Container(
+          margin: const EdgeInsets.only(top: 16),
+          child: Column(
+            children: [
+              Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: MenusButton(
+                    color: Colors.redAccent.withOpacity(0.5),
+                    iconData: MdiIcons.controllerOff,
+                    text: AppLocalizations.of(context).pvp,
+                    onPressed: () => setSubPageRoute(GameMainSubPages.pvpRoute),
+                  )),
+              Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: MenusButton(
+                    color: Colors.blueAccent,
+                    iconData: MdiIcons.controller,
+                    text: AppLocalizations.of(context).pve,
+                    onPressed: () => setSubPageRoute(GameMainSubPages.pveRoute),
+                  )),
+            ],
+          ),
+        )
+      ],
     );
   }
 }

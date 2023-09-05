@@ -11,8 +11,7 @@ class GameHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Container(
+    return Container(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       child: Column(children: [
         Container(
@@ -39,6 +38,6 @@ class GameHome extends StatelessWidget {
           onPressed: () => setSubPageRoute(GameMainSubPages.settingsRoute),
         )
       ]),
-    ));
+    );
   }
 }
