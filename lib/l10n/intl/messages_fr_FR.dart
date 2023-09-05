@@ -92,7 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Doit-être composé de chiffre.\nDoit-être composé de minuscule ou majuscule.\nNe dois pas contenir de caractère spécial sauf « ._ ».\nAu moins 3 caractères, mais pas plus de 16."),
         "verificationGame": MessageLookupByLibrary.simpleMessage("⌛ Vérification du jeu... ⌛"),
         "warning": MessageLookupByLibrary.simpleMessage("Attention"),
-        "warrior": MessageLookupByLibrary.simpleMessage("Guérrier"),
+        "warrior": MessageLookupByLibrary.simpleMessage("Guerrier"),
         "warriorDescription": MessageLookupByLibrary.simpleMessage(
             "Puissants, d\'un courage sans limite, et possédant de fantastiques compétences de combat, les Guerriers sont toujours prêts à attaquer l\'ennemi. Pilier de tout groupe et source de sa puissance, les Guerriers affrontent les ennemis en combat rapprochent pendant que leurs partenaires assurent leurs arrières."),
         "welcome": MessageLookupByLibrary.simpleMessage("Accueil")

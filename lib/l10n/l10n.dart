@@ -657,10 +657,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Guérrier`
+  /// `Guerrier`
   String get warrior {
     return Intl.message(
-      'Guérrier',
+      'Guerrier',
       name: 'warrior',
       desc: '',
       args: [],
