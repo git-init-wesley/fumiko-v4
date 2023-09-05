@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fumiko/l10n/l10n.dart';
+import 'package:fumiko/pages/game/main/game_main_page.dart';
 import 'package:fumiko/widgets/game/buttons/menus_button.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class GameHome extends StatelessWidget {
-  const GameHome({super.key, required this.pageController, required this.fightsPage, required this.settingsPage});
+  const GameHome({super.key, required this.setSubPageRoute});
 
-  final PageController pageController;
-  final int fightsPage, settingsPage;
+  final SetSubPageFunction setSubPageRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class GameHome extends StatelessWidget {
               iconData: MdiIcons.sword,
               text: AppLocalizations.of(context).fights,
               textSize: Theme.of(context).textTheme.headlineSmall!.fontSize,
-              onPressed: () => pageController.animateToPage(fightsPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
+              onPressed: () => setSubPageRoute(GameMainSubPages.fightsRoute),
             )),
         Container(margin: const EdgeInsets.only(bottom: 8), child: MenusButton(color: Colors.tealAccent.shade100, iconData: MdiIcons.sack, text: AppLocalizations.of(context).inventory)),
         Container(margin: const EdgeInsets.only(bottom: 8), child: MenusButton(color: Colors.deepPurpleAccent.shade100, iconData: MdiIcons.scriptText, text: AppLocalizations.of(context).quests)),
@@ -36,7 +36,7 @@ class GameHome extends StatelessWidget {
           color: Colors.black,
           iconData: MdiIcons.cog,
           text: AppLocalizations.of(context).settings,
-          onPressed: () => pageController.animateToPage(settingsPage, duration: const Duration(microseconds: 1), curve: Curves.linear),
+          onPressed: () => setSubPageRoute(GameMainSubPages.settingsRoute),
         )
       ]),
     ));
