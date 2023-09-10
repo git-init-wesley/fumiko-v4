@@ -15,12 +15,12 @@ class _SplashScreenController extends _SplashScreenModel {
     if (Core.instance.isInitialized || Core.instance.isStartedInitialization) {
       if (Core.instance.data != null) {
         if (await Core.instance.data!.isUpdateAvailable) {
-          setState(() async => progressIndicatorText = AppLocalizations.current.updateAvailable);
+          await setState(() async => progressIndicatorText = AppLocalizations.current.updateAvailable);
         }
         if (Core.instance.data!.isCurrentlyMaintenance) {
           String currentLocale = await Core.instance.currentLocale;
           String maintenanceEnd = DateFormat('dd MMM yyyy - hh:mm a', currentLocale).format(DateTime.fromMillisecondsSinceEpoch(Core.instance.data!.maintenanceEnd, isUtc: true));
-          setState(() async => progressIndicatorText = AppLocalizations.current.maintenanceCurrentlyProgress(Core.instance.data!.getMaintenanceCauseFromLocale(currentLocale), maintenanceEnd));
+          await setState(() async => progressIndicatorText = AppLocalizations.current.maintenanceCurrentlyProgress(Core.instance.data!.getMaintenanceCauseFromLocale(currentLocale), maintenanceEnd));
         }
         return;
       }
@@ -33,7 +33,7 @@ class _SplashScreenController extends _SplashScreenModel {
       onStateChange: (newState) => setState(() => progressIndicatorText = newState.message),
       whenComplete: (AppException? appException, CoreData? coreData, bool isAuthenticated) async {
         if (appException != null) {
-          setState(() => progressIndicatorText = '${AppLocalizations.current.errorOccurred}\n\n${appException.message ?? ''}');
+          await setState(() => progressIndicatorText = '${AppLocalizations.current.errorOccurred}\n\n${appException.message ?? ''}');
           try {
             appException.makeThrow();
           } catch (error, stacktrace) {
@@ -46,12 +46,12 @@ class _SplashScreenController extends _SplashScreenModel {
 
         if (coreData != null) {
           if (await coreData.isUpdateAvailable) {
-            setState(() async => progressIndicatorText = AppLocalizations.current.updateAvailable);
+            await setState(() async => progressIndicatorText = AppLocalizations.current.updateAvailable);
           }
           if (coreData.isCurrentlyMaintenance) {
             String currentLocale = await Core.instance.currentLocale;
             String maintenanceEnd = DateFormat('dd MMM yyyy - hh:mm a', currentLocale).format(DateTime.fromMillisecondsSinceEpoch(coreData.maintenanceEnd, isUtc: true));
-            setState(() async => progressIndicatorText = AppLocalizations.current.maintenanceCurrentlyProgress(coreData.getMaintenanceCauseFromLocale(currentLocale), maintenanceEnd));
+            await setState(() async => progressIndicatorText = AppLocalizations.current.maintenanceCurrentlyProgress(coreData.getMaintenanceCauseFromLocale(currentLocale), maintenanceEnd));
           }
           return;
         }

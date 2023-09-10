@@ -29,7 +29,7 @@ class _AuthSignInController extends _AuthSignInModel with PopupController, AuthN
       return;
     }
 
-    setState(() {
+    await setState(() {
       loadingText = AppLocalizations.current.logInLoading;
       isLoading = true;
       errorEmailAddress = null;
@@ -41,7 +41,7 @@ class _AuthSignInController extends _AuthSignInModel with PopupController, AuthN
         password: passwordController.text,
         whenComplete: (List<AppException> appExceptions) async {
           if (appExceptions.isEmpty) {
-            setState(() {
+            await setState(() {
               loadingText = null;
               isLoading = false;
             });
@@ -77,7 +77,7 @@ class _AuthSignInController extends _AuthSignInModel with PopupController, AuthN
                 iconColor: Colors.redAccent);
           }
 
-          setState(() {
+          await setState(() {
             loadingText = null;
             isLoading = false;
           });
