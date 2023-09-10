@@ -32,6 +32,7 @@ class GameMainSubPages {
   static const String shopSecondaryRoute = 'shop-secondary';
   static const String statsRoute = 'stats';
   static const String rankingsRoute = 'rankings';
+  static const String abstractWidget = 'abstract-widget';
 }
 
 class _GameMainView extends State<GameMainPage> {
@@ -60,6 +61,8 @@ class _GameMainView extends State<GameMainPage> {
         return GameMainSubPages.viewUsers(setSubPageRoute: controller.setSubPageRoute, onChange: () => setState(() {}));
       case GameMainSubPages.chooseClassesRoute:
         return GameMainSubPages.chooseClasses(context: context, setClasses: controller.setClasses);
+      case GameMainSubPages.abstractWidget:
+        return controller.abstractWidget;
       default:
         return GameMainSubPages.home(setSubPageRoute: controller.setSubPageRoute);
     }
@@ -120,8 +123,6 @@ class _GameMainView extends State<GameMainPage> {
                                 width: mediaWidth,
                                 constraints: BoxConstraints(minHeight: _getWidgetPageHeight(controller: controller, mediaHeight: mediaHeight)),
                                 child: _buildWidgetPage(context: context, controller: controller)),
-                            Transform.scale(scale: 0, child: Text(CoreUser.instance.current.exp.toString())),
-                            Text('v${Core.instance.packageInfo?.version ?? '0.0.0'}#${Core.instance.packageInfo?.buildNumber ?? '0000'}'), //TODO: Copyright, Versioning...
                           ],
                         )),
                   ))

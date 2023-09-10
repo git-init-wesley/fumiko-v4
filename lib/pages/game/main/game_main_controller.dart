@@ -7,39 +7,40 @@ class _GameMainController extends _GameMainModel with PopupController {
     setState(() {
       loadingText = AppLocalizations.current.gameLoading;
       isLoading = true;
-    });
-    CoreUser.instance.load(whenComplete: () async {
-      Core.instance.addListener((_) async {
-        if (!CoreUser.instance.isAuthenticated) {
-          navigationService.pushReplacementTo(RouterRoutes.authSignIn);
-        }
-        if (Core.instance.data != null && (await Core.instance.data!.isUpdateAvailable || Core.instance.data!.isCurrentlyMaintenance)) {
-          navigationService.pushReplacementTo(RouterRoutes.splashScreen);
-        }
-      });
-      CoreUserPresences.instance.addListener((_) => notifyListeners());
-      CoreUser.instance.current.addListener((UserChangeListener obj) {
-        if (obj != null && obj.error != null) {
-          openPopup(
-            title: AppLocalizations.current.error,
-            titleColor: Colors.redAccent,
-            description: obj.error!.message ?? AppLocalizations.current.errorOccurred,
-            icon: FontAwesomeIcons.circleXmark,
-            iconColor: Colors.redAccent,
-          );
-        }
-        if (CoreUser.instance.current.classes.code == UserClasses.unknown.code) {
-          setSubPageRoute(GameMainSubPages.chooseClassesRoute);
-        } else {
-          setSubPageRoute(GameMainSubPages.homeRoute);
-        }
+    }).whenComplete(() {
+      CoreUser.instance.load(whenComplete: () async {
+        Core.instance.addListener((_) async {
+          if (!CoreUser.instance.isAuthenticated) {
+            navigationService.pushReplacementTo(RouterRoutes.authSignIn);
+          }
+          if (Core.instance.data != null && (await Core.instance.data!.isUpdateAvailable || Core.instance.data!.isCurrentlyMaintenance)) {
+            navigationService.pushReplacementTo(RouterRoutes.splashScreen);
+          }
+        });
+        CoreUserPresences.instance.addListener((_) => notifyListeners());
+        CoreUser.instance.current.addListener((UserChangeListener obj) {
+          if (obj != null && obj.error != null) {
+            openPopup(
+              title: AppLocalizations.current.error,
+              titleColor: Colors.redAccent,
+              description: obj.error!.message ?? AppLocalizations.current.errorOccurred,
+              icon: FontAwesomeIcons.circleXmark,
+              iconColor: Colors.redAccent,
+            );
+          }
+          if (CoreUser.instance.current.classes.code == UserClasses.unknown.code) {
+            setSubPageRoute(GameMainSubPages.chooseClassesRoute);
+          } else {
+            setSubPageRoute(GameMainSubPages.homeRoute);
+          }
 
-        notifyListeners();
-      });
+          notifyListeners();
+        });
 
-      setState(() {
-        loadingText = null;
-        isLoading = false;
+        await setState(() {
+          loadingText = null;
+          isLoading = false;
+        });
       });
     });
   }
@@ -56,16 +57,16 @@ class _GameMainController extends _GameMainModel with PopupController {
     notifyListeners();
   }
 
-  void logout() {
-    setState(() {
+  Future<void> logout() async {
+    await setState(() {
       loadingText = AppLocalizations.current.logoutLoading;
       isLoading = true;
     });
     CoreUser.instance.unload();
   }
 
-  void setSubPageRoute(String route) {
-    setState(() {
+  Future<void> setSubPageRoute(String route) async {
+    await setState(() {
       subPageRoute = route;
     });
   }
