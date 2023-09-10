@@ -34,6 +34,7 @@ class GameSubheader extends StatelessWidget {
     }
     final List<Widget> children = [
       Row(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -69,6 +70,7 @@ class GameSubheader extends StatelessWidget {
       Container(
         margin: EdgeInsets.only(top: mediaWidth > 1024 ? 0 : 8, left: mediaWidth > 1024 ? 8 : 0),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -103,14 +105,16 @@ class GameSubheader extends StatelessWidget {
         ),
       ),
     ];
-    return Container(
-      alignment: Alignment.center,
-      constraints: BoxConstraints(maxWidth: mediaWidth > 1024 ? double.infinity : 512),
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      margin: const EdgeInsets.only(top: 8),
-      child: mediaWidth > 1024
-          ? Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: children)
-          : Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: children),
+    return Center(
+      child: Container(
+        alignment: Alignment.center,
+        constraints: BoxConstraints(maxWidth: mediaWidth > 1024 ? double.infinity : 512),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        margin: const EdgeInsets.only(top: 8),
+        child: mediaWidth > 1024
+            ? Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: children)
+            : Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: children),
+      ),
     );
   }
 }
