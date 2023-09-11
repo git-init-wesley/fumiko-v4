@@ -7,11 +7,11 @@ class CoreUserPresences with ChangeListener {
 
   static CoreUserPresences get instance => _instance;
 
-  List<UserPresences> _onlineUsers = [];
+  List<EntityUserPresence> _onlineUsers = [];
 
-  List<UserPresences> get onlineUsers => _onlineUsers;
+  List<EntityUserPresence> get onlineUsers => _onlineUsers;
 
-  set _setOnlineUsers(List<UserPresences> value) => _onlineUsers = value;
+  set _setOnlineUsers(List<EntityUserPresence> value) => _onlineUsers = value;
 
   StreamController? _onlineUsersStreamController;
   StreamSubscription? _onlineUsersStreamSubscription;
@@ -22,12 +22,12 @@ class CoreUserPresences with ChangeListener {
   Future<void> _observeOnlineUsers(_) async {
     try {
       DataSnapshot snapshot =
-          await FirebaseDatabase.instance.ref().child('presences').orderByChild('lastOnline').startAt(DateTime.now().millisecondsSinceEpoch - const Duration(minutes: 5).inMilliseconds).get();
+          await FirebaseDatabase.instance.ref().child('presence').orderByChild('lastOnline').startAt(DateTime.now().millisecondsSinceEpoch - const Duration(minutes: 5).inMilliseconds).get();
       _setOnlineUsers = [];
       if (snapshot.exists) {
         _setOnlineUsers = (snapshot.value as Map)
             .entries
-            .map((entry) => UserPresences.fromJson(entry.key, jsonDecode(jsonEncode((entry.value)))))
+            .map((entry) => EntityUserPresence.fromJson(entry.key, jsonDecode(jsonEncode((entry.value)))))
             .where((e) => e.isOnline && DateTime.now().millisecondsSinceEpoch - e.lastOnline <= const Duration(minutes: 5).inMilliseconds)
             .toList();
       }
@@ -35,7 +35,7 @@ class CoreUserPresences with ChangeListener {
       if (!kReleaseMode) {
         developer.log(error.toString(), time: DateTime.now(), stackTrace: stacktrace);
       }
-      _setOnlineUsers = 0 as List<UserPresences>;
+      _setOnlineUsers = 0 as List<EntityUserPresence>;
     } finally {
       onChange(null);
     }
@@ -63,8 +63,8 @@ class CoreUserPresences with ChangeListener {
       try {
         await FirebaseDatabase.instance
             .ref()
-            .child('presences/${FirebaseAuth.instance.currentUser!.uid}')
-            .set(UserPresences(lastOnline: DateTime.now().millisecondsSinceEpoch, isOnline: true, uid: FirebaseAuth.instance.currentUser!.uid).toJson());
+            .child('presence/${FirebaseAuth.instance.currentUser!.uid}')
+            .set(EntityUserPresence(lastOnline: DateTime.now().millisecondsSinceEpoch, isOnline: true, uid: FirebaseAuth.instance.currentUser!.uid).toJson());
       } catch (_) {}
     }
   }
@@ -88,8 +88,8 @@ class CoreUserPresences with ChangeListener {
       try {
         await FirebaseDatabase.instance
             .ref()
-            .child('presences/${FirebaseAuth.instance.currentUser!.uid}/')
-            .set(UserPresences(lastOnline: DateTime.now().millisecondsSinceEpoch, isOnline: false, uid: FirebaseAuth.instance.currentUser!.uid).toJson());
+            .child('presence/${FirebaseAuth.instance.currentUser!.uid}/')
+            .set(EntityUserPresence(lastOnline: DateTime.now().millisecondsSinceEpoch, isOnline: false, uid: FirebaseAuth.instance.currentUser!.uid).toJson());
       } catch (_) {}
     }
   }

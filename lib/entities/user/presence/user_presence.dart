@@ -1,6 +1,6 @@
 part of user;
 
-class UserPresences {
+class EntityUserPresence {
   String _uid;
 
   String get uid => _uid;
@@ -12,13 +12,13 @@ class UserPresences {
 
   bool get isOnline => _isOnline;
 
-  UserPresences({required String uid, required num lastOnline, required bool isOnline})
+  EntityUserPresence({required String uid, required num lastOnline, required bool isOnline})
       : _uid = uid,
         _lastOnline = lastOnline,
         _isOnline = isOnline;
 
-  factory UserPresences.fromJson(String key, Map<dynamic, dynamic> json) =>
-      UserPresences(uid: key, lastOnline: num.tryParse(json['lastOnline']?.toString() ?? '0') ?? 0, isOnline: bool.tryParse(json['isOnline']?.toString() ?? 'false') ?? false);
+  factory EntityUserPresence.fromJson(String key, Map<dynamic, dynamic> json) =>
+      EntityUserPresence(uid: key, lastOnline: num.tryParse(json['lastOnline']?.toString() ?? '0') ?? 0, isOnline: bool.tryParse(json['isOnline']?.toString() ?? 'false') ?? false);
 
   Map<String, dynamic> toJson() => {'lastOnline': lastOnline, 'isOnline': isOnline};
 }

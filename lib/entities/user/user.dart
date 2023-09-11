@@ -13,11 +13,11 @@ import 'package:fumiko/utils/change_listener.dart';
 
 part './balances/user_balances.dart';
 part './leveling/user_leveling.dart';
-part './presences/user_presences.dart';
+part './presence/user_presence.dart';
 part './stats/user_stats_base.dart';
 part './stats/user_stats_primary.dart';
 
-typedef UserChangeListener = DatabaseResult<dynamic>?;
+typedef EntityUserChangeListener = DatabaseResult<dynamic>?;
 typedef EntityUserDidSetValue<T> = Function(T oldValue, T newValue);
 
 class EntityUserValue<T> {
@@ -39,7 +39,7 @@ class EntityUserValue<T> {
         _value = value;
 }
 
-class EntityUser with _EntityUserLeveling, _EntityUserBalances, _EntityUserStatsBase, _EntityUserStatsPrimary, ChangeListener<UserChangeListener> {
+class EntityUser with EntityUserLeveling, EntityUserBalances, EntityUserStatsBase, EntityUserStatsPrimary, ChangeListener<EntityUserChangeListener> {
   String? _uid;
 
   String? get uid => _uid;
@@ -171,7 +171,7 @@ class EntityUser with _EntityUserLeveling, _EntityUserBalances, _EntityUserStats
   }
 
   @override
-  Future<void> onChange(UserChangeListener obj) {
+  Future<void> onChange(EntityUserChangeListener obj) {
     return super.onChange.call(obj);
   }
 
