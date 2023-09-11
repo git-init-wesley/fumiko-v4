@@ -8,7 +8,7 @@ class GameUsers extends StatefulWidget {
   const GameUsers({super.key, required this.userPresences, required this.setSubPageRoute, required this.onChange});
 
   final VoidCallback onChange;
-  final List<UserPresences> userPresences;
+  final List<EntityUserPresence> userPresences;
   final SetSubPageFunction setSubPageRoute;
 
   @override

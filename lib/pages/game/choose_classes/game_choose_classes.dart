@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fumiko/entities/user/classes/user_classes.dart';
+import 'package:fumiko/pages/game/main/game_main_page.dart';
 
 class GameChooseClasses extends StatefulWidget {
   const GameChooseClasses({super.key, required this.setClasses, required this.fontSize});
 
-  final Future<void> Function(UserClass) setClasses;
+  final SetUserClassFunction setClasses;
   final double fontSize;
 
   @override

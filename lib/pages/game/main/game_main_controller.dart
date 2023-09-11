@@ -1,6 +1,7 @@
 part of game_main;
 
 typedef SetSubPageFunction = Future<void> Function(String route);
+typedef SetUserClassFunction = Future<void> Function(UserClass classes);
 
 class _GameMainController extends _GameMainModel with PopupController {
   _GameMainController() {
@@ -18,7 +19,7 @@ class _GameMainController extends _GameMainModel with PopupController {
           }
         });
         CoreUserPresences.instance.addListener((_) => notifyListeners());
-        CoreUser.instance.current.addListener((UserChangeListener obj) async {
+        CoreUser.instance.current.addListener((EntityUserChangeListener obj) async {
           if (obj != null && obj.error != null) {
             await openPopup(
               title: AppLocalizations.current.error,

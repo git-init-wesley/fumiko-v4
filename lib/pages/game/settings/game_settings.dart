@@ -3,6 +3,7 @@ import 'package:fumiko/core/core.dart';
 import 'package:fumiko/l10n/l10n.dart';
 import 'package:fumiko/pages/game/main/game_main_page.dart';
 import 'package:fumiko/pages/game/statique/home_menus_button.dart';
+import 'package:fumiko/utils/typedefs.dart';
 import 'package:fumiko/widgets/game/buttons/menus_button.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -10,7 +11,7 @@ class GameSettings extends StatelessWidget {
   const GameSettings({super.key, required this.setSubPageRoute, required this.logout});
 
   final SetSubPageFunction setSubPageRoute;
-  final Future<void> Function() logout;
+  final FutureVoidCallback logout;
 
   @override
   Widget build(BuildContext context) {
