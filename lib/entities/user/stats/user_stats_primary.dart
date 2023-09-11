@@ -1,9 +1,9 @@
 part of user;
 
-mixin _EntityUserStatsPrimary {
+mixin EntityUserStatsPrimary {
   void updatePower();
 
-  void onChange(UserChangeListener obj);
+  void onChange(EntityUserChangeListener obj);
 
   UserClass get classes;
 

@@ -5,10 +5,10 @@ class DefaultEntityUserStatsBase {
   static const num maxStamina = 500;
 }
 
-mixin _EntityUserStatsBase {
+mixin EntityUserStatsBase {
   void updatePower();
 
-  void onChange(UserChangeListener obj);
+  void onChange(EntityUserChangeListener obj);
 
   UserClass get classes;
 

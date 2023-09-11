@@ -1,9 +1,9 @@
 part of user;
 
-mixin _EntityUserBalances {
+mixin EntityUserBalances {
   void updatePower();
 
-  void onChange(UserChangeListener obj);
+  void onChange(EntityUserChangeListener obj);
 
   EntityUserValue<num?> _primary = EntityUserValue<num?>(value: 0);
 

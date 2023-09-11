@@ -1,9 +1,9 @@
 part of user;
 
-mixin _EntityUserLeveling {
+mixin EntityUserLeveling {
   void updatePower();
 
-  void onChange(UserChangeListener obj);
+  void onChange(EntityUserChangeListener obj);
 
   EntityUserValue<num?> _levels = EntityUserValue<num?>(value: 1);
 
