@@ -10,7 +10,7 @@ class GameSettings extends StatelessWidget {
   const GameSettings({super.key, required this.setSubPageRoute, required this.logout});
 
   final SetSubPageFunction setSubPageRoute;
-  final Future<void> logout;
+  final Future<void> Function() logout;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,8 @@ class GameSettings extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                  margin: const EdgeInsets.only(bottom: 8), child: MenusButton(onPressed: () { logout; }, color: Colors.red.shade500, iconData: MdiIcons.logout, text: AppLocalizations.of(context).logout)),
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: MenusButton(onPressed: () => logout.call(), color: Colors.red.shade500, iconData: MdiIcons.logout, text: AppLocalizations.of(context).logout)),
               Text('Alpha-v${Core.instance.packageInfo?.version ?? '0.0.0'}'), //TODO: Copyright, Versioning...
             ],
           ),

@@ -25,7 +25,7 @@ class _AuthRecoveryController extends _AuthRecoveryModel with PopupController, A
       return;
     }
 
-    setState(() {
+    await setState(() {
       loadingText = AppLocalizations.current.recoveryLoading;
       isLoading = true;
       errorEmailAddress = null;
@@ -35,7 +35,7 @@ class _AuthRecoveryController extends _AuthRecoveryModel with PopupController, A
         emailAddress: emailAddressController.text,
         whenComplete: (List<AppException> appExceptions) async {
           if (appExceptions.isEmpty) {
-            setState(() {
+            await setState(() {
               loadingText = null;
               isLoading = false;
             });
@@ -49,7 +49,7 @@ class _AuthRecoveryController extends _AuthRecoveryModel with PopupController, A
           }
 
           if (appExceptions.contains(AuthExceptions.userNotFound())) {
-            setState(() {
+            await setState(() {
               loadingText = null;
               isLoading = false;
             });
@@ -62,7 +62,7 @@ class _AuthRecoveryController extends _AuthRecoveryModel with PopupController, A
             return;
           }
 
-          setState(() {
+          await setState(() {
             loadingText = null;
             isLoading = false;
           });

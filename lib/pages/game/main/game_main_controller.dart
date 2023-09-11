@@ -1,6 +1,6 @@
 part of game_main;
 
-typedef SetSubPageFunction = void Function(String route);
+typedef SetSubPageFunction = Future<void> Function(String route);
 
 class _GameMainController extends _GameMainModel with PopupController {
   _GameMainController() {
@@ -18,9 +18,9 @@ class _GameMainController extends _GameMainModel with PopupController {
           }
         });
         CoreUserPresences.instance.addListener((_) => notifyListeners());
-        CoreUser.instance.current.addListener((UserChangeListener obj) {
+        CoreUser.instance.current.addListener((UserChangeListener obj) async {
           if (obj != null && obj.error != null) {
-            openPopup(
+            await openPopup(
               title: AppLocalizations.current.error,
               titleColor: Colors.redAccent,
               description: obj.error!.message ?? AppLocalizations.current.errorOccurred,
@@ -29,9 +29,9 @@ class _GameMainController extends _GameMainModel with PopupController {
             );
           }
           if (CoreUser.instance.current.classes.code == UserClasses.unknown.code) {
-            setSubPageRoute(GameMainSubPages.chooseClassesRoute);
+            await setSubPageRoute(GameMainSubPages.chooseClassesRoute);
           } else {
-            setSubPageRoute(GameMainSubPages.homeRoute);
+            await setSubPageRoute(GameMainSubPages.homeRoute);
           }
 
           notifyListeners();
@@ -62,7 +62,7 @@ class _GameMainController extends _GameMainModel with PopupController {
       loadingText = AppLocalizations.current.logoutLoading;
       isLoading = true;
     });
-    CoreUser.instance.unload();
+    await CoreUser.instance.unload();
   }
 
   Future<void> setSubPageRoute(String route) async {
@@ -71,8 +71,8 @@ class _GameMainController extends _GameMainModel with PopupController {
     });
   }
 
-  void setClasses(UserClass classes) async {
-    setState(() {
+  Future<void> setClasses(UserClass classes) async {
+    await setState(() {
       loadingText = AppLocalizations.current.gameLoading;
       isLoading = true;
     });
@@ -80,10 +80,10 @@ class _GameMainController extends _GameMainModel with PopupController {
     await CoreUser.instance.current.setClasses(classes);
 
     if (CoreUser.instance.current.classes.code != UserClasses.unknown.code) {
-      setSubPageRoute(GameMainSubPages.homeRoute);
+      await setSubPageRoute(GameMainSubPages.homeRoute);
     }
 
-    setState(() {
+    await setState(() {
       loadingText = null;
       isLoading = false;
     });

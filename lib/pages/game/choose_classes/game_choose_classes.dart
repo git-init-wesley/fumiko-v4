@@ -4,7 +4,7 @@ import 'package:fumiko/entities/user/classes/user_classes.dart';
 class GameChooseClasses extends StatefulWidget {
   const GameChooseClasses({super.key, required this.setClasses, required this.fontSize});
 
-  final void Function(UserClass) setClasses;
+  final Future<void> Function(UserClass) setClasses;
   final double fontSize;
 
   @override

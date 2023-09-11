@@ -13,7 +13,7 @@ class GameMainSubPages {
 
   static const String settingsRoute = 'settings';
 
-  static Widget settings({required SetSubPageFunction setSubPageRoute, required VoidCallback logout}) => GameSettings(setSubPageRoute: setSubPageRoute, logout: logout);
+  static Widget settings({required SetSubPageFunction setSubPageRoute, required Future<void> Function() logout}) => GameSettings(setSubPageRoute: setSubPageRoute, logout: logout);
 
   static const String viewUsersRoute = 'view-users';
 
@@ -22,7 +22,7 @@ class GameMainSubPages {
 
   static const String chooseClassesRoute = 'choose-classes';
 
-  static Widget chooseClasses({required BuildContext context, required void Function(UserClass) setClasses}) =>
+  static Widget chooseClasses({required BuildContext context, required Future<void> Function(UserClass) setClasses}) =>
       GameChooseClasses(setClasses: setClasses, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 0);
 
   static const String pvpRoute = 'pvp';
