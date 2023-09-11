@@ -13,7 +13,7 @@ class GameMainSubPages {
 
   static const String settingsRoute = 'settings';
 
-  static Widget settings({required SetSubPageFunction setSubPageRoute, required Future<void> Function() logout}) => GameSettings(setSubPageRoute: setSubPageRoute, logout: logout);
+  static Widget settings({required SetSubPageFunction setSubPageRoute, required FutureVoidCallback logout}) => GameSettings(setSubPageRoute: setSubPageRoute, logout: logout);
 
   static const String viewUsersRoute = 'view-users';
 
@@ -22,11 +22,15 @@ class GameMainSubPages {
 
   static const String chooseClassesRoute = 'choose-classes';
 
-  static Widget chooseClasses({required BuildContext context, required Future<void> Function(UserClass) setClasses}) =>
+  static Widget chooseClasses({required BuildContext context, required SetUserClassFunction setClasses}) =>
       GameChooseClasses(setClasses: setClasses, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 0);
 
   static const String pvpRoute = 'pvp';
+
   static const String pveRoute = 'pve';
+
+  static Widget pve({required SetSubPageFunction setSubPageRoute}) => GameFightsPvE(setSubPageRoute: setSubPageRoute);
+
   static const String staminaRoute = 'stamina';
   static const String shopPrimaryRoute = 'shop-primary';
   static const String shopSecondaryRoute = 'shop-secondary';
@@ -61,6 +65,8 @@ class _GameMainView extends State<GameMainPage> {
         return GameMainSubPages.viewUsers(setSubPageRoute: controller.setSubPageRoute, onChange: () => setState(() {}));
       case GameMainSubPages.chooseClassesRoute:
         return GameMainSubPages.chooseClasses(context: context, setClasses: controller.setClasses);
+      case GameMainSubPages.pveRoute:
+        return GameMainSubPages.pve(setSubPageRoute: controller.setSubPageRoute);
       case GameMainSubPages.abstractWidget:
         return controller.abstractWidget;
       default:
