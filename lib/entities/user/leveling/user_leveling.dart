@@ -96,5 +96,5 @@ mixin EntityUserLeveling {
     }
   }
 
-  num get maxExp => pow(levels, 1.1).ceilToDouble() * pow(27.5, 1.2).ceilToDouble() * pow(rebirths + 1, 1.25).ceilToDouble();
+  num get maxExp => (pow(levels, 1.1) * pow(27.5, 1.2) * pow(rebirths + 1, 1.25)).ceilToDouble();
 }
