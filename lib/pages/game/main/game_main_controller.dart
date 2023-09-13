@@ -2,6 +2,7 @@ part of game_main;
 
 typedef SetSubPageFunction = Future<void> Function(String route);
 typedef SetUserClassFunction = Future<void> Function(UserClass classes);
+typedef SetAbstractWidgetFunction = void Function(Widget widget);
 
 class _GameMainController extends _GameMainModel with PopupController {
   _GameMainController() {
@@ -70,6 +71,11 @@ class _GameMainController extends _GameMainModel with PopupController {
     await setState(() {
       subPageRoute = route;
     });
+  }
+
+  void setAbstractWidget(Widget widget) async {
+    super.abstractWidget = widget;
+    setSubPageRoute(GameMainSubPages.abstractWidget);
   }
 
   Future<void> setClasses(UserClass classes) async {
