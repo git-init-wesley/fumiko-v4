@@ -50,7 +50,7 @@ class AuthField extends StatelessWidget {
                   enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(width: 2, color: Colors.grey.withOpacity(0.1))),
                   hintText: hintText.toUpperCase(),
                   errorText: errorText,
-                  errorStyle: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall!.fontSize)),
+                  errorStyle: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize)),
             )));
   }
 }

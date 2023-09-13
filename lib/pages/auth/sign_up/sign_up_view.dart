@@ -35,7 +35,7 @@ class _AuthSignUpView extends State<AuthSignUpPage> {
           ],
           onTap: controller.closePopup,
           child: FullScreenDoubleCircularProgressIndicator(
-              fontSize: Theme.of(context).textTheme.titleLarge!.fontSize,
+              fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
               text: controller.loadingText,
               presented: controller.isLoading,
               child: SingleChildScrollView(
@@ -55,8 +55,8 @@ class _AuthSignUpView extends State<AuthSignUpPage> {
                               animationOffSet: controller.delayedAnimationOffset,
                               children: [
                                 AssetsImages.fumikoIcon.toImage(alignment: kIsWeb ? Alignment.center : Alignment.centerLeft, height: 200),
-                                Text(AppLocalizations.of(context).registration, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.displayMedium!.fontSize)),
-                                Text(AppLocalizations.of(context).registrationDescription, style: TextStyle(color: Colors.grey, fontSize: Theme.of(context).textTheme.titleLarge!.fontSize))
+                                Text(AppLocalizations.of(context).registration, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.displayMedium?.fontSize)),
+                                Text(AppLocalizations.of(context).registrationDescription, style: TextStyle(color: Colors.grey, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize))
                               ]),
                         ),
                         DelayedAnimation(

@@ -22,7 +22,7 @@ class GameHome extends StatelessWidget {
               color: Colors.redAccent,
               iconData: MdiIcons.sword,
               text: AppLocalizations.of(context).fights,
-              textSize: Theme.of(context).textTheme.headlineSmall!.fontSize,
+              textSize: Theme.of(context).textTheme.headlineSmall?.fontSize,
               onPressed: () => setSubPageRoute(GameMainSubPages.fightsRoute),
             )),
         Container(margin: const EdgeInsets.only(bottom: 8), child: MenusButton(color: Colors.tealAccent.shade100, iconData: MdiIcons.sack, text: AppLocalizations.of(context).inventory)),

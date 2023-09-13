@@ -25,7 +25,7 @@ class AuthSubmitButton extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
               alignment: Alignment.center,
               child: Text(title.toUpperCase(),
-                  textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge!.fontSize!)),
+                  textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize)),
             )));
   }
 }
