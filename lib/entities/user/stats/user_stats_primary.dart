@@ -1,6 +1,6 @@
 part of user;
 
-mixin EntityUserStatsPrimary {
+mixin EntityUserStatsPrimary implements EntityStatsPrimary {
   void updatePower();
 
   void onChange(EntityUserChangeListener obj);
@@ -9,6 +9,7 @@ mixin EntityUserStatsPrimary {
 
   EntityUserValue<num?> _strength = EntityUserValue<num?>(value: DefaultEntityUserStatsBase.defaultValue);
 
+  @override
   num get strength => _strength.value ?? 0;
 
   num get realStrength => strength * classes.strength;
@@ -16,6 +17,7 @@ mixin EntityUserStatsPrimary {
 
   EntityUserValue<num?> _dexterity = EntityUserValue<num?>(value: DefaultEntityUserStatsBase.defaultValue);
 
+  @override
   num get dexterity => _dexterity.value ?? 0;
 
   num get realDexterity => dexterity * classes.dexterity;
@@ -23,6 +25,7 @@ mixin EntityUserStatsPrimary {
 
   EntityUserValue<num?> _agility = EntityUserValue<num?>(value: DefaultEntityUserStatsBase.defaultValue);
 
+  @override
   num get agility => _agility.value ?? 0;
 
   num get realAgility => agility * classes.agility;
@@ -30,6 +33,7 @@ mixin EntityUserStatsPrimary {
 
   EntityUserValue<num?> _vitality = EntityUserValue<num?>(value: DefaultEntityUserStatsBase.defaultValue);
 
+  @override
   num get vitality => _vitality.value ?? 0;
 
   num get realVitality => vitality * classes.vitality;
@@ -37,6 +41,7 @@ mixin EntityUserStatsPrimary {
 
   EntityUserValue<num?> _endurance = EntityUserValue<num?>(value: DefaultEntityUserStatsBase.defaultValue);
 
+  @override
   num get endurance => _endurance.value ?? 0;
 
   num get realEndurance => endurance * classes.endurance;
@@ -44,6 +49,7 @@ mixin EntityUserStatsPrimary {
 
   EntityUserValue<num?> _eyesight = EntityUserValue<num?>(value: DefaultEntityUserStatsBase.defaultValue);
 
+  @override
   num get eyesight => _eyesight.value ?? 0;
 
   num get realEyesight => eyesight * classes.eyesight;
@@ -51,6 +57,7 @@ mixin EntityUserStatsPrimary {
 
   EntityUserValue<num?> _mass = EntityUserValue<num?>(value: DefaultEntityUserStatsBase.defaultValue);
 
+  @override
   num get mass => _mass.value ?? 0;
 
   num get realMass => mass * classes.mass;

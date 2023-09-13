@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/database/database.dart';
 import 'package:fumiko/database/user/database_user.dart';
+import 'package:fumiko/entities/entity/entity.dart';
 import 'package:fumiko/entities/user/classes/user_classes.dart';
 import 'package:fumiko/utils/change_listener.dart';
 
@@ -39,7 +40,7 @@ class EntityUserValue<T> {
         _value = value;
 }
 
-class EntityUser with EntityUserLeveling, EntityUserBalances, EntityUserStatsBase, EntityUserStatsPrimary, ChangeListener<EntityUserChangeListener> {
+class EntityUser with Entity, EntityUserLeveling, EntityUserBalances, EntityUserStatsBase, EntityUserStatsPrimary, ChangeListener<EntityUserChangeListener> {
   String? _uid;
 
   String? get uid => _uid;
@@ -48,6 +49,9 @@ class EntityUser with EntityUserLeveling, EntityUserBalances, EntityUserStatsBas
 
   String get username => _username.value ?? 'X';
   StreamSubscription? _usernameObserver;
+
+  @override
+  String get name => username;
 
   Future<String?> setUsername(String newUsername) async => await _username._set(newUsername);
 
