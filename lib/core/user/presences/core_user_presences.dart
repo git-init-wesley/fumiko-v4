@@ -22,7 +22,7 @@ class CoreUserPresences with ChangeListener {
   Future<void> _observeOnlineUsers(_) async {
     try {
       DataSnapshot snapshot =
-          await FirebaseDatabase.instance.ref().child('presence').orderByChild('lastOnline').startAt(DateTime.now().millisecondsSinceEpoch - const Duration(minutes: 5).inMilliseconds).get();
+          await FirebaseDatabase.instance.ref().child('presences').orderByChild('lastOnline').startAt(DateTime.now().millisecondsSinceEpoch - const Duration(minutes: 5).inMilliseconds).get();
       _setOnlineUsers = [];
       if (snapshot.exists) {
         _setOnlineUsers = (snapshot.value as Map)
@@ -35,7 +35,7 @@ class CoreUserPresences with ChangeListener {
       if (!kReleaseMode) {
         developer.log(error.toString(), time: DateTime.now(), stackTrace: stacktrace);
       }
-      _setOnlineUsers = 0 as List<EntityUserPresence>;
+      _setOnlineUsers = [];
     } finally {
       onChange(null);
     }
@@ -63,7 +63,7 @@ class CoreUserPresences with ChangeListener {
       try {
         await FirebaseDatabase.instance
             .ref()
-            .child('presence/${FirebaseAuth.instance.currentUser!.uid}')
+            .child('presences/${FirebaseAuth.instance.currentUser!.uid}')
             .set(EntityUserPresence(lastOnline: DateTime.now().millisecondsSinceEpoch, isOnline: true, uid: FirebaseAuth.instance.currentUser!.uid).toJson());
       } catch (_) {}
     }
@@ -88,7 +88,7 @@ class CoreUserPresences with ChangeListener {
       try {
         await FirebaseDatabase.instance
             .ref()
-            .child('presence/${FirebaseAuth.instance.currentUser!.uid}/')
+            .child('presences/${FirebaseAuth.instance.currentUser!.uid}/')
             .set(EntityUserPresence(lastOnline: DateTime.now().millisecondsSinceEpoch, isOnline: false, uid: FirebaseAuth.instance.currentUser!.uid).toJson());
       } catch (_) {}
     }
