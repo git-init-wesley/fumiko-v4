@@ -29,7 +29,8 @@ class GameMainSubPages {
 
   static const String pveRoute = 'pve';
 
-  static Widget pve({required SetSubPageFunction setSubPageRoute}) => GameFightsPvE(setSubPageRoute: setSubPageRoute);
+  static Widget pve({required SetSubPageFunction setSubPageRoute, required SetAbstractWidgetFunction setAbstractWidget}) =>
+      GameFightsPve(setSubPageRoute: setSubPageRoute, setAbstractWidget: setAbstractWidget);
 
   static const String staminaRoute = 'stamina';
   static const String shopPrimaryRoute = 'shop-primary';
@@ -66,7 +67,7 @@ class _GameMainView extends State<GameMainPage> {
       case GameMainSubPages.chooseClassesRoute:
         return GameMainSubPages.chooseClasses(context: context, setClasses: controller.setClasses);
       case GameMainSubPages.pveRoute:
-        return GameMainSubPages.pve(setSubPageRoute: controller.setSubPageRoute);
+        return GameMainSubPages.pve(setSubPageRoute: controller.setSubPageRoute, setAbstractWidget: controller.setAbstractWidget);
       case GameMainSubPages.abstractWidget:
         return controller.abstractWidget;
       default:
@@ -93,7 +94,7 @@ class _GameMainView extends State<GameMainPage> {
                   ],
                   onTap: controller.closePopup,
                   child: FullScreenDoubleCircularProgressIndicator(
-                    fontSize: Theme.of(context).textTheme.titleLarge!.fontSize,
+                    fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
                     text: controller.loadingText,
                     presented: controller.isLoading,
                     child: SingleChildScrollView(
