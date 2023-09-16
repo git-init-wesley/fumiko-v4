@@ -627,10 +627,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Return PvP`
+  /// `Retour JcJ`
   String get returnPvp {
     return Intl.message(
-      'Return PvP',
+      'Retour JcJ',
       name: 'returnPvp',
       desc: '',
       args: [],
@@ -647,10 +647,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Return PvE`
+  /// `Retour JcE`
   String get returnPve {
     return Intl.message(
-      'Return PvE',
+      'Retour JcE',
       name: 'returnPve',
       desc: '',
       args: [],
@@ -797,13 +797,23 @@ class AppLocalizations {
     );
   }
 
-  /// `Points d'expérience`
+  /// `points d'expérience`
   String get experiencePoints {
     return Intl.message(
-      'Points d\'expérience',
+      'points d\'expérience',
       name: 'experiencePoints',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `yen{plural}`
+  String primaryBalance(Object plural) {
+    return Intl.message(
+      'yen$plural',
+      name: 'primaryBalance',
+      desc: '',
+      args: [plural],
     );
   }
 }

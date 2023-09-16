@@ -26,7 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(maintenanceCause, maintenanceEnd) => "👨🏻‍🔧 Une maintenance est actuellement en cours... 👨🏻‍🔧\n\n${maintenanceCause}\n\nSe termine le ${maintenanceEnd} (UTC+00).";
 
-  static String m3(plural, number) => "Tour${plural} ${number}";
+  static String m3(plural) => "yen${plural}";
+
+  static String m4(plural, number) => "Tour${plural} ${number}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
 
@@ -50,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailSentChangePassword": MessageLookupByLibrary.simpleMessage("Un mail vous a été envoyer pour changer votre mot de passe."),
         "error": MessageLookupByLibrary.simpleMessage("Erreur"),
         "errorOccurred": MessageLookupByLibrary.simpleMessage("❌ Une erreur est survenue. Réessayer ultérieurement. ❌"),
-        "experiencePoints": MessageLookupByLibrary.simpleMessage("Points d\'expérience"),
+        "experiencePoints": MessageLookupByLibrary.simpleMessage("points d\'expérience"),
         "fights": MessageLookupByLibrary.simpleMessage("Combats"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Mot de passe perdu ?"),
         "gameLoading": MessageLookupByLibrary.simpleMessage("Chargement du jeu..."),
@@ -79,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordNotEqual": MessageLookupByLibrary.simpleMessage("Les mot de passe ne sont pas égaux."),
         "passwordTooltip": MessageLookupByLibrary.simpleMessage(
             "Au moins un chiffre.\nAu moins un caractère minuscule.\nAu moins un caractère majuscule.\nAu moins un caractère spécial.\nAu moins 8 caractères, mais pas plus de 32."),
+        "primaryBalance": m3,
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Politique de confidentialité"),
         "pve": MessageLookupByLibrary.simpleMessage("JcE"),
         "pvp": MessageLookupByLibrary.simpleMessage("JcJ"),
@@ -91,9 +94,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "registrationDescription": MessageLookupByLibrary.simpleMessage("Inscrivez-vous pour entrer dans le jeu."),
         "registrationLoading": MessageLookupByLibrary.simpleMessage("Inscription..."),
         "rememberPassword": MessageLookupByLibrary.simpleMessage("Vous vous souvenez de votre mot de passe ?"),
-        "returnPve": MessageLookupByLibrary.simpleMessage("Return PvE"),
-        "returnPvp": MessageLookupByLibrary.simpleMessage("Return PvP"),
-        "rounds": m3,
+        "returnPve": MessageLookupByLibrary.simpleMessage("Retour JcE"),
+        "returnPvp": MessageLookupByLibrary.simpleMessage("Retour JcJ"),
+        "rounds": m4,
         "settings": MessageLookupByLibrary.simpleMessage("Paramètres"),
         "shop": MessageLookupByLibrary.simpleMessage("Boutique"),
         "signIn": MessageLookupByLibrary.simpleMessage("Se connecter"),

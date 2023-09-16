@@ -58,9 +58,9 @@
   "logout": "Se déconnecter",
   "logoutLoading": "Déconnexion...",
   "pvp": "JcJ",
-  "returnPvp": "Return PvP",
+  "returnPvp": "Retour JcJ",
   "pve": "JcE",
-  "returnPve": "Return PvE",
+  "returnPve": "Retour JcE",
   "mage": "Mage",
   "mageDescription": "Les Mages sont l'artillerie lourde d'un groupe, ils lancent de puissants sorts à distance sur une ou plusieurs cibles. Les ennemis s'enfuient dès qu'ils entendent leurs redoutables incantations.",
   "warrior": "Guerrier",
@@ -75,5 +75,6 @@
   "rounds": "Tour{plural} {number}",
   "winsFight": "remporte le combat",
   "youHaveWin": "Vous avez gagné",
-  "experiencePoints": "Points d'expérience"
+  "experiencePoints": "points d'expérience",
+  "primaryBalance": "yen{plural}"
 }
