@@ -41,8 +41,8 @@ class _GameChooseClassesState extends State<GameChooseClasses> {
                               onPressed: () => setState(() {
                                     currentPage = i;
                                   }),
-                              child: Text(UserClasses.fromCode(UserClasses.classesCode.elementAt(i)).name(context),
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: widget.fontSize))))
+                              child:
+                                  Text(UserClasses.fromCode(UserClasses.classesCode.elementAt(i)).name, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: widget.fontSize))))
                   ])),
               _buildClasses(context: context, classes: e),
             ],
@@ -89,8 +89,7 @@ class _GameChooseClassesState extends State<GameChooseClasses> {
                     constraints: const BoxConstraints(maxWidth: 192, minHeight: 48),
                     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
                     alignment: Alignment.center,
-                    child:
-                        Text('Choisir la classe ${classes.name(context)}', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: widget.fontSize)),
+                    child: Text('Choisir la classe ${classes.name}', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: widget.fontSize)),
                   )))
         ],
       ),
