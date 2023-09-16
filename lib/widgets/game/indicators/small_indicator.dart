@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SmallIndicator extends StatelessWidget {
-  SmallIndicator({super.key, required this.backgroundColor, required this.text, required this.iconData, required this.iconColor, this.onPressed, required this.withIconData, required this.width});
+  const SmallIndicator(
+      {super.key, required this.backgroundColor, required this.text, required this.iconData, required this.iconColor, this.onPressed, required this.withIconData, required this.width});
 
   final Color backgroundColor;
   final String text;
@@ -10,7 +11,6 @@ class SmallIndicator extends StatelessWidget {
   final VoidCallback? onPressed;
   final IconData withIconData;
   final double width;
-  late final bool _withMore = onPressed != null;
 
   @override
   Widget build(BuildContext context) {
