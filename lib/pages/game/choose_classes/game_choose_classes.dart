@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fumiko/entities/user/classes/user_classes.dart';
+import 'package:fumiko/l10n/l10n.dart';
 import 'package:fumiko/pages/game/main/game_main_page.dart';
 
 class GameChooseClasses extends StatefulWidget {
@@ -48,9 +49,7 @@ class _GameChooseClassesState extends State<GameChooseClasses> {
             ],
           ));
     }).toList();
-    setState(() {
-      currentPage = 0;
-    });
+    setState(() => currentPage = 0);
   }
 
   @override
@@ -89,7 +88,8 @@ class _GameChooseClassesState extends State<GameChooseClasses> {
                     constraints: const BoxConstraints(maxWidth: 192, minHeight: 48),
                     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
                     alignment: Alignment.center,
-                    child: Text('Choisir la classe ${classes.name}', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: widget.fontSize)),
+                    child: Text(AppLocalizations.of(context).chooseClassX(classes.name),
+                        textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: widget.fontSize)),
                   )))
         ],
       ),
