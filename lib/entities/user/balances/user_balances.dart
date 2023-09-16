@@ -10,15 +10,45 @@ mixin EntityUserBalances {
   num get primary => _primary.value ?? 0;
   StreamSubscription? _primaryObserver;
 
+  Future<void> addPrimary(num amounts) async {
+    if (amounts <= 0) return;
+    await _primary._set(primary + amounts);
+  }
+
+  Future<void> removePrimary(num amounts) async {
+    if (amounts <= 0) return;
+    await _primary._set(primary - amounts);
+  }
+
   EntityUserValue<num?> _secondary = EntityUserValue<num?>(value: 0);
 
   num get secondary => _secondary.value ?? 0;
   StreamSubscription? _secondaryObserver;
 
+  Future<void> addSecondary(num amounts) async {
+    if (amounts <= 0) return;
+    await _secondary._set(secondary + amounts);
+  }
+
+  Future<void> removeSecondary(num amounts) async {
+    if (amounts <= 0) return;
+    await _secondary._set(secondary - amounts);
+  }
+
   EntityUserValue<num?> _trophies = EntityUserValue<num?>(value: 0);
 
   num get trophies => _trophies.value ?? 0;
   StreamSubscription? _trophiesObserver;
+
+  Future<void> addTrophies(num amounts) async {
+    if (amounts <= 0) return;
+    await _trophies._set(trophies + amounts);
+  }
+
+  Future<void> removeTrophies(num amounts) async {
+    if (amounts <= 0) return;
+    await _trophies._set(trophies - amounts);
+  }
 
   Future<void> _getBalanceValues({required String uid}) async {
     _primary = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getPrimary()).value ?? 0);

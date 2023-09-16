@@ -6,17 +6,14 @@ import 'package:fumiko/entities/entity/classes/entity_classes.dart';
 import 'package:fumiko/entities/entity/entity.dart';
 import 'package:fumiko/entities/monster/classes/monster_classes.dart';
 
+part './leveling/monster_leveling.dart';
 part './stats/monster_stats_base.dart';
 part './stats/monster_stats_primary.dart';
 
-class EntityMonster with Entity, EntityMonsterStatsBase, EntityMonsterStatsPrimary {
+class EntityMonster with Entity, EntityMonsterLeveling, EntityMonsterStatsBase, EntityMonsterStatsPrimary {
   bool? _isBoss = false;
 
   bool get isBoss => _isBoss ?? false;
-
-  num? _levels = 0;
-
-  num get levels => _levels ?? 0;
 
   MonsterClass? _classes = MonsterClasses.unknown;
 
@@ -30,10 +27,11 @@ class EntityMonster with Entity, EntityMonsterStatsBase, EntityMonsterStatsPrima
 
   EntityMonster._();
 
-  EntityMonster.of({required num levels, required bool isBoss, required MonsterClass classes}) {
+  EntityMonster.of({required num levels, required num rebirths, required bool isBoss, required MonsterClass classes}) {
     _isBoss = isBoss;
     _classes = classes;
     _levels = levels;
+    _rebirths = rebirths;
     _init();
   }
 

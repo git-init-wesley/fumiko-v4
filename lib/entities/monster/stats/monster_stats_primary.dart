@@ -48,6 +48,7 @@ mixin EntityMonsterStatsPrimary implements EntityStatsPrimary {
   @override
   num get eyesight => _eyesight ?? 0;
 
+  @override
   num get realEyesight => eyesight * classes.eyesight;
 
   num? _mass = DefaultEntityMonsterStatsBase.defaultValue;

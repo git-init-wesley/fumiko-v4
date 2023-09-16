@@ -1,17 +1,22 @@
 part of user;
 
-mixin EntityUserLeveling {
+mixin EntityUserLeveling implements EntityLeveling {
   void updatePower();
 
   void onChange(EntityUserChangeListener obj);
 
   EntityUserValue<num?> _levels = EntityUserValue<num?>(value: 1);
 
+  @override
   num get levels => _levels.value ?? 0;
   StreamSubscription? _levelsObserver;
 
+  @override
+  num get realLevels => levels + (rebirths * 100);
+
   EntityUserValue<num?> _rebirths = EntityUserValue<num?>(value: 0);
 
+  @override
   num get rebirths => _rebirths.value ?? 0;
   StreamSubscription? _rebirthsObserver;
 
