@@ -23,11 +23,12 @@ class WinRate {
       return Colors.yellowAccent;
     }
     if (rate >= 25) {
-      return Colors.orangeAccent;
+      return Colors.amber;
     }
     if (isBoss) {
       return Colors.black;
+    } else {
+      return Colors.redAccent;
     }
-    return Colors.redAccent;
   }
 }
