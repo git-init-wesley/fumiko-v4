@@ -20,7 +20,11 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'fr_FR';
 
-  static String m0(maintenanceCause, maintenanceEnd) => "👨🏻‍🔧 Une maintenance est actuellement en cours... 👨🏻‍🔧\n\n${maintenanceCause}\n\nSe termine le ${maintenanceEnd} (UTC+00).";
+  static String m0(plural) => "dégât${plural}";
+
+  static String m1(maintenanceCause, maintenanceEnd) => "👨🏻‍🔧 Une maintenance est actuellement en cours... 👨🏻‍🔧\n\n${maintenanceCause}\n\nSe termine le ${maintenanceEnd} (UTC+00).";
+
+  static String m2(plural, number) => "Tour${plural} ${number}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
 
@@ -29,8 +33,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountDeactivated": MessageLookupByLibrary.simpleMessage("Votre compte a été désactivé. ⏳"),
         "alliance": MessageLookupByLibrary.simpleMessage("Alliance"),
         "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage("Vous avez déjà un compte ?"),
+        "and_deals": MessageLookupByLibrary.simpleMessage("et inflige"),
+        "attacks": MessageLookupByLibrary.simpleMessage("attaque"),
         "checkConnectivity": MessageLookupByLibrary.simpleMessage("⌛ Vérification de la connexion... ⌛"),
         "chests": MessageLookupByLibrary.simpleMessage("Coffres"),
+        "damage": m0,
         "deactivation": MessageLookupByLibrary.simpleMessage("Désactivation"),
         "doNotHaveAccountYet": MessageLookupByLibrary.simpleMessage("Vous n\'avez pas encore de compte ?"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Adresse mail"),
@@ -54,7 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mage": MessageLookupByLibrary.simpleMessage("Mage"),
         "mageDescription": MessageLookupByLibrary.simpleMessage(
             "Les Mages sont l\'artillerie lourde d\'un groupe, ils lancent de puissants sorts à distance sur une ou plusieurs cibles. Les ennemis s\'enfuient dès qu\'ils entendent leurs redoutables incantations."),
-        "maintenanceCurrentlyProgress": m0,
+        "maintenanceCurrentlyProgress": m1,
         "map": MessageLookupByLibrary.simpleMessage("Carte"),
         "ninja": MessageLookupByLibrary.simpleMessage("Ninja"),
         "ninjaDescription": MessageLookupByLibrary.simpleMessage(
@@ -79,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registrationDescription": MessageLookupByLibrary.simpleMessage("Inscrivez-vous pour entrer dans le jeu."),
         "registrationLoading": MessageLookupByLibrary.simpleMessage("Inscription..."),
         "rememberPassword": MessageLookupByLibrary.simpleMessage("Vous vous souvenez de votre mot de passe ?"),
+        "rounds": m2,
         "settings": MessageLookupByLibrary.simpleMessage("Paramètres"),
         "shop": MessageLookupByLibrary.simpleMessage("Boutique"),
         "signIn": MessageLookupByLibrary.simpleMessage("Se connecter"),
@@ -95,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "warrior": MessageLookupByLibrary.simpleMessage("Guerrier"),
         "warriorDescription": MessageLookupByLibrary.simpleMessage(
             "Puissants, d\'un courage sans limite, et possédant de fantastiques compétences de combat, les Guerriers sont toujours prêts à attaquer l\'ennemi. Pilier de tout groupe et source de sa puissance, les Guerriers affrontent les ennemis en combat rapprochent pendant que leurs partenaires assurent leurs arrières."),
-        "welcome": MessageLookupByLibrary.simpleMessage("Accueil")
+        "welcome": MessageLookupByLibrary.simpleMessage("Accueil"),
+        "wins_fight": MessageLookupByLibrary.simpleMessage("remporte le combat")
       };
 }

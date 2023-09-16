@@ -696,6 +696,56 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `attaque`
+  String get attacks {
+    return Intl.message(
+      'attaque',
+      name: 'attacks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `et inflige`
+  String get and_deals {
+    return Intl.message(
+      'et inflige',
+      name: 'and_deals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `dégât{plural}`
+  String damage(Object plural) {
+    return Intl.message(
+      'dégât$plural',
+      name: 'damage',
+      desc: '',
+      args: [plural],
+    );
+  }
+
+  /// `Tour{plural} {number}`
+  String rounds(Object plural, Object number) {
+    return Intl.message(
+      'Tour$plural $number',
+      name: 'rounds',
+      desc: '',
+      args: [plural, number],
+    );
+  }
+
+  /// `remporte le combat`
+  String get wins_fight {
+    return Intl.message(
+      'remporte le combat',
+      name: 'wins_fight',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
