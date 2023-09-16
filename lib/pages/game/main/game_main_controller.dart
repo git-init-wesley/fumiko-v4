@@ -73,8 +73,8 @@ class _GameMainController extends _GameMainModel with PopupController {
   }
 
   Future<void> setAbstractWidget(Widget widget) async {
-    await setSubPageRoute(GameMainSubPages.pveRoute);
-    await Future.delayed(const Duration(microseconds: 1));
+    await setState(() => abstractWidget = const SizedBox.shrink());
+    await Future.delayed(const Duration(milliseconds: 10));
     await setState(() => abstractWidget = widget);
     await setSubPageRoute(GameMainSubPages.abstractWidget);
   }
