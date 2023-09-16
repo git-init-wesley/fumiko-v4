@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/entities/monster/classes/monster_classes.dart';
 import 'package:fumiko/entities/monster/monster.dart';
+import 'package:fumiko/pages/game/fights/pve/details/game_fights_pve_details_page.dart';
 import 'package:fumiko/pages/game/main/game_main_page.dart';
 import 'package:fumiko/pages/game/statique/home_menus_button.dart';
 import 'package:fumiko/utils/win_rate.dart';
@@ -13,11 +14,19 @@ class GameFightsPve extends StatelessWidget {
   final SetSubPageFunction setSubPageRoute;
   final SetAbstractWidgetFunction setAbstractWidget;
 
+  void _generateFightDetails({required EntityMonster monster}) {
+    setAbstractWidget(GameFightsPveDetailsPage(
+        monster: monster,
+        user: CoreUser.instance.current,
+        setSubPageRoute: setSubPageRoute,
+        repeat: () => _generateFightDetails(monster: EntityMonster.of(levels: monster.levels, isBoss: monster.isBoss, classes: monster.classes))));
+  }
+
   List<Widget> _generateMonsters() {
     List<Widget> monsters = [];
 
     const num minLevel = 1, maxLevel = 10;
-    final MonsterClass classes = MonsterClasses.fromCode('alpha');
+    final MonsterClass classes = MonsterClasses.alpha;
 
     for (num i = minLevel; i <= maxLevel; i++) {
       final bool isBoss = i % 5 == 0;
@@ -32,7 +41,9 @@ class GameFightsPve extends StatelessWidget {
           power: monster.power,
           classes: monster.classes,
           winRate: WinRate.ofPvE(monster: monster, user: CoreUser.instance.current),
-          setAbstractWidget: setAbstractWidget,
+          onPressed: () {
+            _generateFightDetails(monster: monster);
+          },
           setSubPageRoute: setSubPageRoute,
         ),
       ));

@@ -4,23 +4,22 @@ class _GameFightsPveDetailsModel extends PageBaseModel {
   StreamController? _streamController;
   StreamSubscription? _streamSubscription;
 
-  EntityMonster? _actualMonster;
-  num _actualVitalityMonster = 0;
+  late EntityFight _actualMonster;
 
-  num get actualVitalityMonster => _actualVitalityMonster;
+  late EntityFight _actualUser;
 
-  EntityUser? _actualUser;
-  num _actualVitalityUser = 0;
-
-  num get actualVitalityUser => _actualVitalityUser;
-
-  num _actualRound = 1;
+  num _actualRound = 0;
 
   num get actualRound => _actualRound;
 
+  set actualRound(v) => _actualRound = v;
+
+  //TODO: Ninja FIRST, Others class random starting attack
   bool _monsterFirst = false;
 
-  bool get monsterFirst => _monsterFirst ?? false;
+  bool get monsterFirst => _monsterFirst;
+
+  set monsterFirst(v) => _monsterFirst = v;
 
   List<Widget> logs = [];
 }

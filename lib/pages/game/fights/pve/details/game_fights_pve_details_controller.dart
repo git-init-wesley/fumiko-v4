@@ -2,10 +2,8 @@ part of pve_details;
 
 class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
   _GameFightsPveDetailsController({required BuildContext context, required EntityMonster monster, required EntityUser user}) {
-    _actualMonster = monster;
-    _actualVitalityMonster = monster.realVitality;
-    _actualUser = user;
-    _actualVitalityUser = user.realVitality;
+    _actualMonster = EntityFight(entity: monster);
+    _actualUser = EntityFight(entity: user);
 
     CoreUser.instance.current.addListener((_) => notifyListeners());
     CoreUserPresences.instance.addListener((_) => notifyListeners());
@@ -17,26 +15,42 @@ class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
 
   Future<void> _round(_) async {
     try {
-      if (_actualMonster == null || _actualUser == null) return;
+      if (actualRound == 0) {
+        if (_actualUser.entity.classes == UserClasses.ninja) {
+          monsterFirst = false;
+        } else {
+          monsterFirst = Random.secure().nextBool();
+        }
+        actualRound++;
+      }
 
-      _roundUser();
-      _roundMonster();
+      if (monsterFirst) {
+        _roundTargets(target2: _actualUser, target1: _actualMonster);
+        _roundTargets(target1: _actualUser, target2: _actualMonster);
+      } else {
+        _roundTargets(target1: _actualUser, target2: _actualMonster);
+        _roundTargets(target2: _actualUser, target1: _actualMonster);
+      }
+
       notifyListeners();
 
       _addVoidLog();
-      _actualRound++;
+      actualRound++;
       notifyListeners();
 
       if (!_checkIfContinue) {
-        if (_actualVitalityMonster <= 0) {
-          _createWinnerLog(entity: _actualUser);
-          num winExp = (_actualMonster?.power ?? 0) / 10;
-          winExp *= Random().nextDouble() * 2;
-          _createRewardsLog(winExp: winExp);
+        if (_actualMonster.actualVitality <= 0) {
           //TODO: Recompenses
+          num winExp = (_actualMonster.entity.power) / 100;
+          winExp *= Random.secure().nextDouble() * 2;
+
+          //TODO: Buff EXP for difficulty classes.
+
+          _createRewardsLog(winExp: winExp);
+          _createWinnerLog(entity: _actualUser.entity);
           CoreUser.instance.current.addExp(winExp);
-        } else if (_actualVitalityUser <= 0) {
-          _createWinnerLog(entity: _actualMonster);
+        } else if (_actualUser.actualVitality <= 0) {
+          _createWinnerLog(entity: _actualMonster.entity);
         }
         _destroyStream();
       }
@@ -48,52 +62,51 @@ class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
     }
   }
 
-  bool get _checkIfContinue => _actualVitalityMonster > 0 && _actualVitalityUser > 0;
+  bool get _checkIfContinue => _actualMonster.actualVitality > 0 && _actualUser.actualVitality > 0;
 
-  void _roundMonster() {
+  void _roundTargets({required EntityFight target1, required EntityFight target2}) {
     if (!_checkIfContinue) return;
-    num damage = _actualMonster!.realStrength;
-    _actualVitalityUser -= damage;
-    _createLog(target1: _actualMonster, target2: _actualUser, damage: damage);
+    num damage = target1.entity.realStrength;
+    bool critical = Random.secure().nextInt(100) >= 95 ? true : false;
+    if (critical) damage *= 2;
+    target2.actualVitality -= damage;
+    _createLog(target1: target1.entity, target2: target2.entity, damage: damage, critical: critical);
   }
 
-  void _roundUser() {
-    if (!_checkIfContinue) return;
-    num damage = _actualUser!.realStrength;
-    _actualVitalityMonster -= damage;
-    _createLog(target1: _actualUser, target2: _actualMonster, damage: damage);
-  }
-
-  void _createLog({required Entity? target1, required Entity? target2, required num damage}) {
+  void _createLog({required Entity target1, required Entity target2, required num damage, required bool critical}) {
     logs.add(Row(children: [
       Container(
           margin: const EdgeInsets.only(right: 4),
           child: Text(AppLocalizations.current.rounds(actualRound > 1 ? 's' : '', actualRound), style: const TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline))),
       Row(children: [
-        Container(margin: const EdgeInsets.only(right: 2), child: Text(target1?.name ?? 'X', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
+        Container(margin: const EdgeInsets.only(right: 2), child: Text(target1.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
         Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.attacks)),
-        Container(margin: const EdgeInsets.only(right: 2), child: Text(target2?.name ?? 'Y', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
-        Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.and_deals)),
+        Container(margin: const EdgeInsets.only(right: 2), child: Text(target2.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
+        Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.andDeals)),
         Container(margin: const EdgeInsets.only(right: 2), child: Text(NumberFormatter.compact(damage), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
         Text('${AppLocalizations.current.damage(damage > 1 ? 's' : '')}.'),
+        if (critical)
+          Container(
+              margin: const EdgeInsets.only(left: 2),
+              child: Text(AppLocalizations.current.critical.toUpperCase(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
       ])
     ]));
   }
 
-  void _createWinnerLog({required Entity? entity}) {
+  void _createWinnerLog({required Entity entity}) {
     _addVoidLog();
     logs.add(Row(children: [
-      Container(margin: const EdgeInsets.only(right: 2), child: Text(entity?.name ?? 'X', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
-      Text('${AppLocalizations.current.wins_fight}.'),
+      Container(margin: const EdgeInsets.only(right: 2), child: Text(entity.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
+      Text('${AppLocalizations.current.winsFight}.'),
     ]));
   }
 
   void _createRewardsLog({required num winExp}) {
     _addVoidLog();
     logs.add(Row(children: [
-      Text('Vous avez gagné '), //TODO: L10n
+      Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.youHaveWin)),
       Container(margin: const EdgeInsets.only(right: 2), child: Text(NumberFormatter.compact(winExp), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
-      Text('points d\'expérience'),
+      Text('${AppLocalizations.current.experiencePoints.toLowerCase()}.'),
     ]));
   }
 

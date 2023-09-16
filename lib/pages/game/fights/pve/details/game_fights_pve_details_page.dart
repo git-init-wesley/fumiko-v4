@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/entities/entity/entity.dart';
 import 'package:fumiko/entities/monster/monster.dart';
+import 'package:fumiko/entities/user/classes/user_classes.dart';
 import 'package:fumiko/entities/user/user.dart';
 import 'package:fumiko/l10n/l10n.dart';
 import 'package:fumiko/models/page_base_model.dart';
@@ -25,9 +26,10 @@ part './game_fights_pve_details_model.dart';
 part './game_fights_pve_details_view.dart';
 
 class GameFightsPveDetailsPage extends StatefulWidget {
-  const GameFightsPveDetailsPage({super.key, required this.monster, required this.user, required this.setSubPageRoute});
+  const GameFightsPveDetailsPage({super.key, required this.monster, required this.user, required this.setSubPageRoute, required this.repeat});
 
   final SetSubPageFunction setSubPageRoute;
+  final VoidCallback repeat;
   final EntityMonster monster;
   final EntityUser user;
 

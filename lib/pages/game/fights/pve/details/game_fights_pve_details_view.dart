@@ -13,14 +13,21 @@ class _GameFightsPveDetailsView extends State<GameFightsPveDetailsPage> {
     return Column(children: [
       Column(children: [
         HomeMenusButton(setSubPageRoute: widget.setSubPageRoute),
+        MenusButton(
+          maxWidth: double.infinity,
+          color: Colors.blueAccent,
+          iconData: MdiIcons.controller,
+          text: AppLocalizations.current.returnPve,
+          onPressed: () => widget.setSubPageRoute(GameMainSubPages.pveRoute),
+        ),
         Container(
             margin: const EdgeInsets.only(bottom: 16),
             child: MenusButton(
               maxWidth: double.infinity,
-              color: Colors.blueAccent,
-              iconData: MdiIcons.controller,
-              text: 'Retour JcE', //TODO: L10n
-              onPressed: () => widget.setSubPageRoute(GameMainSubPages.pveRoute),
+              color: Colors.deepPurpleAccent,
+              iconData: MdiIcons.backspace,
+              text: 'Recommencer',
+              onPressed: widget.repeat,
             )),
       ]),
       Container(
@@ -34,12 +41,12 @@ class _GameFightsPveDetailsView extends State<GameFightsPveDetailsPage> {
                     margin: const EdgeInsets.symmetric(vertical: 2),
                     child: Text(widget.user.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize))),
                 BarProgressIndicator(
-                    value: (controller._actualVitalityUser) / widget.user.realVitality,
+                    value: (controller._actualUser.actualVitality) / widget.user.realVitality,
                     height: 32,
                     width: 128,
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.redAccent,
-                    child: Text('${NumberFormatter.compact(controller._actualVitalityUser)}/${NumberFormatter.compact(widget.user.realVitality)}',
+                    child: Text('${NumberFormatter.compact(controller._actualUser.actualVitality)}/${NumberFormatter.compact(widget.user.realVitality)}',
                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize ?? 0))),
               ]),
               Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -48,12 +55,12 @@ class _GameFightsPveDetailsView extends State<GameFightsPveDetailsPage> {
                     margin: const EdgeInsets.symmetric(vertical: 2),
                     child: Text(widget.monster.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize))),
                 BarProgressIndicator(
-                    value: (controller._actualVitalityMonster) / widget.monster.realVitality,
+                    value: (controller._actualMonster.actualVitality) / widget.monster.realVitality,
                     height: 32,
                     width: 128,
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.redAccent,
-                    child: Text('${NumberFormatter.compact(controller._actualVitalityMonster)}/${NumberFormatter.compact(widget.monster.realVitality)}',
+                    child: Text('${NumberFormatter.compact(controller._actualMonster.actualVitality)}/${NumberFormatter.compact(widget.monster.realVitality)}',
                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize ?? 0))),
               ]),
             ]),
