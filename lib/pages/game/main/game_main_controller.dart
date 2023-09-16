@@ -32,10 +32,9 @@ class _GameMainController extends _GameMainModel with PopupController {
           }
           if (CoreUser.instance.current.classes.code == UserClasses.unknown.code) {
             await setSubPageRoute(GameMainSubPages.chooseClassesRoute);
-          } else {
+          } else if (CoreUser.instance.current.classes.code != UserClasses.unknown.code && subPageRoute == GameMainSubPages.chooseClassesRoute) {
             await setSubPageRoute(GameMainSubPages.homeRoute);
           }
-
           notifyListeners();
         });
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fumiko/entities/user/classes/user_classes.dart';
+import 'package:fumiko/utils/number_formatter.dart';
 import 'package:fumiko/widgets/game/indicators/bar_progress_indicator.dart';
 
 class GameHeader extends StatelessWidget {
@@ -15,7 +16,7 @@ class GameHeader extends StatelessWidget {
     return Row(
       children: [
         Tooltip(
-          message: classes.name(context),
+          message: classes.name,
           textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           padding: const EdgeInsets.all(8),
           child: Container(
@@ -55,7 +56,8 @@ class GameHeader extends StatelessWidget {
                         width: mediaWidth - 86 - 8,
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.deepOrange,
-                        child: Text('Exp: $exp/$maxExp', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize ?? 0)))),
+                        child: Text('Exp: ${NumberFormatter.compact(exp)}/${NumberFormatter.compact(maxExp)}',
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize ?? 0)))),
               ],
             ))
       ],
