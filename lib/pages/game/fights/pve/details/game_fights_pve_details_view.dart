@@ -11,7 +11,18 @@ class _GameFightsPveDetailsView extends State<GameFightsPveDetailsPage> {
 
   Widget _buildWidget(BuildContext context, _GameFightsPveDetailsController controller, Widget? child) {
     return Column(children: [
-      Container(margin: const EdgeInsets.only(bottom: 16), child: HomeMenusButton(setSubPageRoute: widget.setSubPageRoute)),
+      Column(children: [
+        HomeMenusButton(setSubPageRoute: widget.setSubPageRoute),
+        Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: MenusButton(
+              maxWidth: double.infinity,
+              color: Colors.blueAccent,
+              iconData: MdiIcons.controller,
+              text: 'Retour JcE', //TODO: L10n
+              onPressed: () => widget.setSubPageRoute(GameMainSubPages.pveRoute),
+            )),
+      ]),
       Container(
           margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
           padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
@@ -19,7 +30,9 @@ class _GameFightsPveDetailsView extends State<GameFightsPveDetailsPage> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                 widget.user.classes.icon.toImage(width: 128),
-                Container(margin: const EdgeInsets.symmetric(vertical: 2), child: Text(widget.user.username)),
+                Container(
+                    margin: const EdgeInsets.symmetric(vertical: 2),
+                    child: Text(widget.user.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize))),
                 BarProgressIndicator(
                     value: (controller._actualVitalityUser) / widget.user.realVitality,
                     height: 32,
@@ -31,7 +44,9 @@ class _GameFightsPveDetailsView extends State<GameFightsPveDetailsPage> {
               ]),
               Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                 widget.monster.classes.icon.toImage(width: 128),
-                Container(margin: const EdgeInsets.symmetric(vertical: 2), child: Text(widget.monster.classes.name)),
+                Container(
+                    margin: const EdgeInsets.symmetric(vertical: 2),
+                    child: Text(widget.monster.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize))),
                 BarProgressIndicator(
                     value: (controller._actualVitalityMonster) / widget.monster.realVitality,
                     height: 32,
@@ -42,7 +57,10 @@ class _GameFightsPveDetailsView extends State<GameFightsPveDetailsPage> {
                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize ?? 0))),
               ]),
             ]),
-            Container(margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4), padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4), child: Column(children: controller.logs)),
+            Container(
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                child: Column(children: controller.logs.reversed.toList())),
           ])),
     ]);
   }

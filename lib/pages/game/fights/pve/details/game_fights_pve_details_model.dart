@@ -14,7 +14,7 @@ class _GameFightsPveDetailsModel extends PageBaseModel {
 
   num get actualVitalityUser => _actualVitalityUser;
 
-  num _actualRound = 0;
+  num _actualRound = 1;
 
   num get actualRound => _actualRound;
 
