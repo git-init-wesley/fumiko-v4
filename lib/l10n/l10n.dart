@@ -627,11 +627,31 @@ class AppLocalizations {
     );
   }
 
+  /// `Return PvP`
+  String get returnPvp {
+    return Intl.message(
+      'Return PvP',
+      name: 'returnPvp',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `JcE`
   String get pve {
     return Intl.message(
       'JcE',
       name: 'pve',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Return PvE`
+  String get returnPve {
+    return Intl.message(
+      'Return PvE',
+      name: 'returnPve',
       desc: '',
       args: [],
     );
@@ -697,6 +717,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Choisir la classe {className}`
+  String chooseClassX(Object className) {
+    return Intl.message(
+      'Choisir la classe $className',
+      name: 'chooseClassX',
+      desc: '',
+      args: [className],
+    );
+  }
+
   /// `attaque`
   String get attacks {
     return Intl.message(
@@ -707,11 +737,21 @@ class AppLocalizations {
     );
   }
 
+  /// `critique`
+  String get critical {
+    return Intl.message(
+      'critique',
+      name: 'critical',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `et inflige`
-  String get and_deals {
+  String get andDeals {
     return Intl.message(
       'et inflige',
-      name: 'and_deals',
+      name: 'andDeals',
       desc: '',
       args: [],
     );
@@ -738,10 +778,30 @@ class AppLocalizations {
   }
 
   /// `remporte le combat`
-  String get wins_fight {
+  String get winsFight {
     return Intl.message(
       'remporte le combat',
-      name: 'wins_fight',
+      name: 'winsFight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vous avez gagné`
+  String get youHaveWin {
+    return Intl.message(
+      'Vous avez gagné',
+      name: 'youHaveWin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Points d'expérience`
+  String get experiencePoints {
+    return Intl.message(
+      'Points d\'expérience',
+      name: 'experiencePoints',
       desc: '',
       args: [],
     );
