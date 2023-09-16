@@ -19,7 +19,7 @@ class GameFightsPve extends StatelessWidget {
         monster: monster,
         user: CoreUser.instance.current,
         setSubPageRoute: setSubPageRoute,
-        repeat: () => _generateFightDetails(monster: EntityMonster.of(levels: monster.levels, isBoss: monster.isBoss, classes: monster.classes))));
+        repeat: () => _generateFightDetails(monster: EntityMonster.of(levels: monster.levels, isBoss: monster.isBoss, classes: monster.classes, rebirths: 0))));
   }
 
   List<Widget> _generateMonsters() {
@@ -30,7 +30,7 @@ class GameFightsPve extends StatelessWidget {
 
     for (num i = minLevel; i <= maxLevel; i++) {
       final bool isBoss = i % 5 == 0;
-      final EntityMonster monster = EntityMonster.of(levels: i, isBoss: isBoss, classes: classes);
+      final EntityMonster monster = EntityMonster.of(levels: i, isBoss: isBoss, classes: classes, rebirths: 0);
       monsters.add(Container(
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),

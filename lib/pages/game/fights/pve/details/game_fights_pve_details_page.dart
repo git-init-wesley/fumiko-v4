@@ -6,6 +6,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/entities/entity/entity.dart';
 import 'package:fumiko/entities/monster/monster.dart';

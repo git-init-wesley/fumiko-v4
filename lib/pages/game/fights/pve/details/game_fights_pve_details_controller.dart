@@ -42,13 +42,18 @@ class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
         if (_actualMonster.actualVitality <= 0) {
           //TODO: Recompenses
           num winExp = (_actualMonster.entity.power) / 100;
+          num winPrimaryBalance = (_actualMonster.entity.levels) * Random.secure().nextDouble() * 2;
           winExp *= Random.secure().nextDouble() * 2;
 
-          //TODO: Buff EXP for difficulty classes.
+          if (_actualUser.entity.classes == UserClasses.ninja) {
+            winExp *= 1.50;
+            winPrimaryBalance *= 1.20;
+          }
 
-          _createRewardsLog(winExp: winExp);
+          _createRewardsLog(winExp: winExp, winPrimaryBalance: winPrimaryBalance);
           _createWinnerLog(entity: _actualUser.entity);
           CoreUser.instance.current.addExp(winExp);
+          CoreUser.instance.current.addPrimary(winExp);
         } else if (_actualUser.actualVitality <= 0) {
           _createWinnerLog(entity: _actualMonster.entity);
         }
@@ -101,13 +106,26 @@ class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
     ]));
   }
 
-  void _createRewardsLog({required num winExp}) {
+  void _createRewardsLog({required num winExp, required num winPrimaryBalance}) {
     _addVoidLog();
-    logs.add(Row(children: [
-      Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.youHaveWin)),
-      Container(margin: const EdgeInsets.only(right: 2), child: Text(NumberFormatter.compact(winExp), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
-      Text('${AppLocalizations.current.experiencePoints.toLowerCase()}.'),
-    ]));
+    logs.add(Column(
+      children: [
+        Row(children: [
+          Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.youHaveWin)),
+          Container(margin: const EdgeInsets.only(right: 2), child: Text(NumberFormatter.compact(winExp), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
+          Container(margin: const EdgeInsets.only(right: 6), child: const Icon(FontAwesomeIcons.dumbbell, size: 12, color: Colors.deepOrange)),
+          Text('${AppLocalizations.current.experiencePoints}.'),
+        ]),
+        Row(children: [
+          Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.youHaveWin)),
+          Container(
+              margin: const EdgeInsets.only(right: 2),
+              child: Text(NumberFormatter.compact(winPrimaryBalance), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
+          Container(margin: const EdgeInsets.only(right: 6), child: const Icon(FontAwesomeIcons.coins, size: 12, color: Colors.white70)),
+          Text('${AppLocalizations.current.primaryBalance(winPrimaryBalance > 1 ? 's' : '')}.'),
+        ]),
+      ],
+    ));
   }
 
   void _addVoidLog() {

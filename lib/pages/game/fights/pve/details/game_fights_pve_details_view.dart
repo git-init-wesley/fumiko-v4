@@ -25,7 +25,7 @@ class _GameFightsPveDetailsView extends State<GameFightsPveDetailsPage> {
             child: MenusButton(
               maxWidth: double.infinity,
               color: Colors.deepPurpleAccent,
-              iconData: MdiIcons.backspace,
+              iconData: MdiIcons.reload,
               text: 'Recommencer',
               onPressed: widget.repeat,
             )),
