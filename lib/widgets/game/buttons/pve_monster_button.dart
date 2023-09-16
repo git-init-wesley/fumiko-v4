@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/entities/monster/classes/monster_classes.dart';
-import 'package:fumiko/entities/monster/monster.dart';
-import 'package:fumiko/pages/game/fights/pve/details/game_fights_pve_details_page.dart';
 import 'package:fumiko/pages/game/main/game_main_page.dart';
 import 'package:fumiko/utils/number_formatter.dart';
 import 'package:fumiko/utils/win_rate.dart';
@@ -16,11 +13,11 @@ class PveMonsterButton extends StatelessWidget {
       required this.title,
       required this.winRate,
       required this.power,
-      required this.setAbstractWidget,
+      required this.onPressed,
       required this.classes,
       required this.setSubPageRoute});
 
-  final SetAbstractWidgetFunction setAbstractWidget;
+  final VoidCallback onPressed;
   final SetSubPageFunction setSubPageRoute;
   final WinRate winRate;
   final String title;
@@ -38,9 +35,7 @@ class PveMonsterButton extends StatelessWidget {
             shadowColor: MaterialStateProperty.all<Color>(Colors.black),
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)))),
-        onPressed: () {
-          setAbstractWidget(GameFightsPveDetailsPage(monster: EntityMonster.of(levels: levels, isBoss: isBoss, classes: classes), user: CoreUser.instance.current, setSubPageRoute: setSubPageRoute));
-        },
+        onPressed: onPressed,
         child: Row(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
           Icon(isBoss ? MdiIcons.swordCross : MdiIcons.sword, size: Theme.of(context).textTheme.titleLarge?.fontSize),
           Container(
