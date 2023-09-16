@@ -58,18 +58,18 @@ mixin EntityUserLeveling {
 
   Future<void> _initLevelingObservers({required String? uid, required Function onChange}) async {
     if (uid == null) return;
-    _levelsObserver = await DatabaseUser.of(uid: uid).observeLevels((value) {
-      if (value != _levels.value) _levels._set(value ?? 1);
+    _levelsObserver = await DatabaseUser.of(uid: uid).observeLevels((value) async {
+      if (value != _levels.value) await _levels._set(value ?? 1);
       onChange(null);
       updatePower();
     });
-    _rebirthsObserver = await DatabaseUser.of(uid: uid).observeRebirths((value) {
-      if (value != _rebirths.value) _rebirths._set(value ?? 0);
+    _rebirthsObserver = await DatabaseUser.of(uid: uid).observeRebirths((value) async {
+      if (value != _rebirths.value) await _rebirths._set(value ?? 0);
       onChange(null);
       updatePower();
     });
-    _expObserver = await DatabaseUser.of(uid: uid).observeExp((value) {
-      if (value != _exp.value) _exp._set(value ?? 0);
+    _expObserver = await DatabaseUser.of(uid: uid).observeExp((value) async {
+      if (value != _exp.value) await _exp._set(value ?? 0);
       onChange(null);
       updatePower();
     });

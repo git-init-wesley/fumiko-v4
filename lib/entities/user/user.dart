@@ -68,6 +68,9 @@ class EntityUser with Entity, EntityUserLeveling, EntityUserBalances, EntityUser
   num get power => _power.value ?? 0;
   StreamSubscription? _powerObserver;
 
+  @override
+  num get levels => _levels.value ?? 0;
+
   EntityUser();
 
   EntityUser.of({String? uid, required VoidCallback whenComplete}) {
@@ -141,17 +144,17 @@ class EntityUser with Entity, EntityUserLeveling, EntityUserBalances, EntityUser
   }
 
   Future<void> _initBaseObservers() async {
-    _usernameObserver = await DatabaseUser.of(uid: uid!).observeUsername((value) {
-      if (value != _username.value) _username._set(value ?? 'N/A');
+    _usernameObserver = await DatabaseUser.of(uid: uid!).observeUsername((value) async {
+      if (value != _username.value) await _username._set(value ?? 'N/A');
       onChange(null);
     });
-    _classesObserver = await DatabaseUser.of(uid: uid!).observeClasses((value) {
-      if (value != _classes.value?.code) _classes._set(UserClasses.fromCode(value));
+    _classesObserver = await DatabaseUser.of(uid: uid!).observeClasses((value) async {
+      if (value != _classes.value?.code) await _classes._set(UserClasses.fromCode(value));
       onChange(null);
       updatePower();
     });
-    _powerObserver = await DatabaseUser.of(uid: uid!).observePower((value) {
-      if (value != _power.value) _power._set(value ?? 0);
+    _powerObserver = await DatabaseUser.of(uid: uid!).observePower((value) async {
+      if (value != _power.value) await _power._set(value ?? 0);
       onChange(null);
     });
   }
@@ -180,9 +183,9 @@ class EntityUser with Entity, EntityUserLeveling, EntityUserBalances, EntityUser
   }
 
   @override
-  void updatePower() {
-    final algo = (realStrength + realDexterity + realAgility + realVitality + realEndurance + realEyesight + realMass) - 200;
-    _power._set(algo);
+  void updatePower() async {
+    num algo = (realStrength + realDexterity + realAgility + realVitality + realEndurance + realEyesight + realMass) - 200;
+    await _power._set(num.tryParse(algo.toStringAsFixed(0)) ?? 0);
     onChange(null);
   }
 }

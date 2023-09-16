@@ -35,8 +35,8 @@ mixin EntityUserStatsBase {
 
   Future<void> _initStatsBaseObservers({required String? uid, required Function onChange}) async {
     if (uid == null) return;
-    _staminaObserver = await DatabaseUser.of(uid: uid).observeStamina((value) {
-      if (value != _stamina.value) _stamina._set(value ?? 500);
+    _staminaObserver = await DatabaseUser.of(uid: uid).observeStamina((value) async {
+      if (value != _stamina.value) await _stamina._set(value ?? 500);
       onChange(null);
       updatePower();
     });

@@ -58,18 +58,18 @@ mixin EntityUserBalances {
 
   Future<void> _initBalanceObservers({required String? uid, required Function onChange}) async {
     if (uid == null) return;
-    _primaryObserver = await DatabaseUser.of(uid: uid).observePrimary((value) {
-      if (value != _primary.value) _primary._set(value ?? 0);
+    _primaryObserver = await DatabaseUser.of(uid: uid).observePrimary((value) async {
+      if (value != _primary.value) await _primary._set(value ?? 0);
       onChange(null);
       updatePower();
     });
-    _secondaryObserver = await DatabaseUser.of(uid: uid).observeSecondary((value) {
-      if (value != _secondary.value) _secondary._set(value ?? 0);
+    _secondaryObserver = await DatabaseUser.of(uid: uid).observeSecondary((value) async {
+      if (value != _secondary.value) await _secondary._set(value ?? 0);
       onChange(null);
       updatePower();
     });
-    _trophiesObserver = await DatabaseUser.of(uid: uid).observeTrophies((value) {
-      if (value != _trophies.value) _trophies._set(value ?? 0);
+    _trophiesObserver = await DatabaseUser.of(uid: uid).observeTrophies((value) async {
+      if (value != _trophies.value) await _trophies._set(value ?? 0);
       onChange(null);
       updatePower();
     });
