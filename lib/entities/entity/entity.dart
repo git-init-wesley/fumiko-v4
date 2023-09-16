@@ -2,9 +2,10 @@ library entity;
 
 import 'package:fumiko/entities/entity/classes/entity_classes.dart';
 
+part './leveling/entity_leveling.dart';
 part './stats/entity_stats_primary.dart';
 
-mixin Entity implements EntityStatsPrimary {
+mixin Entity implements EntityLeveling, EntityStatsPrimary {
   String get name;
 
   num get power;
