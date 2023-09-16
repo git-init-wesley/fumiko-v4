@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fumiko/entities/user/classes/user_classes.dart';
+import 'package:fumiko/entities/entity/classes/entity_classes.dart';
 import 'package:fumiko/utils/number_formatter.dart';
 import 'package:fumiko/widgets/game/indicators/bar_progress_indicator.dart';
 
 class GameHeader extends StatelessWidget {
   const GameHeader({super.key, required this.username, required this.levels, required this.rebirths, required this.exp, required this.maxExp, required this.classes});
 
-  final UserClass classes;
+  final EntityClass classes;
   final String username;
   final num levels, rebirths, exp, maxExp;
 
@@ -47,7 +47,7 @@ class GameHeader extends StatelessWidget {
                   ],
                 ),
                 Tooltip(
-                    message: '${exp.toString()}/${maxExp.toString()}',
+                    message: '${NumberFormatter.compact(exp)}/${NumberFormatter.compact(maxExp)}',
                     textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                     padding: const EdgeInsets.all(8),
                     child: BarProgressIndicator(

@@ -48,13 +48,13 @@ class _GameMainController extends _GameMainModel with PopupController {
 
   @override
   Future openPopup({required String title, required Color titleColor, required String description, required IconData icon, required Color iconColor}) async {
-    super.openPopup(title: title, titleColor: titleColor, description: description, icon: icon, iconColor: iconColor);
+    openPopup(title: title, titleColor: titleColor, description: description, icon: icon, iconColor: iconColor);
     notifyListeners();
   }
 
   @override
   Future closePopup() async {
-    super.closePopup();
+    closePopup();
     notifyListeners();
   }
 
@@ -72,9 +72,11 @@ class _GameMainController extends _GameMainModel with PopupController {
     });
   }
 
-  void setAbstractWidget(Widget widget) async {
-    super.abstractWidget = widget;
-    setSubPageRoute(GameMainSubPages.abstractWidget);
+  Future<void> setAbstractWidget(Widget widget) async {
+    await setSubPageRoute(GameMainSubPages.pveRoute);
+    await Future.delayed(const Duration(microseconds: 1));
+    await setState(() => abstractWidget = widget);
+    await setSubPageRoute(GameMainSubPages.abstractWidget);
   }
 
   Future<void> setClasses(UserClass classes) async {
