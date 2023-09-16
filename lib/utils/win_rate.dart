@@ -16,7 +16,7 @@ class WinRate {
   }
 
   Color color() {
-    if (rate >= 75) {
+    if (rate >= 99) {
       return Colors.greenAccent;
     }
     if (rate >= 50) {
