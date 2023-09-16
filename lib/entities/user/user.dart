@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:fumiko/core/user/core_user.dart';
 import 'package:fumiko/database/database.dart';
 import 'package:fumiko/database/user/database_user.dart';
+import 'package:fumiko/entities/entity/classes/entity_classes.dart';
 import 'package:fumiko/entities/entity/entity.dart';
 import 'package:fumiko/entities/user/classes/user_classes.dart';
 import 'package:fumiko/utils/change_listener.dart';
@@ -58,18 +59,22 @@ class EntityUser with Entity, EntityUserLeveling, EntityUserBalances, EntityUser
   EntityUserValue<UserClass?> _classes = EntityUserValue<UserClass>(value: UserClasses.unknown);
 
   @override
-  UserClass get classes => _classes.value ?? UserClasses.unknown;
+  EntityClass get classes => _classes.value ?? UserClasses.unknown;
   StreamSubscription? _classesObserver;
 
   Future<UserClass?> setClasses(UserClass newClasses) async => await _classes._set(newClasses);
 
   EntityUserValue<num?> _power = EntityUserValue<num>(value: 0);
 
+  @override
   num get power => _power.value ?? 0;
   StreamSubscription? _powerObserver;
 
   @override
   num get levels => _levels.value ?? 0;
+
+  @override
+  num get rebirths => _rebirths.value ?? 0;
 
   EntityUser();
 

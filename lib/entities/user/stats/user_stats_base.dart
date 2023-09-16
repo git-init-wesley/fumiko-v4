@@ -10,7 +10,7 @@ mixin EntityUserStatsBase {
 
   void onChange(EntityUserChangeListener obj);
 
-  UserClass get classes;
+  EntityClass get classes;
 
   EntityUserValue<num?> _stamina = EntityUserValue<num?>(value: 500);
 

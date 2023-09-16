@@ -1,53 +1,66 @@
+import 'package:fumiko/entities/entity/classes/entity_classes.dart';
 import 'package:fumiko/l10n/l10n.dart';
 import 'package:fumiko/utils/assets/assets_images.dart';
 
-class MonsterClass {
+class MonsterClass with EntityClass {
   final String _code;
 
+  @override
   String get code => _code;
 
   final String _name;
 
+  @override
   String get name => _name;
 
-  final AssetsImage _image;
+  final AssetsImage _icon;
 
-  AssetsImage get icon => _image;
+  @override
+  AssetsImage get icon => _icon;
 
   final AssetsImage _graphics;
 
+  @override
   AssetsImage get graphics => _graphics;
 
   final String _description;
 
+  @override
   String get description => _description;
 
   final num _strength;
 
+  @override
   num get strength => _strength;
 
   final num _dexterity;
 
+  @override
   num get dexterity => _dexterity;
 
   final num _agility;
 
+  @override
   num get agility => _agility;
 
   final num _vitality;
 
+  @override
   num get vitality => _vitality;
 
   final num _endurance;
 
+  @override
   num get endurance => _endurance;
 
   final num _eyesight;
 
+  @override
   num get eyesight => _eyesight;
 
   final num _mass;
 
+  @override
   num get mass => _mass;
 
   MonsterClass({
@@ -65,7 +78,7 @@ class MonsterClass {
     required num mass,
   })  : _code = code,
         _name = name,
-        _image = icon,
+        _icon = icon,
         _graphics = graphic,
         _description = description,
         _strength = strength,
@@ -75,38 +88,27 @@ class MonsterClass {
         _endurance = endurance,
         _eyesight = eyesight,
         _mass = mass;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) || other is MonsterClass && runtimeType == other.runtimeType && _code == other._code;
-
-  @override
-  int get hashCode => _code.hashCode;
-
-  @override
-  String toString() {
-    return 'MonsterClass{_code: $_code, _name: $_name, _image: $_image, _graphics: $_graphics, _description: $_description, _strength: $_strength, _dexterity: $_dexterity, _agility: $_agility, _vitality: $_vitality, _endurance: $_endurance, _eyesight: $_eyesight, _mass: $_mass}';
-  }
 }
 
 class MonsterClasses {
   MonsterClasses._();
 
-  static final List<MonsterClass> _classes = [
-    MonsterClass(
-      code: 'alpha',
-      name: 'Monster',
-      icon: AssetsImages.fumikoIcon,
-      graphic: AssetsImages.fumikoGraphic,
-      description: AppLocalizations.current.mageDescription,
-      strength: 0.1,
-      dexterity: 0.5,
-      agility: 0.5,
-      vitality: 1,
-      endurance: 0.5,
-      eyesight: 0.5,
-      mass: 0.5,
-    ),
-  ];
+  static final MonsterClass alpha = MonsterClass(
+    code: 'alpha',
+    name: 'Monster',
+    icon: AssetsImages.fumikoIcon,
+    graphic: AssetsImages.fumikoGraphic,
+    description: AppLocalizations.current.mageDescription,
+    strength: 0.5,
+    dexterity: 0.8,
+    agility: 0.7,
+    vitality: 0.4,
+    endurance: 0.5,
+    eyesight: 0.5,
+    mass: 0.5,
+  );
+
+  static final List<MonsterClass> _classes = [alpha];
 
   static final MonsterClass _unknown = MonsterClass(
     code: 'unknown',

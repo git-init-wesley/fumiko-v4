@@ -2,6 +2,7 @@ library monster;
 
 import 'dart:core';
 
+import 'package:fumiko/entities/entity/classes/entity_classes.dart';
 import 'package:fumiko/entities/entity/entity.dart';
 import 'package:fumiko/entities/monster/classes/monster_classes.dart';
 
@@ -24,6 +25,7 @@ class EntityMonster with Entity, EntityMonsterStatsBase, EntityMonsterStatsPrima
 
   num? _power = 0;
 
+  @override
   num get power => _power ?? 0;
 
   EntityMonster._();
@@ -51,7 +53,7 @@ class EntityMonster with Entity, EntityMonsterStatsBase, EntityMonsterStatsPrima
   }
 
   void updatePower() {
-    final algo = (realStrength + realDexterity + realAgility + realVitality + realEndurance + realEyesight + realMass);
+    final algo = (realStrength + realDexterity + realAgility + realVitality + realEndurance + realEyesight + realMass) + 110;
     _power = algo;
   }
 

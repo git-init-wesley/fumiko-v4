@@ -1,53 +1,66 @@
+import 'package:fumiko/entities/entity/classes/entity_classes.dart';
 import 'package:fumiko/l10n/l10n.dart';
 import 'package:fumiko/utils/assets/assets_images.dart';
 
-class UserClass {
+class UserClass with EntityClass {
   final String _code;
 
+  @override
   String get code => _code;
 
   final String _name;
 
+  @override
   String get name => _name;
 
-  final AssetsImage _image;
+  final AssetsImage _icon;
 
-  AssetsImage get icon => _image;
+  @override
+  AssetsImage get icon => _icon;
 
   final AssetsImage _graphics;
 
+  @override
   AssetsImage get graphics => _graphics;
 
   final String _description;
 
+  @override
   String get description => _description;
 
   final num _strength;
 
+  @override
   num get strength => _strength;
 
   final num _dexterity;
 
+  @override
   num get dexterity => _dexterity;
 
   final num _agility;
 
+  @override
   num get agility => _agility;
 
   final num _vitality;
 
+  @override
   num get vitality => _vitality;
 
   final num _endurance;
 
+  @override
   num get endurance => _endurance;
 
   final num _eyesight;
 
+  @override
   num get eyesight => _eyesight;
 
   final num _mass;
 
+  @override
   num get mass => _mass;
 
   UserClass({
@@ -65,7 +78,7 @@ class UserClass {
     required num mass,
   })  : _code = code,
         _name = name,
-        _image = icon,
+        _icon = icon,
         _graphics = graphic,
         _description = description,
         _strength = strength,
@@ -75,61 +88,57 @@ class UserClass {
         _endurance = endurance,
         _eyesight = eyesight,
         _mass = mass;
-
-  @override
-  bool operator ==(Object other) => identical(this, other) || other is UserClass && runtimeType == other.runtimeType && _code == other._code;
-
-  @override
-  int get hashCode => _code.hashCode;
 }
 
 class UserClasses {
   UserClasses._();
 
-  static final List<UserClass> _classes = [
-    UserClass(
-      code: 'mage',
-      name: AppLocalizations.current.mage,
-      icon: AssetsImages.mageIcon,
-      graphic: AssetsImages.mageGraphic,
-      description: AppLocalizations.current.mageDescription,
-      strength: 1,
-      dexterity: 1.1,
-      agility: 0.7,
-      vitality: 1.1,
-      endurance: 1.1,
-      eyesight: 1,
-      mass: 1,
-    ),
-    UserClass(
-      code: 'warrior',
-      name: AppLocalizations.current.warrior,
-      icon: AssetsImages.warriorIcon,
-      graphic: AssetsImages.warriorGraphic,
-      description: AppLocalizations.current.warriorDescription,
-      strength: 1.5,
-      dexterity: 0.8,
-      agility: 0.7,
-      vitality: 1.5,
-      endurance: 0.5,
-      eyesight: 0.5,
-      mass: 1.5,
-    ),
-    UserClass(
-      code: 'ninja',
-      name: AppLocalizations.current.ninja,
-      icon: AssetsImages.ninjaIcon,
-      graphic: AssetsImages.ninjaGraphic,
-      description: AppLocalizations.current.ninjaDescription,
-      strength: 0.5,
-      dexterity: 1.1,
-      agility: 1.6,
-      vitality: 0.4,
-      endurance: 1.4,
-      eyesight: 1.5,
-      mass: 0.5,
-    ),
-  ];
+  static final UserClass mage = UserClass(
+    code: 'mage',
+    name: AppLocalizations.current.mage,
+    icon: AssetsImages.mageIcon,
+    graphic: AssetsImages.mageGraphic,
+    description: AppLocalizations.current.mageDescription,
+    strength: 1,
+    dexterity: 1.1,
+    agility: 0.7,
+    vitality: 1.1,
+    endurance: 1.1,
+    eyesight: 1,
+    mass: 1,
+  );
+
+  static final UserClass warrior = UserClass(
+    code: 'warrior',
+    name: AppLocalizations.current.warrior,
+    icon: AssetsImages.warriorIcon,
+    graphic: AssetsImages.warriorGraphic,
+    description: AppLocalizations.current.warriorDescription,
+    strength: 1.5,
+    dexterity: 0.8,
+    agility: 0.7,
+    vitality: 1.5,
+    endurance: 0.5,
+    eyesight: 0.5,
+    mass: 1.5,
+  );
+
+  static final UserClass ninja = UserClass(
+    code: 'ninja',
+    name: AppLocalizations.current.ninja,
+    icon: AssetsImages.ninjaIcon,
+    graphic: AssetsImages.ninjaGraphic,
+    description: AppLocalizations.current.ninjaDescription,
+    strength: 0.5,
+    dexterity: 1.1,
+    agility: 1.6,
+    vitality: 0.4,
+    endurance: 1.4,
+    eyesight: 1.5,
+    mass: 0.5,
+  );
+
+  static final List<UserClass> _classes = [mage, warrior, ninja];
 
   static final UserClass _unknown = UserClass(
     code: 'unknown',

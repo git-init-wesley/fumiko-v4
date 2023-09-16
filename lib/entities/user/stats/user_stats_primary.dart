@@ -5,17 +5,20 @@ mixin EntityUserStatsPrimary implements EntityStatsPrimary {
 
   void onChange(EntityUserChangeListener obj);
 
+  num get rebirths;
+
   num get levels;
 
-  UserClass get classes;
+  EntityClass get classes;
 
-  num get _levelsDelta => 1; //(levels/100)+1; BUG
+  num get _levelsDelta => ((rebirths * 100 + levels) / 100) + 1;
 
   EntityUserValue<num?> _strength = EntityUserValue<num?>(value: DefaultEntityUserStatsBase.defaultValue);
 
   @override
   num get strength => _strength.value ?? 0;
 
+  @override
   num get realStrength => strength * classes.strength * _levelsDelta;
 
   StreamSubscription? _strengthObserver;
@@ -25,6 +28,7 @@ mixin EntityUserStatsPrimary implements EntityStatsPrimary {
   @override
   num get dexterity => _dexterity.value ?? 0;
 
+  @override
   num get realDexterity => dexterity * classes.dexterity * _levelsDelta;
   StreamSubscription? _dexterityObserver;
 
@@ -33,6 +37,7 @@ mixin EntityUserStatsPrimary implements EntityStatsPrimary {
   @override
   num get agility => _agility.value ?? 0;
 
+  @override
   num get realAgility => agility * classes.agility * _levelsDelta;
   StreamSubscription? _agilityObserver;
 
@@ -41,6 +46,7 @@ mixin EntityUserStatsPrimary implements EntityStatsPrimary {
   @override
   num get vitality => _vitality.value ?? 0;
 
+  @override
   num get realVitality => vitality * classes.vitality * _levelsDelta;
   StreamSubscription? _vitalityObserver;
 
@@ -49,6 +55,7 @@ mixin EntityUserStatsPrimary implements EntityStatsPrimary {
   @override
   num get endurance => _endurance.value ?? 0;
 
+  @override
   num get realEndurance => endurance * classes.endurance * _levelsDelta;
   StreamSubscription? _enduranceObserver;
 
@@ -57,6 +64,7 @@ mixin EntityUserStatsPrimary implements EntityStatsPrimary {
   @override
   num get eyesight => _eyesight.value ?? 0;
 
+  @override
   num get realEyesight => eyesight * classes.eyesight * _levelsDelta;
   StreamSubscription? _eyesightObserver;
 
@@ -65,6 +73,7 @@ mixin EntityUserStatsPrimary implements EntityStatsPrimary {
   @override
   num get mass => _mass.value ?? 0;
 
+  @override
   num get realMass => mass * classes.mass * _levelsDelta;
   StreamSubscription? _massObserver;
 
