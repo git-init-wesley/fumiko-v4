@@ -4,7 +4,15 @@ import 'package:fumiko/utils/number_formatter.dart';
 import 'package:fumiko/widgets/game/indicators/bar_progress_indicator.dart';
 
 class GameHeader extends StatelessWidget {
-  const GameHeader({super.key, required this.username, required this.levels, required this.rebirths, required this.exp, required this.maxExp, required this.classes, this.widthOffSet = 0});
+  const GameHeader(
+      {super.key,
+      required this.username,
+      required this.levels,
+      required this.rebirths,
+      required this.exp,
+      required this.maxExp,
+      required this.classes,
+      this.widthOffSet = 0});
 
   final double widthOffSet;
   final EntityClass classes;
@@ -18,7 +26,8 @@ class GameHeader extends StatelessWidget {
       children: [
         Tooltip(
           message: classes.name,
-          textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          textStyle:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           padding: const EdgeInsets.all(8),
           child: Container(
             height: 86,
@@ -43,13 +52,28 @@ class GameHeader extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(username, style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 0)),
-                    Text('Re.$rebirths - Lv.$levels', style: TextStyle(fontSize: Theme.of(context).textTheme.titleMedium?.fontSize ?? 0))
+                    Text(username,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.fontSize ??
+                                0)),
+                    Text('Re.$rebirths - Lv.$levels',
+                        style: TextStyle(
+                            fontSize: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.fontSize ??
+                                0))
                   ],
                 ),
                 Tooltip(
-                    message: '${NumberFormatter.compact(exp)}/${NumberFormatter.compact(maxExp)}',
-                    textStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    message:
+                        '${NumberFormatter.compact(exp)}/${NumberFormatter.compact(maxExp)}',
+                    textStyle: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                     padding: const EdgeInsets.all(8),
                     child: BarProgressIndicator(
                         value: (exp / maxExp),
@@ -57,8 +81,16 @@ class GameHeader extends StatelessWidget {
                         width: mediaWidth - 86 - 16 + widthOffSet,
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.deepOrange,
-                        child: Text('Exp: ${NumberFormatter.compact(exp)}/${NumberFormatter.compact(maxExp)}',
-                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize ?? 0)))),
+                        child: Text(
+                            'Exp: ${NumberFormatter.compact(exp)}/${NumberFormatter.compact(maxExp)}',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall
+                                        ?.fontSize ??
+                                    0)))),
               ],
             ))
       ],

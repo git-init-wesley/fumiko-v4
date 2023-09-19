@@ -20,11 +20,14 @@ part './splash_screen_model.dart';
 part './splash_screen_view.dart';
 
 class SplashScreenPage extends StatefulWidget {
-  const SplashScreenPage({Key? key, this.unknownPage = false}) : super(key: key);
+  const SplashScreenPage({Key? key, this.unknownPage = false})
+      : super(key: key);
 
   final bool unknownPage;
 
-  _SplashScreenController _createController({required BuildContext context, required bool unknownPage}) => _SplashScreenController(context: context, unknownPage: unknownPage);
+  _SplashScreenController _createController(
+          {required BuildContext context, required bool unknownPage}) =>
+      _SplashScreenController(context: context, unknownPage: unknownPage);
 
   @override
   State createState() => _SplashScreenView();

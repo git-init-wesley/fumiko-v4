@@ -26,7 +26,11 @@ mixin EntityClass {
   num get mass;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is EntityClass && runtimeType == other.runtimeType && code == other.code;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EntityClass &&
+          runtimeType == other.runtimeType &&
+          code == other.code;
 
   @override
   int get hashCode => code.hashCode;

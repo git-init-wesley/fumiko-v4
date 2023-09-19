@@ -10,7 +10,12 @@ part './leveling/monster_leveling.dart';
 part './stats/monster_stats_base.dart';
 part './stats/monster_stats_primary.dart';
 
-class EntityMonster with Entity, EntityMonsterLeveling, EntityMonsterStatsBase, EntityMonsterStatsPrimary {
+class EntityMonster
+    with
+        Entity,
+        EntityMonsterLeveling,
+        EntityMonsterStatsBase,
+        EntityMonsterStatsPrimary {
   bool? _isBoss = false;
 
   bool get isBoss => _isBoss ?? false;
@@ -27,7 +32,11 @@ class EntityMonster with Entity, EntityMonsterLeveling, EntityMonsterStatsBase, 
 
   EntityMonster._();
 
-  EntityMonster.of({required num levels, required num rebirths, required bool isBoss, required MonsterClass classes}) {
+  EntityMonster.of(
+      {required num levels,
+      required num rebirths,
+      required bool isBoss,
+      required MonsterClass classes}) {
     _isBoss = isBoss;
     _classes = classes;
     _levels = levels;
@@ -36,7 +45,9 @@ class EntityMonster with Entity, EntityMonsterLeveling, EntityMonsterStatsBase, 
   }
 
   void _init() async {
-    final num delta = DefaultEntityMonsterStatsBase.defaultValue * (isBoss ? 1.5 : 1) * levels;
+    final num delta = DefaultEntityMonsterStatsBase.defaultValue *
+        (isBoss ? 1.5 : 1) *
+        levels;
     _initStatsBaseValues();
     _initStatsPrimaryValues(
       strength: delta,
@@ -51,7 +62,14 @@ class EntityMonster with Entity, EntityMonsterLeveling, EntityMonsterStatsBase, 
   }
 
   void updatePower() {
-    final algo = (realStrength + realDexterity + realAgility + realVitality + realEndurance + realEyesight + realMass) + 110;
+    final algo = (realStrength +
+            realDexterity +
+            realAgility +
+            realVitality +
+            realEndurance +
+            realEyesight +
+            realMass) +
+        110;
     _power = algo;
   }
 

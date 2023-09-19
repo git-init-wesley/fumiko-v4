@@ -29,28 +29,52 @@ class PveMonsterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ButtonStyle(
-            minimumSize: MaterialStateProperty.all<Size>(Size(0, isBoss ? 64 : 48)),
-            backgroundColor: MaterialStateProperty.all<Color>(isBoss ? Colors.redAccent.withOpacity(0.75) : Colors.transparent),
-            overlayColor: MaterialStateProperty.all<Color>(isBoss ? Colors.redAccent.withOpacity(0.6) : Colors.transparent.withOpacity(0.6)),
+            minimumSize:
+                MaterialStateProperty.all<Size>(Size(0, isBoss ? 64 : 48)),
+            backgroundColor: MaterialStateProperty.all<Color>(isBoss
+                ? Colors.redAccent.withOpacity(0.75)
+                : Colors.transparent),
+            overlayColor: MaterialStateProperty.all<Color>(isBoss
+                ? Colors.redAccent.withOpacity(0.6)
+                : Colors.transparent.withOpacity(0.6)),
             shadowColor: MaterialStateProperty.all<Color>(Colors.black),
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)))),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(2)))),
         onPressed: onPressed,
-        child: Row(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Icon(isBoss ? MdiIcons.swordCross : MdiIcons.sword, size: Theme.of(context).textTheme.titleLarge?.fontSize),
-          Container(
-              margin: const EdgeInsets.only(left: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(title.toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize)),
-                  Container(
-                      margin: const EdgeInsets.only(left: 4),
-                      child: Text('Lv.$levels (Power: ${NumberFormatter.compact(power)})',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize, color: winRate.color()))),
-                ],
-              ))
-        ]));
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(isBoss ? MdiIcons.swordCross : MdiIcons.sword,
+                  size: Theme.of(context).textTheme.titleLarge?.fontSize),
+              Container(
+                  margin: const EdgeInsets.only(left: 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(title.toUpperCase(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.fontSize)),
+                      Container(
+                          margin: const EdgeInsets.only(left: 4),
+                          child: Text(
+                              'Lv.$levels (Power: ${NumberFormatter.compact(power)})',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.fontSize,
+                                  color: winRate.color()))),
+                    ],
+                  ))
+            ]));
   }
 }

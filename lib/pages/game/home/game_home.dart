@@ -25,12 +25,42 @@ class GameHome extends StatelessWidget {
               textSize: Theme.of(context).textTheme.headlineSmall?.fontSize,
               onPressed: () => setSubPageRoute(GameMainSubPages.fightsRoute),
             )),
-        Container(margin: const EdgeInsets.only(bottom: 8), child: MenusButton(color: Colors.tealAccent.shade100, iconData: MdiIcons.sack, text: AppLocalizations.of(context).inventory)),
-        Container(margin: const EdgeInsets.only(bottom: 8), child: MenusButton(color: Colors.deepPurpleAccent.shade100, iconData: MdiIcons.scriptText, text: AppLocalizations.of(context).quests)),
-        Container(margin: const EdgeInsets.only(bottom: 8), child: MenusButton(color: Colors.deepOrangeAccent.shade100, iconData: MdiIcons.map, text: AppLocalizations.of(context).map)),
-        Container(margin: const EdgeInsets.only(bottom: 8), child: MenusButton(color: Colors.pinkAccent.shade100, iconData: MdiIcons.shield, text: AppLocalizations.of(context).alliance)),
-        Container(margin: const EdgeInsets.only(bottom: 8), child: MenusButton(color: Colors.yellowAccent.shade100, iconData: MdiIcons.shopping, text: AppLocalizations.of(context).shop)),
-        Container(margin: const EdgeInsets.only(bottom: 8), child: MenusButton(color: Colors.orange.shade100, iconData: MdiIcons.treasureChest, text: AppLocalizations.of(context).chests)),
+        Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            child: MenusButton(
+                color: Colors.tealAccent.shade100,
+                iconData: MdiIcons.sack,
+                text: AppLocalizations.of(context).inventory)),
+        Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            child: MenusButton(
+                color: Colors.deepPurpleAccent.shade100,
+                iconData: MdiIcons.scriptText,
+                text: AppLocalizations.of(context).quests)),
+        Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            child: MenusButton(
+                color: Colors.deepOrangeAccent.shade100,
+                iconData: MdiIcons.map,
+                text: AppLocalizations.of(context).map)),
+        Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            child: MenusButton(
+                color: Colors.pinkAccent.shade100,
+                iconData: MdiIcons.shield,
+                text: AppLocalizations.of(context).alliance)),
+        Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            child: MenusButton(
+                color: Colors.yellowAccent.shade100,
+                iconData: MdiIcons.shopping,
+                text: AppLocalizations.of(context).shop)),
+        Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            child: MenusButton(
+                color: Colors.orange.shade100,
+                iconData: MdiIcons.treasureChest,
+                text: AppLocalizations.of(context).chests)),
         MenusButton(
           color: Colors.black,
           iconData: MdiIcons.cog,

@@ -5,32 +5,50 @@ class GameMainSubPages {
 
   static const String homeRoute = 'home';
 
-  static Widget home({required SetSubPageFunction setSubPageRoute}) => GameHome(setSubPageRoute: setSubPageRoute);
+  static Widget home({required SetSubPageFunction setSubPageRoute}) =>
+      GameHome(setSubPageRoute: setSubPageRoute);
 
   static const String fightsRoute = 'fights';
 
-  static Widget fights({required SetSubPageFunction setSubPageRoute}) => GameFights(setSubPageRoute: setSubPageRoute);
+  static Widget fights({required SetSubPageFunction setSubPageRoute}) =>
+      GameFights(setSubPageRoute: setSubPageRoute);
 
   static const String settingsRoute = 'settings';
 
-  static Widget settings({required SetSubPageFunction setSubPageRoute, required FutureVoidCallback logout}) => GameSettings(setSubPageRoute: setSubPageRoute, logout: logout);
+  static Widget settings(
+          {required SetSubPageFunction setSubPageRoute,
+          required FutureVoidCallback logout}) =>
+      GameSettings(setSubPageRoute: setSubPageRoute, logout: logout);
 
   static const String viewUsersRoute = 'view-users';
 
-  static Widget viewUsers({required SetSubPageFunction setSubPageRoute, required VoidCallback onChange}) =>
-      GameUsers(userPresences: CoreUserPresences.instance.onlineUsers, setSubPageRoute: setSubPageRoute, onChange: onChange);
+  static Widget viewUsers(
+          {required SetSubPageFunction setSubPageRoute,
+          required VoidCallback onChange}) =>
+      GameUsers(
+          userPresences: CoreUserPresences.instance.onlineUsers,
+          setSubPageRoute: setSubPageRoute,
+          onChange: onChange);
 
   static const String chooseClassesRoute = 'choose-classes';
 
-  static Widget chooseClasses({required BuildContext context, required SetUserClassFunction setClasses}) =>
-      GameChooseClasses(setClasses: setClasses, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 0);
+  static Widget chooseClasses(
+          {required BuildContext context,
+          required SetUserClassFunction setClasses}) =>
+      GameChooseClasses(
+          setClasses: setClasses,
+          fontSize: Theme.of(context).textTheme.titleLarge?.fontSize ?? 0);
 
   static const String pvpRoute = 'pvp';
 
   static const String pveRoute = 'pve';
 
-  static Widget pve({required SetSubPageFunction setSubPageRoute, required SetAbstractWidgetFunction setAbstractWidget}) =>
-      GameFightsPve(setSubPageRoute: setSubPageRoute, setAbstractWidget: setAbstractWidget);
+  static Widget pve(
+          {required SetSubPageFunction setSubPageRoute,
+          required SetAbstractWidgetFunction setAbstractWidget}) =>
+      GameFightsPve(
+          setSubPageRoute: setSubPageRoute,
+          setAbstractWidget: setAbstractWidget);
 
   static const String staminaRoute = 'stamina';
   static const String shopPrimaryRoute = 'shop-primary';
@@ -44,38 +62,62 @@ class _GameMainView extends State<GameMainPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => widget._createController(), child: Consumer<_GameMainController>(builder: (context, controller, child) => _buildWidget(context, controller, child)));
+        create: (context) => widget._createController(),
+        child: Consumer<_GameMainController>(
+            builder: (context, controller, child) =>
+                _buildWidget(context, controller, child)));
   }
 
-  double _getWidgetPageHeight({required _GameMainController controller, required double mediaHeight}) {
+  double _getWidgetPageHeight(
+      {required _GameMainController controller, required double mediaHeight}) {
     const double minHeight = 0; //480;
     double algo = mediaHeight -
         8 -
-        ((controller._gameHeaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0) -
-        ((controller._gameSubheaderKey.currentContext?.findRenderObject() as RenderBox?)?.size.height ?? 0);
+        ((controller._gameHeaderKey.currentContext?.findRenderObject()
+                    as RenderBox?)
+                ?.size
+                .height ??
+            0) -
+        ((controller._gameSubheaderKey.currentContext?.findRenderObject()
+                    as RenderBox?)
+                ?.size
+                .height ??
+            0);
     return max(algo, minHeight);
   }
 
-  Widget _buildWidgetPage({required BuildContext context, required _GameMainController controller}) {
+  Widget _buildWidgetPage(
+      {required BuildContext context,
+      required _GameMainController controller}) {
     switch (controller.subPageRoute) {
       case GameMainSubPages.fightsRoute:
-        return GameMainSubPages.fights(setSubPageRoute: controller.setSubPageRoute);
+        return GameMainSubPages.fights(
+            setSubPageRoute: controller.setSubPageRoute);
       case GameMainSubPages.settingsRoute:
-        return GameMainSubPages.settings(setSubPageRoute: controller.setSubPageRoute, logout: controller.logout);
+        return GameMainSubPages.settings(
+            setSubPageRoute: controller.setSubPageRoute,
+            logout: controller.logout);
       case GameMainSubPages.viewUsersRoute:
-        return GameMainSubPages.viewUsers(setSubPageRoute: controller.setSubPageRoute, onChange: () => setState(() {}));
+        return GameMainSubPages.viewUsers(
+            setSubPageRoute: controller.setSubPageRoute,
+            onChange: () => setState(() {}));
       case GameMainSubPages.chooseClassesRoute:
-        return GameMainSubPages.chooseClasses(context: context, setClasses: controller.setClasses);
+        return GameMainSubPages.chooseClasses(
+            context: context, setClasses: controller.setClasses);
       case GameMainSubPages.pveRoute:
-        return GameMainSubPages.pve(setSubPageRoute: controller.setSubPageRoute, setAbstractWidget: controller.setAbstractWidget);
+        return GameMainSubPages.pve(
+            setSubPageRoute: controller.setSubPageRoute,
+            setAbstractWidget: controller.setAbstractWidget);
       case GameMainSubPages.abstractWidget:
         return controller.abstractWidget;
       default:
-        return GameMainSubPages.home(setSubPageRoute: controller.setSubPageRoute);
+        return GameMainSubPages.home(
+            setSubPageRoute: controller.setSubPageRoute);
     }
   }
 
-  Widget _buildWidget(BuildContext context, _GameMainController controller, Widget? child) {
+  Widget _buildWidget(
+      BuildContext context, _GameMainController controller, Widget? child) {
     final double mediaWidth = MediaQuery.of(context).size.width;
     final double mediaHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -90,7 +132,10 @@ class _GameMainView extends State<GameMainPage> {
                   iconColor: controller.popupIconColor,
                   presented: controller.popupPresented,
                   buttons: [
-                    PopupButtonWidget(color: Colors.red, text: AppLocalizations.of(context).understood, onPressed: controller.closePopup),
+                    PopupButtonWidget(
+                        color: Colors.red,
+                        text: AppLocalizations.of(context).understood,
+                        onPressed: controller.closePopup),
                   ],
                   onTap: controller.closePopup,
                   child: FullScreenDoubleCircularProgressIndicator(
@@ -120,16 +165,22 @@ class _GameMainView extends State<GameMainPage> {
                                   setSubPageRoute: controller.setSubPageRoute,
                                   stamina: CoreUser.instance.current.stamina,
                                   primary: CoreUser.instance.current.primary,
-                                  secondary: CoreUser.instance.current.secondary,
+                                  secondary:
+                                      CoreUser.instance.current.secondary,
                                   power: CoreUser.instance.current.power,
                                   trophies: CoreUser.instance.current.trophies,
-                                  onlineUsers: CoreUserPresences.instance.onlineUsers.length,
+                                  onlineUsers: CoreUserPresences
+                                      .instance.onlineUsers.length,
                                 )),
                             Container(
                                 margin: const EdgeInsets.only(top: 8),
                                 width: mediaWidth,
-                                constraints: BoxConstraints(minHeight: _getWidgetPageHeight(controller: controller, mediaHeight: mediaHeight)),
-                                child: _buildWidgetPage(context: context, controller: controller)),
+                                constraints: BoxConstraints(
+                                    minHeight: _getWidgetPageHeight(
+                                        controller: controller,
+                                        mediaHeight: mediaHeight)),
+                                child: _buildWidgetPage(
+                                    context: context, controller: controller)),
                           ],
                         )),
                   ))

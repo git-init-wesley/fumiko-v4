@@ -7,7 +7,13 @@ part 'delayed_animation_controller.dart';
 part 'delayed_animation_view.dart';
 
 class DelayedAnimation extends StatefulWidget {
-  const DelayedAnimation({Key? key, required this.duration, this.delayedAnimationController, required this.animationOffSet, required this.child}) : super(key: key);
+  const DelayedAnimation(
+      {Key? key,
+      required this.duration,
+      this.delayedAnimationController,
+      required this.animationOffSet,
+      required this.child})
+      : super(key: key);
 
   final Duration duration;
   final DelayedAnimationController? delayedAnimationController;

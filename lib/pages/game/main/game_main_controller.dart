@@ -15,24 +15,31 @@ class _GameMainController extends _GameMainModel with PopupController {
           if (!CoreUser.instance.isAuthenticated) {
             navigationService.pushReplacementTo(RouterRoutes.authSignIn);
           }
-          if (Core.instance.data != null && (await Core.instance.data!.isUpdateAvailable || Core.instance.data!.isCurrentlyMaintenance)) {
+          if (Core.instance.data != null &&
+              (await Core.instance.data!.isUpdateAvailable ||
+                  Core.instance.data!.isCurrentlyMaintenance)) {
             navigationService.pushReplacementTo(RouterRoutes.splashScreen);
           }
         });
         CoreUserPresences.instance.addListener((_) => notifyListeners());
-        CoreUser.instance.current.addListener((EntityUserChangeListener obj) async {
+        CoreUser.instance.current
+            .addListener((EntityUserChangeListener obj) async {
           if (obj != null && obj.error != null) {
             await openPopup(
               title: AppLocalizations.current.error,
               titleColor: Colors.redAccent,
-              description: obj.error!.message ?? AppLocalizations.current.errorOccurred,
+              description:
+                  obj.error!.message ?? AppLocalizations.current.errorOccurred,
               icon: FontAwesomeIcons.circleXmark,
               iconColor: Colors.redAccent,
             );
           }
-          if (CoreUser.instance.current.classes.code == UserClasses.unknown.code) {
+          if (CoreUser.instance.current.classes.code ==
+              UserClasses.unknown.code) {
             await setSubPageRoute(GameMainSubPages.chooseClassesRoute);
-          } else if (CoreUser.instance.current.classes.code != UserClasses.unknown.code && subPageRoute == GameMainSubPages.chooseClassesRoute) {
+          } else if (CoreUser.instance.current.classes.code !=
+                  UserClasses.unknown.code &&
+              subPageRoute == GameMainSubPages.chooseClassesRoute) {
             await setSubPageRoute(GameMainSubPages.homeRoute);
           }
           notifyListeners();
@@ -47,8 +54,18 @@ class _GameMainController extends _GameMainModel with PopupController {
   }
 
   @override
-  Future openPopup({required String title, required Color titleColor, required String description, required IconData icon, required Color iconColor}) async {
-    openPopup(title: title, titleColor: titleColor, description: description, icon: icon, iconColor: iconColor);
+  Future openPopup(
+      {required String title,
+      required Color titleColor,
+      required String description,
+      required IconData icon,
+      required Color iconColor}) async {
+    openPopup(
+        title: title,
+        titleColor: titleColor,
+        description: description,
+        icon: icon,
+        iconColor: iconColor);
     notifyListeners();
   }
 

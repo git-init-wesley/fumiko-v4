@@ -6,7 +6,11 @@ import 'package:fumiko/pages/game/main/widgets/game_header.dart';
 import 'package:fumiko/pages/game/statique/home_menus_button.dart';
 
 class GameUsers extends StatefulWidget {
-  const GameUsers({super.key, required this.userPresences, required this.setSubPageRoute, required this.onChange});
+  const GameUsers(
+      {super.key,
+      required this.userPresences,
+      required this.setSubPageRoute,
+      required this.onChange});
 
   final VoidCallback onChange;
   final List<EntityUserPresence> userPresences;
@@ -39,7 +43,9 @@ class _GameUsersState extends State<GameUsers> {
       mainAxisSize: MainAxisSize.max,
       children: [
         HomeMenusButton(setSubPageRoute: widget.setSubPageRoute),
-        if (retrieve != users.length) Text('${AppLocalizations.current.recoveryLoading} ${retrieve.toString()} / ${users.length}'),
+        if (retrieve != users.length)
+          Text(
+              '${AppLocalizations.current.recoveryLoading} ${retrieve.toString()} / ${users.length}'),
         Container(
           margin: const EdgeInsets.only(top: 16),
           child: Builder(builder: (b) {
@@ -47,15 +53,23 @@ class _GameUsersState extends State<GameUsers> {
             return ListBody(
                 children: users.map((e) {
               return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(2))),
-                      padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(0)),
-                      backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent.withOpacity(0)),
-                      overlayColor: MaterialStateProperty.all<Color>(Colors.transparent.withOpacity(0.2)),
-                      shadowColor: MaterialStateProperty.all<Color>(Colors.black),
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(2))),
+                      padding: MaterialStateProperty.all<EdgeInsets>(
+                          const EdgeInsets.all(0)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.transparent.withOpacity(0)),
+                      overlayColor: MaterialStateProperty.all<Color>(
+                          Colors.transparent.withOpacity(0.2)),
+                      shadowColor:
+                          MaterialStateProperty.all<Color>(Colors.black),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
                     ),
                     onPressed: () {},
                     child: GameHeader(

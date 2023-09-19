@@ -26,16 +26,21 @@ mixin EntityUserLeveling implements EntityLeveling {
   StreamSubscription? _expObserver;
 
   Future<void> _getLevelingValues({required String uid}) async {
-    _levels = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getLevels()).value ?? 1);
-    _rebirths = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getRebirths()).value ?? 0);
-    _exp = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getExp()).value ?? 0);
+    _levels = EntityUserValue<num?>(
+        value: (await DatabaseUser.of(uid: uid).getLevels()).value ?? 1);
+    _rebirths = EntityUserValue<num?>(
+        value: (await DatabaseUser.of(uid: uid).getRebirths()).value ?? 0);
+    _exp = EntityUserValue<num?>(
+        value: (await DatabaseUser.of(uid: uid).getExp()).value ?? 0);
   }
 
   void _initLevelingValues({required String? uid}) {
     _levels = EntityUserValue<num?>(
       didSet: (num? oldLevels, num? newLevels) async {
         if (oldLevels == newLevels || newLevels == null) return;
-        if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
+        if (CoreUser.instance.isAuthenticated &&
+            CoreUser.instance.isLoaded &&
+            uid != null) {
           onChange(await DatabaseUser.of(uid: uid).setLevels(newLevels));
         }
       },
@@ -44,7 +49,9 @@ mixin EntityUserLeveling implements EntityLeveling {
     _rebirths = EntityUserValue<num?>(
       didSet: (num? oldRebirths, num? newRebirths) async {
         if (oldRebirths == newRebirths || newRebirths == null) return;
-        if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
+        if (CoreUser.instance.isAuthenticated &&
+            CoreUser.instance.isLoaded &&
+            uid != null) {
           onChange(await DatabaseUser.of(uid: uid).setRebirths(newRebirths));
         }
       },
@@ -53,7 +60,9 @@ mixin EntityUserLeveling implements EntityLeveling {
     _exp = EntityUserValue<num?>(
       didSet: (num? oldExp, num? newExp) async {
         if (oldExp == newExp || newExp == null) return;
-        if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
+        if (CoreUser.instance.isAuthenticated &&
+            CoreUser.instance.isLoaded &&
+            uid != null) {
           onChange(await DatabaseUser.of(uid: uid).setExp(newExp));
         }
       },
@@ -61,14 +70,17 @@ mixin EntityUserLeveling implements EntityLeveling {
     );
   }
 
-  Future<void> _initLevelingObservers({required String? uid, required Function onChange}) async {
+  Future<void> _initLevelingObservers(
+      {required String? uid, required Function onChange}) async {
     if (uid == null) return;
-    _levelsObserver = await DatabaseUser.of(uid: uid).observeLevels((value) async {
+    _levelsObserver =
+        await DatabaseUser.of(uid: uid).observeLevels((value) async {
       if (value != _levels.value) await _levels._set(value ?? 1);
       onChange(null);
       updatePower();
     });
-    _rebirthsObserver = await DatabaseUser.of(uid: uid).observeRebirths((value) async {
+    _rebirthsObserver =
+        await DatabaseUser.of(uid: uid).observeRebirths((value) async {
       if (value != _rebirths.value) await _rebirths._set(value ?? 0);
       onChange(null);
       updatePower();
@@ -101,5 +113,7 @@ mixin EntityUserLeveling implements EntityLeveling {
     }
   }
 
-  num get maxExp => (pow(levels, 1.1) * pow(27.5, 1.2) * pow(rebirths + 1, 1.25)).ceilToDouble();
+  num get maxExp =>
+      (pow(levels, 1.1) * pow(27.5, 1.2) * pow(rebirths + 1, 1.25))
+          .ceilToDouble();
 }

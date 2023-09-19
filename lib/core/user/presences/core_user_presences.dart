@@ -21,19 +21,29 @@ class CoreUserPresences with ChangeListener {
 
   Future<void> _observeOnlineUsers(_) async {
     try {
-      DataSnapshot snapshot =
-          await FirebaseDatabase.instance.ref().child('presences').orderByChild('lastOnline').startAt(DateTime.now().millisecondsSinceEpoch - const Duration(minutes: 5).inMilliseconds).get();
+      DataSnapshot snapshot = await FirebaseDatabase.instance
+          .ref()
+          .child('presences')
+          .orderByChild('lastOnline')
+          .startAt(DateTime.now().millisecondsSinceEpoch -
+              const Duration(minutes: 5).inMilliseconds)
+          .get();
       _setOnlineUsers = [];
       if (snapshot.exists) {
         _setOnlineUsers = (snapshot.value as Map)
             .entries
-            .map((entry) => EntityUserPresence.fromJson(entry.key, jsonDecode(jsonEncode((entry.value)))))
-            .where((e) => e.isOnline && DateTime.now().millisecondsSinceEpoch - e.lastOnline <= const Duration(minutes: 5).inMilliseconds)
+            .map((entry) => EntityUserPresence.fromJson(
+                entry.key, jsonDecode(jsonEncode((entry.value)))))
+            .where((e) =>
+                e.isOnline &&
+                DateTime.now().millisecondsSinceEpoch - e.lastOnline <=
+                    const Duration(minutes: 5).inMilliseconds)
             .toList();
       }
     } catch (error, stacktrace) {
       if (!kReleaseMode) {
-        developer.log(error.toString(), time: DateTime.now(), stackTrace: stacktrace);
+        developer.log(error.toString(),
+            time: DateTime.now(), stackTrace: stacktrace);
       }
       _setOnlineUsers = [];
     } finally {
@@ -45,8 +55,10 @@ class CoreUserPresences with ChangeListener {
     _observeOnlineUsers(null);
     if (_onlineUsersStreamController == null) {
       _onlineUsersStreamController = StreamController();
-      _onlineUsersStreamController!.addStream(Stream.periodic(const Duration(seconds: 10), _observeOnlineUsers));
-      _onlineUsersStreamSubscription ??= _onlineUsersStreamController!.stream.listen(null);
+      _onlineUsersStreamController!.addStream(
+          Stream.periodic(const Duration(seconds: 10), _observeOnlineUsers));
+      _onlineUsersStreamSubscription ??=
+          _onlineUsersStreamController!.stream.listen(null);
     }
   }
 
@@ -64,7 +76,11 @@ class CoreUserPresences with ChangeListener {
         await FirebaseDatabase.instance
             .ref()
             .child('presences/${FirebaseAuth.instance.currentUser!.uid}')
-            .set(EntityUserPresence(lastOnline: DateTime.now().millisecondsSinceEpoch, isOnline: true, uid: FirebaseAuth.instance.currentUser!.uid).toJson());
+            .set(EntityUserPresence(
+                    lastOnline: DateTime.now().millisecondsSinceEpoch,
+                    isOnline: true,
+                    uid: FirebaseAuth.instance.currentUser!.uid)
+                .toJson());
       } catch (_) {}
     }
   }
@@ -73,8 +89,10 @@ class CoreUserPresences with ChangeListener {
     _observeCurrentUser(null);
     if (_currentUserStreamController == null) {
       _currentUserStreamController = StreamController();
-      _currentUserStreamController!.addStream(Stream.periodic(const Duration(seconds: 10), _observeCurrentUser));
-      _currentUserStreamSubscription ??= _currentUserStreamController!.stream.listen(null);
+      _currentUserStreamController!.addStream(
+          Stream.periodic(const Duration(seconds: 10), _observeCurrentUser));
+      _currentUserStreamSubscription ??=
+          _currentUserStreamController!.stream.listen(null);
     }
   }
 
@@ -89,7 +107,11 @@ class CoreUserPresences with ChangeListener {
         await FirebaseDatabase.instance
             .ref()
             .child('presences/${FirebaseAuth.instance.currentUser!.uid}/')
-            .set(EntityUserPresence(lastOnline: DateTime.now().millisecondsSinceEpoch, isOnline: false, uid: FirebaseAuth.instance.currentUser!.uid).toJson());
+            .set(EntityUserPresence(
+                    lastOnline: DateTime.now().millisecondsSinceEpoch,
+                    isOnline: false,
+                    uid: FirebaseAuth.instance.currentUser!.uid)
+                .toJson());
       } catch (_) {}
     }
   }

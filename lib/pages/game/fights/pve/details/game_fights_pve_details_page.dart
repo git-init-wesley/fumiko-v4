@@ -27,14 +27,22 @@ part './game_fights_pve_details_model.dart';
 part './game_fights_pve_details_view.dart';
 
 class GameFightsPveDetailsPage extends StatefulWidget {
-  const GameFightsPveDetailsPage({super.key, required this.monster, required this.user, required this.setSubPageRoute, required this.repeat});
+  const GameFightsPveDetailsPage(
+      {super.key,
+      required this.monster,
+      required this.user,
+      required this.setSubPageRoute,
+      required this.repeat});
 
   final SetSubPageFunction setSubPageRoute;
   final VoidCallback repeat;
   final EntityMonster monster;
   final EntityUser user;
 
-  _GameFightsPveDetailsController _createController({required BuildContext context}) => _GameFightsPveDetailsController(context: context, user: user, monster: monster);
+  _GameFightsPveDetailsController _createController(
+          {required BuildContext context}) =>
+      _GameFightsPveDetailsController(
+          context: context, user: user, monster: monster);
 
   @override
   State createState() => _GameFightsPveDetailsView();

@@ -1,7 +1,10 @@
 part of pve_details;
 
 class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
-  _GameFightsPveDetailsController({required BuildContext context, required EntityMonster monster, required EntityUser user}) {
+  _GameFightsPveDetailsController(
+      {required BuildContext context,
+      required EntityMonster monster,
+      required EntityUser user}) {
     _actualMonster = EntityFight(entity: monster);
     _actualUser = EntityFight(entity: user);
 
@@ -9,7 +12,8 @@ class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
     CoreUserPresences.instance.addListener((_) => notifyListeners());
 
     _streamController = StreamController();
-    _streamController!.addStream(Stream.periodic(const Duration(milliseconds: 1), _round));
+    _streamController!
+        .addStream(Stream.periodic(const Duration(milliseconds: 1), _round));
     _streamSubscription ??= _streamController!.stream.listen(null);
   }
 
@@ -42,7 +46,8 @@ class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
         if (_actualMonster.actualVitality <= 0) {
           //TODO: Recompenses
           num winExp = (_actualMonster.entity.power) / 100;
-          num winPrimaryBalance = (_actualMonster.entity.levels) * Random.secure().nextDouble() * 2;
+          num winPrimaryBalance =
+              (_actualMonster.entity.levels) * Random.secure().nextDouble() * 2;
           winExp *= Random.secure().nextDouble() * 2;
 
           if (_actualUser.entity.classes == UserClasses.ninja) {
@@ -50,7 +55,8 @@ class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
             winPrimaryBalance *= 1.20;
           }
 
-          _createRewardsLog(winExp: winExp, winPrimaryBalance: winPrimaryBalance);
+          _createRewardsLog(
+              winExp: winExp, winPrimaryBalance: winPrimaryBalance);
           _createWinnerLog(entity: _actualUser.entity);
           CoreUser.instance.current.addExp(winExp);
           CoreUser.instance.current.addPrimary(winExp);
@@ -61,39 +67,81 @@ class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
       }
     } catch (error, stacktrace) {
       if (!kReleaseMode) {
-        developer.log(error.toString(), time: DateTime.now(), stackTrace: stacktrace);
+        developer.log(error.toString(),
+            time: DateTime.now(), stackTrace: stacktrace);
       }
       _destroyStream();
     }
   }
 
-  bool get _checkIfContinue => _actualMonster.actualVitality > 0 && _actualUser.actualVitality > 0;
+  bool get _checkIfContinue =>
+      _actualMonster.actualVitality > 0 && _actualUser.actualVitality > 0;
 
-  void _roundTargets({required EntityFight target1, required EntityFight target2}) {
+  void _roundTargets(
+      {required EntityFight target1, required EntityFight target2}) {
     if (!_checkIfContinue) return;
     num damage = target1.entity.realStrength;
     bool critical = Random.secure().nextInt(100) >= 95 ? true : false;
     if (critical) damage *= 2;
     target2.actualVitality -= damage;
-    _createLog(target1: target1.entity, target2: target2.entity, damage: damage, critical: critical);
+    _createLog(
+        target1: target1.entity,
+        target2: target2.entity,
+        damage: damage,
+        critical: critical);
   }
 
-  void _createLog({required Entity target1, required Entity target2, required num damage, required bool critical}) {
+  void _createLog(
+      {required Entity target1,
+      required Entity target2,
+      required num damage,
+      required bool critical}) {
     logs.add(Row(children: [
       Container(
           margin: const EdgeInsets.only(right: 4),
-          child: Text(AppLocalizations.current.rounds(actualRound > 1 ? 's' : '', actualRound), style: const TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline))),
+          child: Text(
+              AppLocalizations.current
+                  .rounds(actualRound > 1 ? 's' : '', actualRound),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline))),
       Row(children: [
-        Container(margin: const EdgeInsets.only(right: 2), child: Text(target1.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
-        Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.attacks)),
-        Container(margin: const EdgeInsets.only(right: 2), child: Text(target2.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
-        Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.andDeals)),
-        Container(margin: const EdgeInsets.only(right: 2), child: Text(NumberFormatter.compact(damage), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
+        Container(
+            margin: const EdgeInsets.only(right: 2),
+            child: Text(target1.name,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.redAccent))),
+        Container(
+            margin: const EdgeInsets.only(right: 2),
+            child: Text(AppLocalizations.current.attacks)),
+        Container(
+            margin: const EdgeInsets.only(right: 2),
+            child: Text(target2.name,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.redAccent))),
+        Container(
+            margin: const EdgeInsets.only(right: 2),
+            child: Text(AppLocalizations.current.andDeals)),
+        Container(
+            margin: const EdgeInsets.only(right: 2),
+            child: Text(NumberFormatter.compact(damage),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.redAccent))),
         Text('${AppLocalizations.current.damage(damage > 1 ? 's' : '')}.'),
         if (critical)
           Container(
               margin: const EdgeInsets.only(left: 2),
-              child: Text(AppLocalizations.current.critical.toUpperCase(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
+              child: Text(AppLocalizations.current.critical.toUpperCase(),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.redAccent))),
       ])
     ]));
   }
@@ -101,28 +149,56 @@ class _GameFightsPveDetailsController extends _GameFightsPveDetailsModel {
   void _createWinnerLog({required Entity entity}) {
     _addVoidLog();
     logs.add(Row(children: [
-      Container(margin: const EdgeInsets.only(right: 2), child: Text(entity.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
+      Container(
+          margin: const EdgeInsets.only(right: 2),
+          child: Text(entity.name,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.redAccent))),
       Text('${AppLocalizations.current.winsFight}.'),
     ]));
   }
 
-  void _createRewardsLog({required num winExp, required num winPrimaryBalance}) {
+  void _createRewardsLog(
+      {required num winExp, required num winPrimaryBalance}) {
     _addVoidLog();
     logs.add(Column(
       children: [
         Row(children: [
-          Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.youHaveWin)),
-          Container(margin: const EdgeInsets.only(right: 2), child: Text(NumberFormatter.compact(winExp), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
-          Container(margin: const EdgeInsets.only(right: 6), child: const Icon(FontAwesomeIcons.dumbbell, size: 12, color: Colors.deepOrange)),
+          Container(
+              margin: const EdgeInsets.only(right: 2),
+              child: Text(AppLocalizations.current.youHaveWin)),
+          Container(
+              margin: const EdgeInsets.only(right: 2),
+              child: Text(NumberFormatter.compact(winExp),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.redAccent))),
+          Container(
+              margin: const EdgeInsets.only(right: 6),
+              child: const Icon(FontAwesomeIcons.dumbbell,
+                  size: 12, color: Colors.deepOrange)),
           Text('${AppLocalizations.current.experiencePoints}.'),
         ]),
         Row(children: [
-          Container(margin: const EdgeInsets.only(right: 2), child: Text(AppLocalizations.current.youHaveWin)),
           Container(
               margin: const EdgeInsets.only(right: 2),
-              child: Text(NumberFormatter.compact(winPrimaryBalance), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.redAccent))),
-          Container(margin: const EdgeInsets.only(right: 6), child: const Icon(FontAwesomeIcons.coins, size: 12, color: Colors.white70)),
-          Text('${AppLocalizations.current.primaryBalance(winPrimaryBalance > 1 ? 's' : '')}.'),
+              child: Text(AppLocalizations.current.youHaveWin)),
+          Container(
+              margin: const EdgeInsets.only(right: 2),
+              child: Text(NumberFormatter.compact(winPrimaryBalance),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.redAccent))),
+          Container(
+              margin: const EdgeInsets.only(right: 6),
+              child: const Icon(FontAwesomeIcons.coins,
+                  size: 12, color: Colors.white70)),
+          Text(
+              '${AppLocalizations.current.primaryBalance(winPrimaryBalance > 1 ? 's' : '')}.'),
         ]),
       ],
     ));

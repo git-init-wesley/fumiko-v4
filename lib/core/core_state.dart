@@ -1,6 +1,15 @@
 part of core;
 
-enum CoreStates { uninitialized, startInitialisation, initLanguage, checkConnectivity, initFirebase, initFirebaseAppCheck, retrieveCoreData, initialized }
+enum CoreStates {
+  uninitialized,
+  startInitialisation,
+  initLanguage,
+  checkConnectivity,
+  initFirebase,
+  initFirebaseAppCheck,
+  retrieveCoreData,
+  initialized
+}
 
 extension CoreState on CoreStates {
   String _message() {

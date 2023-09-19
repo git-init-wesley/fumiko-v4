@@ -31,12 +31,23 @@ class MainApp extends StatelessWidget {
           thickness: MaterialStateProperty.all(5),
         ),
         fontFamily: 'Dosis',
-        tooltipTheme: const TooltipThemeData(decoration: ShapeDecoration(color: Color(0xFF232426), shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))))),
+        tooltipTheme: const TooltipThemeData(
+            decoration: ShapeDecoration(
+                color: Color(0xFF232426),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(16))))),
       ),
       themeMode: ThemeMode.light,
-      localizationsDelegates: const [AppLocalizations.delegate, GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, GlobalCupertinoLocalizations.delegate],
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
       onGenerateRoute: RouterService.instance.onGenerateRoute,
-      navigatorKey: RouterService.instance.locator<RouterNavigationService>().navigatorKey,
+      navigatorKey: RouterService.instance
+          .locator<RouterNavigationService>()
+          .navigatorKey,
       supportedLocales: AppLocalizations.delegate.supportedLocales,
     );
   }

@@ -18,14 +18,17 @@ mixin EntityUserStatsBase {
   StreamSubscription? _staminaObserver;
 
   Future<void> _getStatsBaseValues({required String uid}) async {
-    _stamina = EntityUserValue<num?>(value: (await DatabaseUser.of(uid: uid).getStamina()).value ?? 500);
+    _stamina = EntityUserValue<num?>(
+        value: (await DatabaseUser.of(uid: uid).getStamina()).value ?? 500);
   }
 
   void _initStatsBaseValues({required String? uid}) {
     _stamina = EntityUserValue<num?>(
       didSet: (num? oldStamina, num? newStamina) async {
         if (oldStamina == newStamina || newStamina == null) return;
-        if (CoreUser.instance.isAuthenticated && CoreUser.instance.isLoaded && uid != null) {
+        if (CoreUser.instance.isAuthenticated &&
+            CoreUser.instance.isLoaded &&
+            uid != null) {
           onChange(await DatabaseUser.of(uid: uid).setStamina(newStamina));
         }
       },
@@ -33,9 +36,11 @@ mixin EntityUserStatsBase {
     );
   }
 
-  Future<void> _initStatsBaseObservers({required String? uid, required Function onChange}) async {
+  Future<void> _initStatsBaseObservers(
+      {required String? uid, required Function onChange}) async {
     if (uid == null) return;
-    _staminaObserver = await DatabaseUser.of(uid: uid).observeStamina((value) async {
+    _staminaObserver =
+        await DatabaseUser.of(uid: uid).observeStamina((value) async {
       if (value != _stamina.value) await _stamina._set(value ?? 500);
       onChange(null);
       updatePower();

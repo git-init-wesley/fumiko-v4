@@ -15,9 +15,13 @@ part '../routes/router_routes.dart';
 class RouterNavigationService {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  Future<Object?> pushTo(RouterRoute route, {dynamic arguments}) async => navigatorKey.currentState!.pushNamed(route.name, arguments: arguments);
+  Future<Object?> pushTo(RouterRoute route, {dynamic arguments}) async =>
+      navigatorKey.currentState!.pushNamed(route.name, arguments: arguments);
 
-  Future<Object?> pushReplacementTo(RouterRoute route, {dynamic arguments}) async => navigatorKey.currentState!.pushReplacementNamed(route.route, arguments: arguments);
+  Future<Object?> pushReplacementTo(RouterRoute route,
+          {dynamic arguments}) async =>
+      navigatorKey.currentState!
+          .pushReplacementNamed(route.route, arguments: arguments);
 
   Future<void> back() async => navigatorKey.currentState?.pop();
 }
@@ -35,18 +39,25 @@ class RouterService {
 
   GetIt get locator => _locator;
 
-  Route onGenerateRoute(RouteSettings settings) => MaterialPageRoute(builder: (context) {
-        final RouterRoute generateRoute = RouterRoutes.fromRouteName(settings.name);
+  Route onGenerateRoute(RouteSettings settings) =>
+      MaterialPageRoute(builder: (context) {
+        final RouterRoute generateRoute =
+            RouterRoutes.fromRouteName(settings.name);
 
         //if (Core.instance.data != null && (await Core.instance.data!.isUpdateAvailable || Core.instance.data!.isCurrentlyMaintenance)) {
         //  return RouterRoutes.splashScreen.createPage;
         //}
 
-        if (!Core.instance.isInitialized && !RouterRoutes.baseRoutes.contains(generateRoute)) {
+        if (!Core.instance.isInitialized &&
+            !RouterRoutes.baseRoutes.contains(generateRoute)) {
           return RouterRoutes.splashScreen.createPage;
-        } else if (!CoreUser.instance.isAuthenticated && !RouterRoutes.isAuthenticationRoutes(generateRoute) && !RouterRoutes.isBaseRoutes(generateRoute)) {
+        } else if (!CoreUser.instance.isAuthenticated &&
+            !RouterRoutes.isAuthenticationRoutes(generateRoute) &&
+            !RouterRoutes.isBaseRoutes(generateRoute)) {
           return RouterRoutes.authSignIn.createPage;
-        } else if (CoreUser.instance.isAuthenticated && !RouterRoutes.isGameRoutes(generateRoute) && !RouterRoutes.isBaseRoutes(generateRoute)) {
+        } else if (CoreUser.instance.isAuthenticated &&
+            !RouterRoutes.isGameRoutes(generateRoute) &&
+            !RouterRoutes.isBaseRoutes(generateRoute)) {
           return RouterRoutes.gameMain.createPage;
         }
         return generateRoute.createPage;

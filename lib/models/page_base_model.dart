@@ -4,7 +4,8 @@ import 'package:fumiko/l10n/l10n.dart';
 import 'package:fumiko/router/services/router_services.dart';
 
 class PageBaseModel extends ChangeNotifier {
-  final RouterNavigationService _navigationService = RouterService.instance.locator<RouterNavigationService>();
+  final RouterNavigationService _navigationService =
+      RouterService.instance.locator<RouterNavigationService>();
 
   RouterNavigationService get navigationService => _navigationService;
 
@@ -15,7 +16,8 @@ class PageBaseModel extends ChangeNotifier {
 
   Future<dynamic> changeLanguage(Locale locale) async {
     await setState(() async {
-      await Core.instance.sharedPreferences!.setString('fumiko-locale', locale.toLanguageTag());
+      await Core.instance.sharedPreferences!
+          .setString('fumiko-locale', locale.toLanguageTag());
       await AppLocalizations.delegate.load(locale);
     });
   }

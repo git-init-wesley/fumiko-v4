@@ -13,7 +13,12 @@ mixin PopupController {
 
   set popupIconColor(Color value);
 
-  Future<void> openPopup({required String title, required Color titleColor, required String description, required IconData icon, required Color iconColor}) async {
+  Future<void> openPopup(
+      {required String title,
+      required Color titleColor,
+      required String description,
+      required IconData icon,
+      required Color iconColor}) async {
     popupTitle = title;
     popupTitleColor = titleColor;
     popupDescription = description;

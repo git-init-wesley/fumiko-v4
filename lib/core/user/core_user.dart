@@ -29,9 +29,11 @@ class CoreUser {
 
   AuthenticationStates _authenticationState = AuthenticationStates.offline;
 
-  bool get isAuthenticated => _authenticationState == AuthenticationStates.connected;
+  bool get isAuthenticated =>
+      _authenticationState == AuthenticationStates.connected;
 
-  set setAuthenticationState(AuthenticationStates value) => _authenticationState = value;
+  set setAuthenticationState(AuthenticationStates value) =>
+      _authenticationState = value;
 
   CoreUserStates _state = CoreUserStates.unload;
 
@@ -54,7 +56,9 @@ class CoreUser {
 
   Future<void> load({required VoidCallback whenComplete}) async {
     await unload(withLogout: false);
-    if (FirebaseAuth.instance.currentUser != null && !isLoaded && isAuthenticated) {
+    if (FirebaseAuth.instance.currentUser != null &&
+        !isLoaded &&
+        isAuthenticated) {
       _current = EntityUser.load(() async {
         _state = CoreUserStates.load;
         await CoreUserPresences.instance.observeCurrentUser();

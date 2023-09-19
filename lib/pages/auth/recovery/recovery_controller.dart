@@ -1,15 +1,28 @@
 part of auth_recovery;
 
-class _AuthRecoveryController extends _AuthRecoveryModel with PopupController, AuthNavigationController {
-  FormFieldValidator<String> get emailAddressValidator =>
-      (String? value) => value != null && value.trim().isNotEmpty && RegExps.mail.hasMatch(value) ? null : (errorEmailAddress = AppLocalizations.current.emailAddressInvalid);
+class _AuthRecoveryController extends _AuthRecoveryModel
+    with PopupController, AuthNavigationController {
+  FormFieldValidator<String> get emailAddressValidator => (String? value) =>
+      value != null && value.trim().isNotEmpty && RegExps.mail.hasMatch(value)
+          ? null
+          : (errorEmailAddress = AppLocalizations.current.emailAddressInvalid);
 
   @override
   RouterNavigationService get authNavigationService => super.navigationService;
 
   @override
-  Future openPopup({required String title, required Color titleColor, required String description, required IconData icon, required Color iconColor}) async {
-    super.openPopup(title: title, titleColor: titleColor, description: description, icon: icon, iconColor: iconColor);
+  Future openPopup(
+      {required String title,
+      required Color titleColor,
+      required String description,
+      required IconData icon,
+      required Color iconColor}) async {
+    super.openPopup(
+        title: title,
+        titleColor: titleColor,
+        description: description,
+        icon: icon,
+        iconColor: iconColor);
     notifyListeners();
   }
 

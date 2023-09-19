@@ -59,7 +59,14 @@ mixin EntityMonsterStatsPrimary implements EntityStatsPrimary {
   @override
   num get realMass => mass * classes.mass;
 
-  void _initStatsPrimaryValues({num? strength, num? dexterity, num? agility, num? vitality, num? endurance, num? eyesight, num? mass}) async {
+  void _initStatsPrimaryValues(
+      {num? strength,
+      num? dexterity,
+      num? agility,
+      num? vitality,
+      num? endurance,
+      num? eyesight,
+      num? mass}) async {
     _strength = strength;
     _dexterity = dexterity;
     _agility = agility;

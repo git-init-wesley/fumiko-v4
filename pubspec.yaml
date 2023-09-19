@@ -1,12 +1,12 @@
 name: fumiko
-description: Fumiko est un « Simple Text based MMORPG », c’est-à-dire un RPG basé sur du
+description:
+  Fumiko est un « Simple Text based MMORPG », c’est-à-dire un RPG basé sur du
   texte, avec une simple jouabilité, en d’autres termes Fumiko offre
   l’expérience RPG simple tout en vous permettant de jouer avec des milliers de
   joueurs dans un univers Japonais. ⛩️
 repository: https://github.com/kanekireal/Fumiko
 version: 1.0.0
 publish_to: "none"
-
 
 environment:
   sdk: ">=3.1.0 <4.0.0"

@@ -40,7 +40,8 @@ class GameSubheader extends StatelessWidget {
         children: [
           SmallIndicator(
             backgroundColor: Colors.black,
-            text: '${NumberFormatter.compact(stamina)}/${NumberFormatter.compact(DefaultEntityUserStatsBase.maxStamina)}',
+            text:
+                '${NumberFormatter.compact(stamina)}/${NumberFormatter.compact(DefaultEntityUserStatsBase.maxStamina)}',
             iconData: FontAwesomeIcons.bolt,
             iconColor: Colors.purpleAccent,
             onPressed: () => setSubPageRoute(GameMainSubPages.staminaRoute),
@@ -61,14 +62,16 @@ class GameSubheader extends StatelessWidget {
             text: NumberFormatter.compact(secondary),
             iconData: FontAwesomeIcons.solidGem,
             iconColor: Colors.blueAccent,
-            onPressed: () => setSubPageRoute(GameMainSubPages.shopSecondaryRoute),
+            onPressed: () =>
+                setSubPageRoute(GameMainSubPages.shopSecondaryRoute),
             withIconData: FontAwesomeIcons.plus,
             width: indicatorWidth,
           ),
         ],
       ),
       Container(
-        margin: EdgeInsets.only(top: mediaWidth > 1024 ? 0 : 8, left: mediaWidth > 1024 ? 8 : 0),
+        margin: EdgeInsets.only(
+            top: mediaWidth > 1024 ? 0 : 8, left: mediaWidth > 1024 ? 8 : 0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,12 +111,21 @@ class GameSubheader extends StatelessWidget {
     return Center(
       child: Container(
         alignment: Alignment.center,
-        constraints: BoxConstraints(maxWidth: mediaWidth > 1024 ? double.infinity : 512),
+        constraints:
+            BoxConstraints(maxWidth: mediaWidth > 1024 ? double.infinity : 512),
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         margin: const EdgeInsets.only(top: 8),
         child: mediaWidth > 1024
-            ? Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: children)
-            : Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: children),
+            ? Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: children)
+            : Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: children),
       ),
     );
   }

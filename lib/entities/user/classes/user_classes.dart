@@ -161,7 +161,11 @@ class UserClasses {
 
   static List<String> get classesCode => classes.map((e) => e.code).toList();
 
-  static Map<String, UserClass> get mapClassesCode => Map.fromIterables(classesCode, classes);
+  static Map<String, UserClass> get mapClassesCode =>
+      Map.fromIterables(classesCode, classes);
 
-  static UserClass fromCode(String? code) => mapClassesCode.entries.firstWhere((e) => e.value.code == code, orElse: () => MapEntry<String, UserClass>(_unknown.code, _unknown)).value;
+  static UserClass fromCode(String? code) => mapClassesCode.entries
+      .firstWhere((e) => e.value.code == code,
+          orElse: () => MapEntry<String, UserClass>(_unknown.code, _unknown))
+      .value;
 }

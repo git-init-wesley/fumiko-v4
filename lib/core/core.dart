@@ -23,7 +23,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 part './core_state.dart';
 
 typedef StateCallback = Function(CoreStates newState);
-typedef InitCallback = Function(AppException? exception, CoreData? data, bool isAuthenticated);
+typedef InitCallback = Function(
+    AppException? exception, CoreData? data, bool isAuthenticated);
 
 class Core with ChangeListener {
   Core._();
@@ -60,84 +61,117 @@ class Core with ChangeListener {
     return 'fr_FR'; //TODO: Return to default
     if (Core.instance.sharedPreferences == null) return Intl.systemLocale;
     if (Core.instance.sharedPreferences?.getString('fumiko-locale') == null) {
-      await Core.instance.sharedPreferences!.setString('fumiko-locale', Intl.systemLocale);
+      await Core.instance.sharedPreferences!
+          .setString('fumiko-locale', Intl.systemLocale);
     }
     return Core.instance.sharedPreferences!.getString('fumiko-locale')!;
   }
 
-  Future<void> init({required StateCallback onStateChange, required InitCallback whenComplete}) async {
-    _onStateChange(state: CoreStates.startInitialisation, onStateChange: onStateChange);
+  Future<void> init(
+      {required StateCallback onStateChange,
+      required InitCallback whenComplete}) async {
+    _onStateChange(
+        state: CoreStates.startInitialisation, onStateChange: onStateChange);
     _sharedPreferences = await SharedPreferences.getInstance();
     _packageInfo = await PackageInfo.fromPlatform();
 
-    _onStateChange(state: CoreStates.initLanguage, onStateChange: onStateChange);
+    _onStateChange(
+        state: CoreStates.initLanguage, onStateChange: onStateChange);
     await AppLocalizations.load(Locale(await currentLocale));
 
-    _onStateChange(state: CoreStates.checkConnectivity, onStateChange: onStateChange);
-    final ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
+    _onStateChange(
+        state: CoreStates.checkConnectivity, onStateChange: onStateChange);
+    final ConnectivityResult connectivityResult =
+        await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
-      _onStateChange(state: CoreStates.uninitialized, onStateChange: onStateChange);
+      _onStateChange(
+          state: CoreStates.uninitialized, onStateChange: onStateChange);
       whenComplete(AppExceptions.connectivityNone(), null, false);
       return;
     }
     if (connectivityResult == ConnectivityResult.vpn) {
-      _onStateChange(state: CoreStates.uninitialized, onStateChange: onStateChange);
+      _onStateChange(
+          state: CoreStates.uninitialized, onStateChange: onStateChange);
       whenComplete(AppExceptions.connectivityVPN(), null, false);
       return;
     }
 
-    _onStateChange(state: CoreStates.initFirebase, onStateChange: onStateChange);
+    _onStateChange(
+        state: CoreStates.initFirebase, onStateChange: onStateChange);
     try {
-      _firebaseApp = await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+      _firebaseApp = await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform);
     } catch (error, stacktrace) {
       if (!kReleaseMode) {
-        developer.log(error.toString(), time: DateTime.now(), stackTrace: stacktrace);
+        developer.log(error.toString(),
+            time: DateTime.now(), stackTrace: stacktrace);
       }
-      _onStateChange(state: CoreStates.uninitialized, onStateChange: onStateChange);
+      _onStateChange(
+          state: CoreStates.uninitialized, onStateChange: onStateChange);
       whenComplete(AppExceptions.error(object: error), null, false);
       return;
     }
 
-    _onStateChange(state: CoreStates.initFirebaseAppCheck, onStateChange: onStateChange);
+    _onStateChange(
+        state: CoreStates.initFirebaseAppCheck, onStateChange: onStateChange);
     try {
       //TODO: AppCheck for Android and Apple providers
-      await FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '6LdjWcMcAAAAAKnOP3gkuNNXp1upJPiOYbCO1GeZ');
+      await FirebaseAppCheck.instance.activate(
+          webRecaptchaSiteKey: '6LdjWcMcAAAAAKnOP3gkuNNXp1upJPiOYbCO1GeZ');
     } catch (error, stacktrace) {
       if (!kReleaseMode) {
-        developer.log(error.toString(), time: DateTime.now(), stackTrace: stacktrace);
+        developer.log(error.toString(),
+            time: DateTime.now(), stackTrace: stacktrace);
       }
-      _onStateChange(state: CoreStates.uninitialized, onStateChange: onStateChange);
+      _onStateChange(
+          state: CoreStates.uninitialized, onStateChange: onStateChange);
       whenComplete(AppExceptions.appInvalid(), null, false);
       return;
     }
 
-    _onStateChange(state: CoreStates.retrieveCoreData, onStateChange: onStateChange);
+    _onStateChange(
+        state: CoreStates.retrieveCoreData, onStateChange: onStateChange);
     try {
-      DataSnapshot snapshot = await FirebaseDatabase.instance.ref().child('core').get();
-      if (!snapshot.exists) AppExceptions.error(message: "CoreData Snapshot doesn't exists.").makeThrow();
-      Core.instance._data = CoreData.fromJson(jsonDecode(jsonEncode((snapshot.value))));
+      DataSnapshot snapshot =
+          await FirebaseDatabase.instance.ref().child('core').get();
+      if (!snapshot.exists)
+        AppExceptions.error(message: "CoreData Snapshot doesn't exists.")
+            .makeThrow();
+      Core.instance._data =
+          CoreData.fromJson(jsonDecode(jsonEncode((snapshot.value))));
 
       FirebaseDatabase.instance.ref().child('core').onValue.listen((event) {
-        Core.instance._data = CoreData.fromJson(jsonDecode(jsonEncode((event.snapshot.value))));
+        Core.instance._data =
+            CoreData.fromJson(jsonDecode(jsonEncode((event.snapshot.value))));
         onChange(null);
       });
     } catch (error, stacktrace) {
       if (!kReleaseMode) {
-        developer.log(error.toString(), time: DateTime.now(), stackTrace: stacktrace);
+        developer.log(error.toString(),
+            time: DateTime.now(), stackTrace: stacktrace);
       }
-      _onStateChange(state: CoreStates.uninitialized, onStateChange: onStateChange);
-      whenComplete(error is FirebaseException && error.code == "unknown" ? AppExceptions.appInvalid() : AppExceptions.error(object: error), null, false);
+      _onStateChange(
+          state: CoreStates.uninitialized, onStateChange: onStateChange);
+      whenComplete(
+          error is FirebaseException && error.code == "unknown"
+              ? AppExceptions.appInvalid()
+              : AppExceptions.error(object: error),
+          null,
+          false);
       return;
     }
 
     if (await data!.isUpdateAvailable || data!.isCurrentlyMaintenance) {
-      _onStateChange(state: CoreStates.uninitialized, onStateChange: onStateChange);
+      _onStateChange(
+          state: CoreStates.uninitialized, onStateChange: onStateChange);
       whenComplete(null, data, false);
       return;
     }
 
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      CoreUser.instance.setAuthenticationState = user != null ? AuthenticationStates.connected : AuthenticationStates.offline;
+      CoreUser.instance.setAuthenticationState = user != null
+          ? AuthenticationStates.connected
+          : AuthenticationStates.offline;
       onChange(null);
     });
 
@@ -145,7 +179,8 @@ class Core with ChangeListener {
     whenComplete(null, null, FirebaseAuth.instance.currentUser != null);
   }
 
-  void _onStateChange({required CoreStates state, StateCallback? onStateChange}) {
+  void _onStateChange(
+      {required CoreStates state, StateCallback? onStateChange}) {
     _state = state;
     onStateChange?.call(state);
   }

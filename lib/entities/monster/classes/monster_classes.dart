@@ -131,7 +131,11 @@ class MonsterClasses {
 
   static List<String> get classesCode => classes.map((e) => e.code).toList();
 
-  static Map<String, MonsterClass> get mapClassesCode => Map.fromIterables(classesCode, classes);
+  static Map<String, MonsterClass> get mapClassesCode =>
+      Map.fromIterables(classesCode, classes);
 
-  static MonsterClass fromCode(String? code) => mapClassesCode.entries.firstWhere((e) => e.value.code == code, orElse: () => MapEntry<String, MonsterClass>(_unknown.code, _unknown)).value;
+  static MonsterClass fromCode(String? code) => mapClassesCode.entries
+      .firstWhere((e) => e.value.code == code,
+          orElse: () => MapEntry<String, MonsterClass>(_unknown.code, _unknown))
+      .value;
 }

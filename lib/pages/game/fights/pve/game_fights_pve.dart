@@ -9,7 +9,10 @@ import 'package:fumiko/utils/win_rate.dart';
 import 'package:fumiko/widgets/game/buttons/pve_monster_button.dart';
 
 class GameFightsPve extends StatelessWidget {
-  const GameFightsPve({super.key, required this.setSubPageRoute, required this.setAbstractWidget});
+  const GameFightsPve(
+      {super.key,
+      required this.setSubPageRoute,
+      required this.setAbstractWidget});
 
   final SetSubPageFunction setSubPageRoute;
   final SetAbstractWidgetFunction setAbstractWidget;
@@ -19,7 +22,12 @@ class GameFightsPve extends StatelessWidget {
         monster: monster,
         user: CoreUser.instance.current,
         setSubPageRoute: setSubPageRoute,
-        repeat: () => _generateFightDetails(monster: EntityMonster.of(levels: monster.levels, isBoss: monster.isBoss, classes: monster.classes, rebirths: 0))));
+        repeat: () => _generateFightDetails(
+            monster: EntityMonster.of(
+                levels: monster.levels,
+                isBoss: monster.isBoss,
+                classes: monster.classes,
+                rebirths: 0))));
   }
 
   List<Widget> _generateMonsters() {
@@ -30,7 +38,8 @@ class GameFightsPve extends StatelessWidget {
 
     for (num i = minLevel; i <= maxLevel; i++) {
       final bool isBoss = i % 5 == 0;
-      final EntityMonster monster = EntityMonster.of(levels: i, isBoss: isBoss, classes: classes, rebirths: 0);
+      final EntityMonster monster = EntityMonster.of(
+          levels: i, isBoss: isBoss, classes: classes, rebirths: 0);
       monsters.add(Container(
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -40,7 +49,8 @@ class GameFightsPve extends StatelessWidget {
           title: 'Monster',
           power: monster.power,
           classes: monster.classes,
-          winRate: WinRate.ofPvE(monster: monster, user: CoreUser.instance.current),
+          winRate:
+              WinRate.ofPvE(monster: monster, user: CoreUser.instance.current),
           onPressed: () {
             _generateFightDetails(monster: monster);
           },
@@ -54,24 +64,37 @@ class GameFightsPve extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, mainAxisSize: MainAxisSize.max, children: [
-      HomeMenusButton(setSubPageRoute: setSubPageRoute),
-      Container(
-          constraints: const BoxConstraints(maxWidth: 384),
-          margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-          child: Column(children: [
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-              margin: const EdgeInsets.only(top: 4, bottom: 4),
-              child: Text('Vous êtes présentement dans la ville de GenOne se situant dans le pays de Alpha.', textAlign: TextAlign.center),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-              margin: const EdgeInsets.only(bottom: 20),
-              child: Text('Vous êtes à l\'heure actuelle X aventuriers dans cette ville avec un total de X aventuriers dans le pays.', textAlign: TextAlign.center),
-            ),
-            Container(padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8), child: ListBody(children: _generateMonsters())),
-          ]))
-    ]);
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          HomeMenusButton(setSubPageRoute: setSubPageRoute),
+          Container(
+              constraints: const BoxConstraints(maxWidth: 384),
+              margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+              child: Column(children: [
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                  margin: const EdgeInsets.only(top: 4, bottom: 4),
+                  child: Text(
+                      'Vous êtes présentement dans la ville de GenOne se situant dans le pays de Alpha.',
+                      textAlign: TextAlign.center),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: Text(
+                      'Vous êtes à l\'heure actuelle X aventuriers dans cette ville avec un total de X aventuriers dans le pays.',
+                      textAlign: TextAlign.center),
+                ),
+                Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    child: ListBody(children: _generateMonsters())),
+              ]))
+        ]);
   }
 }

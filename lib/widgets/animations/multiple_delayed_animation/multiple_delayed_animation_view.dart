@@ -7,16 +7,29 @@ class _MultipleDelayedAnimationView extends State<MultipleDelayedAnimation> {
       List<Widget> buildWidgets = [];
       for (int i = 0; i < widget.children.length; i++) {
         buildWidgets.add(DelayedAnimation(
-            duration: Duration(microseconds: widget.firstDuration.inMilliseconds + (widget.intervalDuration.inMilliseconds * i)),
+            duration: Duration(
+                microseconds: widget.firstDuration.inMilliseconds +
+                    (widget.intervalDuration.inMilliseconds * i)),
             delayedAnimationController: widget.delayedAnimationController,
             animationOffSet: widget.animationOffSet,
             child: widget.children[i]));
       }
       return widget.axis == MultipleDelayedAnimationAxis.horizontal
-          ? Row(mainAxisAlignment: widget.mainAxisAlignment, mainAxisSize: widget.mainAxisSize, crossAxisAlignment: widget.crossAxisAlignment, children: buildWidgets)
-          : Column(mainAxisAlignment: widget.mainAxisAlignment, mainAxisSize: widget.mainAxisSize, crossAxisAlignment: widget.crossAxisAlignment, children: buildWidgets);
+          ? Row(
+              mainAxisAlignment: widget.mainAxisAlignment,
+              mainAxisSize: widget.mainAxisSize,
+              crossAxisAlignment: widget.crossAxisAlignment,
+              children: buildWidgets)
+          : Column(
+              mainAxisAlignment: widget.mainAxisAlignment,
+              mainAxisSize: widget.mainAxisSize,
+              crossAxisAlignment: widget.crossAxisAlignment,
+              children: buildWidgets);
     } else {
-      return DelayedAnimation(duration: widget.firstDuration, animationOffSet: widget.animationOffSet, child: widget.children.first);
+      return DelayedAnimation(
+          duration: widget.firstDuration,
+          animationOffSet: widget.animationOffSet,
+          child: widget.children.first);
     }
   }
 }
