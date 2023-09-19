@@ -4,8 +4,9 @@ import 'package:fumiko/utils/number_formatter.dart';
 import 'package:fumiko/widgets/game/indicators/bar_progress_indicator.dart';
 
 class GameHeader extends StatelessWidget {
-  const GameHeader({super.key, required this.username, required this.levels, required this.rebirths, required this.exp, required this.maxExp, required this.classes});
+  const GameHeader({super.key, required this.username, required this.levels, required this.rebirths, required this.exp, required this.maxExp, required this.classes, this.widthOffSet = 0});
 
+  final double widthOffSet;
   final EntityClass classes;
   final String username;
   final num levels, rebirths, exp, maxExp;
@@ -31,7 +32,7 @@ class GameHeader extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             // constraints: const BoxConstraints(maxWidth: 320),
             height: 86,
-            width: mediaWidth - 86,
+            width: mediaWidth - 86 + widthOffSet,
             decoration: BoxDecoration(color: Colors.black.withOpacity(0.2)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +54,7 @@ class GameHeader extends StatelessWidget {
                     child: BarProgressIndicator(
                         value: (exp / maxExp),
                         height: 24,
-                        width: mediaWidth - 86 - 8,
+                        width: mediaWidth - 86 - 16 + widthOffSet,
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.deepOrange,
                         child: Text('Exp: ${NumberFormatter.compact(exp)}/${NumberFormatter.compact(maxExp)}',
