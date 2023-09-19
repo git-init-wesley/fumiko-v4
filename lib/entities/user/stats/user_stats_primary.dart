@@ -193,50 +193,57 @@ mixin EntityUserStatsPrimary implements EntityStatsPrimary {
     if (uid == null) return;
     _strengthObserver =
         await DatabaseUser.of(uid: uid).observeStrength((value) async {
-      if (value != _strength.value)
+      if (value != _strength.value) {
         await _strength._set(value ?? DefaultEntityUserStatsBase.defaultValue);
+      }
       onChange(null);
       updatePower();
     });
     _dexterityObserver =
         await DatabaseUser.of(uid: uid).observeDexterity((value) async {
-      if (value != _dexterity.value)
+      if (value != _dexterity.value) {
         await _dexterity._set(value ?? DefaultEntityUserStatsBase.defaultValue);
+      }
       onChange(null);
       updatePower();
     });
     _agilityObserver =
         await DatabaseUser.of(uid: uid).observeAgility((value) async {
-      if (value != _agility.value)
+      if (value != _agility.value) {
         await _agility._set(value ?? DefaultEntityUserStatsBase.defaultValue);
+      }
       onChange(null);
       updatePower();
     });
     _vitalityObserver =
         await DatabaseUser.of(uid: uid).observeAgility((value) async {
-      if (value != _vitality.value)
+      if (value != _vitality.value) {
         await _vitality._set(value ?? DefaultEntityUserStatsBase.defaultValue);
+      }
       onChange(null);
       updatePower();
     });
     _enduranceObserver =
         await DatabaseUser.of(uid: uid).observeAgility((value) async {
-      if (value != _endurance.value)
+      if (value != _endurance.value) {
         await _endurance._set(value ?? DefaultEntityUserStatsBase.defaultValue);
+      }
       onChange(null);
       updatePower();
     });
     _eyesightObserver =
         await DatabaseUser.of(uid: uid).observeAgility((value) async {
-      if (value != _eyesight.value)
+      if (value != _eyesight.value) {
         await _eyesight._set(value ?? DefaultEntityUserStatsBase.defaultValue);
+      }
       onChange(null);
       updatePower();
     });
     _massObserver =
         await DatabaseUser.of(uid: uid).observeAgility((value) async {
-      if (value != _mass.value)
+      if (value != _mass.value) {
         await _mass._set(value ?? DefaultEntityUserStatsBase.defaultValue);
+      }
       onChange(null);
       updatePower();
     });

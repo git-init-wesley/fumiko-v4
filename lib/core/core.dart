@@ -58,13 +58,14 @@ class Core with ChangeListener {
   bool get isInitialized => state == CoreStates.initialized;
 
   Future<String> get currentLocale async {
-    return 'fr_FR'; //TODO: Return to default
-    if (Core.instance.sharedPreferences == null) return Intl.systemLocale;
-    if (Core.instance.sharedPreferences?.getString('fumiko-locale') == null) {
-      await Core.instance.sharedPreferences!
-          .setString('fumiko-locale', Intl.systemLocale);
-    }
-    return Core.instance.sharedPreferences!.getString('fumiko-locale')!;
+    return 'fr_FR';
+    //TODO: Return to default, On Start game, choice Language.
+    //if (Core.instance.sharedPreferences == null) return Intl.systemLocale;
+    //if (Core.instance.sharedPreferences?.getString('fumiko-locale') == null) {
+    //  await Core.instance.sharedPreferences!
+    //      .setString('fumiko-locale', Intl.systemLocale);
+    //}
+    //return Core.instance.sharedPreferences!.getString('fumiko-locale')!;
   }
 
   Future<void> init(
@@ -134,9 +135,10 @@ class Core with ChangeListener {
     try {
       DataSnapshot snapshot =
           await FirebaseDatabase.instance.ref().child('core').get();
-      if (!snapshot.exists)
+      if (!snapshot.exists) {
         AppExceptions.error(message: "CoreData Snapshot doesn't exists.")
             .makeThrow();
+      }
       Core.instance._data =
           CoreData.fromJson(jsonDecode(jsonEncode((snapshot.value))));
 

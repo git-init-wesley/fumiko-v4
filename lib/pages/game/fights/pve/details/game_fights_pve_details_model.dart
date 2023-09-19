@@ -14,7 +14,6 @@ class _GameFightsPveDetailsModel extends PageBaseModel {
 
   set actualRound(v) => _actualRound = v;
 
-  //TODO: Ninja FIRST, Others class random starting attack
   bool _monsterFirst = false;
 
   bool get monsterFirst => _monsterFirst;

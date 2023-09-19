@@ -178,8 +178,9 @@ class EntityUser
     });
     _classesObserver =
         await DatabaseUser.of(uid: uid!).observeClasses((value) async {
-      if (value != _classes.value?.code)
+      if (value != _classes.value?.code) {
         await _classes._set(UserClasses.fromCode(value));
+      }
       onChange(null);
       updatePower();
     });
