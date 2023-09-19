@@ -31,6 +31,7 @@ class _GameFightsPveDetailsView extends State<GameFightsPveDetailsPage> {
             )),
       ]),
       Container(
+          constraints: const BoxConstraints(maxWidth: 384),
           margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
           padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
           child: Column(children: [
@@ -67,7 +68,7 @@ class _GameFightsPveDetailsView extends State<GameFightsPveDetailsPage> {
             Container(
                 margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-                child: Column(children: controller.logs.reversed.toList())),
+                child: ListBody(children: controller.logs.reversed.toList())),
           ])),
     ]);
   }

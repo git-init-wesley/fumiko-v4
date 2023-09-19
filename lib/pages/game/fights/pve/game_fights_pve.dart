@@ -25,7 +25,7 @@ class GameFightsPve extends StatelessWidget {
   List<Widget> _generateMonsters() {
     List<Widget> monsters = [];
 
-    const num minLevel = 1, maxLevel = 10;
+    num minLevel = 1, maxLevel = CoreUser.instance.current.levels;
     final MonsterClass classes = MonsterClasses.alpha;
 
     for (num i = minLevel; i <= maxLevel; i++) {
@@ -57,18 +57,21 @@ class GameFightsPve extends StatelessWidget {
     return Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, mainAxisSize: MainAxisSize.max, children: [
       HomeMenusButton(setSubPageRoute: setSubPageRoute),
       Container(
-        constraints: const BoxConstraints(maxWidth: 384),
-        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-        margin: const EdgeInsets.only(top: 4),
-        child: Text('Vous êtes présentement dans la ville de GenOne se situant dans le pays de Alpha.', textAlign: TextAlign.center),
-      ),
-      Container(
-        constraints: const BoxConstraints(maxWidth: 384),
-        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-        margin: const EdgeInsets.only(top: 4),
-        child: Text('Vous êtes à l\'heure actuelle X aventuriers dans cette ville avec un total de X aventuriers dans le pays.', textAlign: TextAlign.center),
-      ),
-      Container(margin: const EdgeInsets.only(top: 16), padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8), child: ListBody(children: _generateMonsters())),
+          constraints: const BoxConstraints(maxWidth: 384),
+          margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+          child: Column(children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+              margin: const EdgeInsets.only(top: 4, bottom: 4),
+              child: Text('Vous êtes présentement dans la ville de GenOne se situant dans le pays de Alpha.', textAlign: TextAlign.center),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+              margin: const EdgeInsets.only(bottom: 20),
+              child: Text('Vous êtes à l\'heure actuelle X aventuriers dans cette ville avec un total de X aventuriers dans le pays.', textAlign: TextAlign.center),
+            ),
+            Container(padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8), child: ListBody(children: _generateMonsters())),
+          ]))
     ]);
   }
 }
