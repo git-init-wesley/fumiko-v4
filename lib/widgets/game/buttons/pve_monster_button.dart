@@ -41,12 +41,14 @@ class PveMonsterButton extends StatelessWidget {
           Container(
               margin: const EdgeInsets.only(left: 4),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('${title.toUpperCase()} Lv.$levels', style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize)),
+                  Text(title.toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize)),
                   Container(
                       margin: const EdgeInsets.only(left: 4),
-                      child: Text('(Power: ${NumberFormatter.compact(power)})',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleLarge?.fontSize, color: winRate.color()))),
+                      child: Text('Lv.$levels (Power: ${NumberFormatter.compact(power)})',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: Theme.of(context).textTheme.titleSmall?.fontSize, color: winRate.color()))),
                 ],
               ))
         ]));
